@@ -1,0 +1,2 @@
+asyncpg/pgproto/pgproto.c -whitespace
+docs/api/index.rst conflict-marker-size=32

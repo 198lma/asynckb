@@ -1,0 +1,158 @@
+[project]
+name = "asyncpg-kes"
+description = "An asyncio driver for KingbaseES compatibility modes"
+authors = [{name = "asyncpg authors and contributors"}]
+requires-python = '>=3.9.0'
+readme = "README.rst"
+license = "Apache-2.0"
+license-files = ["LICENSE"]
+dynamic = ["version"]
+keywords = [
+    "database",
+    "kingbasees",
+    "kes",
+    "mysql",
+    "oracle",
+    "sqlserver",
+]
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Framework :: AsyncIO",
+    "Intended Audience :: Developers",
+    "Operating System :: POSIX",
+    "Operating System :: MacOS :: MacOS X",
+    "Operating System :: Microsoft :: Windows",
+    "Programming Language :: Python :: 3 :: Only",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
+    "Programming Language :: Python :: 3.14",
+    "Programming Language :: Python :: Implementation :: CPython",
+    "Topic :: Database :: Front-Ends",
+]
+dependencies = [
+    'async_timeout>=4.0.3; python_version < "3.11.0"',
+]
+
+[project.urls]
+github = "https://github.com/198lma/asyncpg-kes"
+issues = "https://github.com/198lma/asyncpg-kes/issues"
+changelog = "https://github.com/198lma/asyncpg-kes/blob/main/CHANGELOG.md"
+
+[project.entry-points."sqlalchemy.dialects"]
+"kingbase_mysql.asyncpg" = "asyncpg.sa_dialect:KESMySQLDialect_asyncpg"
+"kingbase_oracle.asyncpg" = "asyncpg.sa_dialect:KESOracleDialect_asyncpg"
+"kingbase_sqlserver.asyncpg" = "asyncpg.sa_dialect:KESSQLServerDialect_asyncpg"
+
+[project.optional-dependencies]
+gssauth = [
+    'gssapi; platform_system != "Windows"',
+    'sspilib; platform_system == "Windows"',
+]
+sqlalchemy = [
+    'SQLAlchemy>=2.0',
+]
+alembic = [
+    'SQLAlchemy>=2.0',
+    'alembic>=1.13',
+]
+
+[dependency-groups]
+test = [
+    'flake8~=6.1',
+    'flake8-pyi~=24.1.0',
+    'mypy~=1.8.0',
+    'pytest',
+    'pytest-asyncio>=0.23',
+    'SQLAlchemy>=2.0',
+    'alembic>=1.13',
+]
+docs = [
+    'Sphinx~=7.4',
+    'sphinx_rtd_theme>=1.2.2',
+]
+
+[build-system]
+requires = [
+    "setuptools>=77.0.3",
+    "Cython(>=3.2.1,<4.0.0)"
+]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools]
+zip-safe = false
+
+[tool.setuptools.packages.find]
+include = ["asyncpg", "asyncpg.*"]
+
+[tool.setuptools.exclude-package-data]
+"*" = ["*.c", "*.h"]
+
+[tool.cibuildwheel]
+build-frontend = "build"
+test-groups = "test"
+skip = "cp38-*"
+test-command = "python {project}/tests/__init__.py -m unit -q"
+
+[tool.pytest.ini_options]
+addopts = "--capture=no --assert=plain --strict-markers --tb=native --import-mode=importlib"
+testpaths = ["tests/kes"]
+filterwarnings = "default"
+asyncio_mode = "strict"
+asyncio_default_fixture_loop_scope = "function"
+markers = [
+    "unit: does not require a running KingbaseES instance",
+    "integration: requires running KingbaseES instances",
+    "framework: exercises SQLAlchemy or Alembic integration",
+]
+
+[tool.coverage.run]
+branch = true
+plugins = ["Cython.Coverage"]
+parallel = true
+source = ["asyncpg/", "tests/"]
+omit = ["*.pxd"]
+
+[tool.coverage.report]
+exclude_lines = [
+    "pragma: no cover",
+    "def __repr__",
+    "if debug",
+    "raise NotImplementedError",
+    "if __name__ == .__main__.",
+]
+show_missing = true
+
+[tool.mypy]
+exclude = [
+    "^.eggs",
+    "^.github",
+    "^.vscode",
+    "^build",
+    "^dist",
+    "^docs",
+    "^tests",
+]
+incremental = true
+strict = true
+implicit_reexport = true
+
+[[tool.mypy.overrides]]
+module = [
+    "asyncpg._testbase",
+    "asyncpg._testbase.*",
+    "asyncpg.cluster",
+    "asyncpg.connect_utils",
+    "asyncpg.connection",
+    "asyncpg.connresource",
+    "asyncpg.cursor",
+    "asyncpg.exceptions",
+    "asyncpg.exceptions.*",
+    "asyncpg.pool",
+    "asyncpg.prepared_stmt",
+    "asyncpg.transaction",
+    "asyncpg.utils",
+]
+ignore_errors = true

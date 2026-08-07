@@ -1,0 +1,73 @@
+name: KES Integration
+
+on:
+  workflow_dispatch:
+    inputs:
+      mode:
+        description: KES compatibility mode
+        required: true
+        default: all
+        type: choice
+        options:
+          - all
+          - mysql
+          - oracle
+          - sqlserver
+
+permissions:
+  contents: read
+
+jobs:
+  kes-integration:
+    runs-on: [self-hosted, linux, x64, kes]
+    environment: kes-test
+    timeout-minutes: 30
+    env:
+      ASYNCPG_KES_HOST: ${{ secrets.ASYNCPG_KES_HOST }}
+      ASYNCPG_KES_USER: ${{ secrets.ASYNCPG_KES_USER }}
+      ASYNCPG_KES_PASSWORD: ${{ secrets.ASYNCPG_KES_PASSWORD }}
+      ASYNCPG_KES_DATABASE: ${{ secrets.ASYNCPG_KES_DATABASE }}
+      ASYNCPG_KES_MYSQL_PORT: ${{ secrets.ASYNCPG_KES_MYSQL_PORT }}
+      ASYNCPG_KES_ORACLE_PORT: ${{ secrets.ASYNCPG_KES_ORACLE_PORT }}
+      ASYNCPG_KES_SQLSERVER_PORT: ${{ secrets.ASYNCPG_KES_SQLSERVER_PORT }}
+    steps:
+      - uses: actions/checkout@v5
+        with:
+          persist-credentials: false
+
+      - uses: actions/setup-python@v6
+        with:
+          python-version: "3.10"
+
+      - name: Validate protected test configuration
+        shell: bash
+        run: |
+          set -euo pipefail
+          test -n "${ASYNCPG_KES_HOST}"
+          test -n "${ASYNCPG_KES_USER}"
+          test -n "${ASYNCPG_KES_PASSWORD}"
+          test -n "${ASYNCPG_KES_DATABASE}"
+          test -n "${ASYNCPG_KES_MYSQL_PORT}"
+          test -n "${ASYNCPG_KES_ORACLE_PORT}"
+          test -n "${ASYNCPG_KES_SQLSERVER_PORT}"
+
+      - name: Install project and test dependencies
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install --group test
+          python -m pip install -e .
+
+      - name: Run strict KES regression
+        env:
+          PYTHONASYNCIODEBUG: "1"
+        run: |
+          python -X dev -W error::ResourceWarning -W error::RuntimeWarning \
+            -m pytest tests/kes --kes-mode "${{ inputs.mode }}" -q \
+            --junitxml=kes-test-results.xml
+
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: kes-test-results-${{ inputs.mode }}
+          path: kes-test-results.xml
+          if-no-files-found: warn

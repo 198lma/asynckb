@@ -1,0 +1,6 @@
+recursive-include docs *.py *.rst *.md Makefile *.css
+prune docs/_build
+recursive-include tests *.py *.md *.example
+recursive-include asyncpg *.pyx *.pxd *.pxi *.py *.pyi *.c *.h
+include LICENSE README.rst AUTHORS CHANGELOG.md CONTRIBUTING.md SECURITY.md
+include UPSTREAM.md Makefile performance.png .flake8 run_kes_tests.sh
