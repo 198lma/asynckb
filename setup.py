@@ -245,6 +245,64 @@ if (
 _ = setuptools.setup(
     name='asyncpg-kes',
     version=VERSION,
+    description='An asyncio driver for KingbaseES compatibility modes',
+    long_description=readme,
+    long_description_content_type='text/x-rst',
+    author='asyncpg authors and contributors',
+    url='https://github.com/198lma/asyncpg-kes',
+    project_urls={
+        'Issues': 'https://github.com/198lma/asyncpg-kes/issues',
+        'Changelog': (
+            'https://github.com/198lma/asyncpg-kes/blob/main/CHANGELOG.md'
+        ),
+    },
+    license='Apache-2.0',
+    license_files=['LICENSE'],
+    python_requires='>=3.9.0',
+    keywords=['database', 'kingbasees', 'kes', 'mysql', 'oracle',
+              'sqlserver'],
+    classifiers=[
+        'Development Status :: 4 - Beta',
+        'Framework :: AsyncIO',
+        'Intended Audience :: Developers',
+        'Operating System :: POSIX',
+        'Operating System :: MacOS :: MacOS X',
+        'Operating System :: Microsoft :: Windows',
+        'Programming Language :: Python :: 3 :: Only',
+        'Programming Language :: Python :: 3.9',
+        'Programming Language :: Python :: 3.10',
+        'Programming Language :: Python :: 3.11',
+        'Programming Language :: Python :: 3.12',
+        'Programming Language :: Python :: 3.13',
+        'Programming Language :: Python :: 3.14',
+        'Programming Language :: Python :: Implementation :: CPython',
+        'Topic :: Database :: Front-Ends',
+    ],
+    install_requires=[
+        'async_timeout>=4.0.3; python_version < "3.11.0"',
+    ],
+    extras_require={
+        'gssauth': [
+            'gssapi; platform_system != "Windows"',
+            'sspilib; platform_system == "Windows"',
+        ],
+        'sqlalchemy': ['SQLAlchemy>=2.0'],
+        'alembic': ['SQLAlchemy>=2.0', 'alembic>=1.13'],
+    },
+    packages=setuptools.find_packages(include=['asyncpg', 'asyncpg.*']),
+    include_package_data=True,
+    exclude_package_data={'': ['*.c', '*.h']},
+    zip_safe=False,
+    entry_points={
+        'sqlalchemy.dialects': [
+            'kingbase_mysql.asyncpg = '
+            'asyncpg.sa_dialect:KESMySQLDialect_asyncpg',
+            'kingbase_oracle.asyncpg = '
+            'asyncpg.sa_dialect:KESOracleDialect_asyncpg',
+            'kingbase_sqlserver.asyncpg = '
+            'asyncpg.sa_dialect:KESSQLServerDialect_asyncpg',
+        ],
+    },
     ext_modules=[
         setuptools.extension.Extension(
             "asyncpg.pgproto.pgproto",
