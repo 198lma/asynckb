@@ -20,6 +20,7 @@ Contents
    :maxdepth: 2
 
    installation
+   user_manual_zh
    usage
    api/index
    faq

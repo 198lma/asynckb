@@ -51,7 +51,6 @@ Basic usage
             user="system",
             password="password",
             database="test",
-            kes_mode="mysql",
             ssl=False,
         )
         try:
@@ -65,9 +64,11 @@ Basic usage
 
     asyncio.run(main())
 
-Use ``kes_mode="oracle"`` or ``kes_mode="sqlserver"`` for the corresponding
-KES compatibility mode.  A mode is verified after connecting, so connecting
-to an instance with the wrong mode fails with ``ClientConfigurationError``.
+The driver runs ``SHOW DATABASE_MODE`` after authentication and automatically
+selects the corresponding KES compatibility mode.  The detected mode is
+available through ``connection.get_kes_mode()``.  Passing
+``kes_mode="mysql"``, ``kes_mode="oracle"`` or ``kes_mode="sqlserver"`` is
+optional and enables an explicit mode check when required.
 
 Connection service files may also declare the KES compatibility mode::
 
@@ -152,7 +153,12 @@ The tested MySQL-mode server can infer an untyped placeholder as ``text`` in
 some expressions.  Use an explicit mode type such as ``CAST($1 AS INT)`` when
 the surrounding expression does not determine the intended parameter type.
 
-Calling ``connect()`` without ``kes_mode`` preserves upstream asyncpg behavior.
+Calling ``connect()`` without ``kes_mode`` preserves the upstream connection
+API.  After authentication, the driver probes ``SHOW DATABASE_MODE`` and
+automatically initializes the matching KingbaseES compatibility mode.  If the
+server does not support that KES command, the connection remains on the
+standard PostgreSQL path.  Passing ``kes_mode`` is still supported when an
+application needs an explicit mode check.
 
 Testing against KES
 -------------------

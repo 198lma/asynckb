@@ -133,7 +133,15 @@ class Connection(metaclass=ConnectionMeta):
 
     async def _initialize_kes(self):
         if self._kes_mode is None:
-            return
+            self._kes_mode = await self._detect_kes_mode()
+            if self._kes_mode is None:
+                # The probe is internal and must not consume pool query
+                # quota or remain in the local statement cache.
+                self._drop_local_statement_cache()
+                self._protocol.reset_queries_count()
+                return
+            self._intro_query = kes.adapt_introspection_query(
+                self._intro_query, self._kes_mode)
         rows = await self.fetch(
             kes.TYPE_LOOKUP_QUERY, timeout=protocol.NO_TIMEOUT)
         (
@@ -145,6 +153,19 @@ class Connection(metaclass=ConnectionMeta):
         if self._stmts_to_close:
             await self._cleanup_stmts()
         self._protocol.reset_queries_count()
+
+    async def _detect_kes_mode(self):
+        try:
+            server_mode = await self.fetchval(
+                'SHOW DATABASE_MODE', timeout=protocol.NO_TIMEOUT)
+        except (
+            exceptions.PostgresSyntaxError,
+            exceptions.UndefinedObjectError,
+            exceptions.FeatureNotSupportedError,
+        ):
+            # PostgreSQL does not expose KES's SHOW DATABASE_MODE command.
+            return None
+        return kes.normalize_detected_mode(server_mode)
 
     def __del__(self):
         if not self.is_closed() and self._protocol is not None:
@@ -303,7 +324,7 @@ class Connection(metaclass=ConnectionMeta):
         return self._protocol.get_settings()
 
     def get_kes_mode(self):
-        """Return the configured KES compatibility mode, if any."""
+        """Return the detected or explicitly configured KES mode, if any."""
         return self._kes_mode
 
     def transaction(self, *, isolation=None, readonly=False,
@@ -2408,9 +2429,11 @@ async def connect(dsn=None, *,
         (the default is ``None``: no timeout).
 
     :param str kes_mode:
-        KingbaseES compatibility mode.  Pass ``'mysql'``, ``'oracle'``, or
-        ``'sqlserver'`` when connecting to a KES instance in that mode.  The
-        default ``None`` preserves the original PostgreSQL behavior.
+        Optional KingbaseES compatibility mode.  Pass ``'mysql'``,
+        ``'oracle'``, or ``'sqlserver'`` to request an explicit mode check.
+        When omitted, the driver detects the mode after authentication using
+        ``SHOW DATABASE_MODE`` and falls back to the standard PostgreSQL path
+        when the server does not provide that KES command.
 
     :param ssl:
         Pass ``True`` or an `ssl.SSLContext <SSLContext_>`_ instance to

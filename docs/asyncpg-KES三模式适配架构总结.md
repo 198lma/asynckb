@@ -126,12 +126,14 @@ sequenceDiagram
     participant Proto as Protocol
     participant KES as KingbaseES
 
-    App->>Utils: connect(kes_mode=mysql/oracle/sqlserver)
+    App->>Utils: connect() 使用原 asyncpg 参数
     Utils->>Utils: normalize_mode()
     Utils->>Proto: 建立异步 TCP 连接
     Proto->>KES: PostgreSQL StartupMessage
     KES-->>Proto: Authentication/ParameterStatus
     Proto-->>Conn: 连接建立
+    Conn->>KES: SHOW DATABASE_MODE
+    KES-->>Conn: MYSQL/ORACLE/MSSQL
     Conn->>KES: TYPE_LOOKUP_QUERY
     KES-->>Conn: type_oid/schema/type_name
     Conn->>Conn: register_codecs()
@@ -804,4 +806,4 @@ SQLAlchemy 方言差异 -> sa_dialect.py
 协议通信           -> 继续复用 asyncpg protocol.pyx
 ```
 
-因此，当前框架可以继续使用 asyncpg 的异步 API，通过 `kes_mode='mysql'`、`kes_mode='oracle'` 或 `kes_mode='sqlserver'` 连接对应 KingbaseES 实例，并使用主要的连接、查询、事务、游标、连接池、COPY、通知和 SQLAlchemy 功能。
+因此，当前框架可以继续使用原 asyncpg 的异步 API 连接对应 KingbaseES 实例，驱动会在认证后自动识别 MySQL、Oracle 或 SQL Server 兼容模式，并使用主要的连接、查询、事务、游标、连接池、COPY、通知和 SQLAlchemy 功能。`kes_mode` 仍可作为可选的显式模式校验参数。

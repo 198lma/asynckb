@@ -15,6 +15,13 @@ from . import exceptions
 
 MODES = frozenset({'mysql', 'oracle', 'sqlserver'})
 
+_DETECTED_MODE_ALIASES = {
+    'mysql': 'mysql',
+    'oracle': 'oracle',
+    'mssql': 'sqlserver',
+    'sqlserver': 'sqlserver',
+}
+
 _PG_EPOCH_DATE = datetime.date(2000, 1, 1)
 _PG_EPOCH_DATETIME = datetime.datetime(2000, 1, 1)
 _DATE_POS_INFINITY = 2**31 - 1
@@ -65,6 +72,13 @@ def normalize_mode(mode):
             "'sqlserver', or None, "
             'got {!r}'.format(mode))
     return mode.lower()
+
+
+def normalize_detected_mode(mode):
+    """Normalize a mode reported by KES, or return None for PostgreSQL."""
+    if not isinstance(mode, str):
+        return None
+    return _DETECTED_MODE_ALIASES.get(mode.strip().lower())
 
 
 def adapt_introspection_query(query, mode):

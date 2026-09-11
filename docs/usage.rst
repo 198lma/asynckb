@@ -21,8 +21,7 @@ which provides methods to run queries and manage transactions.
         # Connect to a KingbaseES MySQL compatibility instance.
         conn = await asyncpg.connect(
             host='127.0.0.1', port=54321, user='system',
-            password='your-password', database='test',
-            kes_mode='mysql', ssl=False)
+            password='your-password', database='test', ssl=False)
         # Execute a statement to create a new table.
         await conn.execute('''
             CREATE TABLE users(

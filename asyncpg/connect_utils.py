@@ -832,6 +832,12 @@ def _parse_connect_dsn_and_args(*, dsn, host, port, user,
             'server_settings is expected to be None or '
             'a Dict[str, str]')
 
+    if server_settings is not None and 'kes_mode' in server_settings:
+        # kes_mode is a client-side selector, not a PostgreSQL startup
+        # parameter.  Do not mutate the dictionary supplied by the caller.
+        server_settings = server_settings.copy()
+        server_settings.pop('kes_mode')
+
     if target_session_attrs is None:
         target_session_attrs = os.getenv(
             "PGTARGETSESSIONATTRS", SessionAttribute.any
