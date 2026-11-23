@@ -5,7 +5,7 @@ import uuid
 from dataclasses import dataclass, field
 from urllib.parse import quote
 
-import asyncpg
+import asynckb
 
 
 @dataclass(frozen=True)
@@ -22,13 +22,13 @@ class KESConfig:
         if mode not in {"mysql", "oracle", "sqlserver"}:
             raise ValueError(f"unsupported KES mode: {mode}")
 
-        password = os.environ.get("ASYNCPG_KES_PASSWORD")
+        password = os.environ.get("ASYNCKB_KES_PASSWORD")
         if not password:
             raise RuntimeError(
-                "ASYNCPG_KES_PASSWORD must be set for integration tests"
+                "ASYNCKB_KES_PASSWORD must be set for integration tests"
             )
 
-        port_name = f"ASYNCPG_KES_{mode.upper()}_PORT"
+        port_name = f"ASYNCKB_KES_{mode.upper()}_PORT"
         default_ports = {
             "mysql": 54321,
             "oracle": 54322,
@@ -36,11 +36,11 @@ class KESConfig:
         }
         return cls(
             mode=mode,
-            host=os.environ.get("ASYNCPG_KES_HOST", "127.0.0.1"),
+            host=os.environ.get("ASYNCKB_KES_HOST", "127.0.0.1"),
             port=int(os.environ.get(port_name, default_ports[mode])),
-            user=os.environ.get("ASYNCPG_KES_USER", "system"),
+            user=os.environ.get("ASYNCKB_KES_USER", "system"),
             password=password,
-            database=os.environ.get("ASYNCPG_KES_DATABASE", "test"),
+            database=os.environ.get("ASYNCKB_KES_DATABASE", "test"),
         )
 
     def connection_kwargs(self, **overrides: object) -> dict[str, object]:
@@ -57,15 +57,24 @@ class KESConfig:
         options.update(overrides)
         return options
 
-    def dsn(self, dialect: str | None = None) -> str:
-        scheme = f"kingbase_{dialect}+asyncpg" if dialect else "postgresql"
+    def dsn(self) -> str:
+        scheme = "postgresql"
         user = quote(self.user, safe="")
         password = quote(self.password, safe="")
         database = quote(self.database, safe="")
         mode_query = f"?kes_mode={self.mode}&sslmode=disable"
         return (
             f"{scheme}://{user}:{password}@{self.host}:{self.port}/"
-            f"{database}{mode_query if dialect is None else ''}"
+            f"{database}{mode_query}"
+        )
+
+    def sqlalchemy_dsn(self) -> str:
+        user = quote(self.user, safe="")
+        password = quote(self.password, safe="")
+        database = quote(self.database, safe="")
+        return (
+            f"kingbase+asynckb://{user}:{password}@{self.host}:"
+            f"{self.port}/{database}?sslmode=disable"
         )
 
     @property
@@ -120,8 +129,8 @@ def unique_object_name(prefix: str, mode: str) -> str:
     return f"apg_{prefix}_{mode}_{token}"
 
 
-async def drop_table(connection: asyncpg.Connection, table: str) -> None:
+async def drop_table(connection: asynckb.Connection, table: str) -> None:
     try:
         await connection.execute(f"DROP TABLE {table}")
-    except asyncpg.UndefinedTableError:
+    except asynckb.UndefinedTableError:
         pass

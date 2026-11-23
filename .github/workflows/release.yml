@@ -1,3 +1,4 @@
+# Modified for asynckb: independent distribution and KES compatibility.
 name: Release
 
 on:
@@ -23,7 +24,7 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          version=$(sed -n "s/^__version__.*= '\([^']*\)'/\1/p" asyncpg/_version.py)
+          version=$(sed -n "s/^__version__.*= '\([^']*\)'/\1/p" asynckb/_version.py)
           test -n "$version"
           test "${GITHUB_REF_NAME}" = "v${version}"
           echo "version=${version}" >> "$GITHUB_OUTPUT"
@@ -96,6 +97,6 @@ jobs:
         run: |
           gh release create "${GITHUB_REF_NAME}" dist/* \
             --repo "${GITHUB_REPOSITORY}" \
-            --title "asyncpg-kes ${{ needs.validate-version.outputs.version }}" \
+            --title "asynckb ${{ needs.validate-version.outputs.version }}" \
             --generate-notes \
             --verify-tag

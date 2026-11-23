@@ -1,6 +1,9 @@
+# Modified for asynckb: include KES sources and redistribution notices.
 recursive-include docs *.py *.rst *.md Makefile *.css
 prune docs/_build
-recursive-include tests *.py *.md *.example
-recursive-include asyncpg *.pyx *.pxd *.pxi *.py *.pyi *.c *.h
+recursive-include tests *.py *.md *.json *.example
+recursive-include asynckb *.pyx *.pxd *.pxi *.py *.pyi *.c *.h
 include LICENSE README.rst AUTHORS CHANGELOG.md CONTRIBUTING.md SECURITY.md
+include NOTICE
+recursive-include LICENSES *.txt
 include UPSTREAM.md Makefile performance.png .flake8 run_kes_tests.sh

@@ -1,0 +1,9 @@
+SQL: select 1; select 2;
+execute: SELECT 1
+fetch: [(1,), (2,)]
+SQL: select 1 select 2
+execute: SELECT 1
+fetch: [(1,), (2,)]
+WITH EMPTY SET: [{'first_value': 1}, {'last_value': 'last'}]
+SET NOCOUNT ON: PostgresSyntaxError, SQLSTATE=42601
+SET NOCOUNT OFF: PostgresSyntaxError, SQLSTATE=42601

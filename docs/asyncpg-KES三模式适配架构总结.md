@@ -1,26 +1,26 @@
-# asyncpg KES MySQL/Oracle/SQL Server 三模式适配架构总结
+# asynckb KES MySQL/Oracle/SQL Server 三模式适配架构总结
 
 ## 1. 文档目的
 
 本文档总结当前项目对 KingbaseES（KES）MySQL、Oracle 和 SQL Server
 三种兼容模式的适配方案，说明：
 
-- 原 asyncpg 框架的主体结构。
-- KES 模式进入 asyncpg 的调用链路。
+- 原 asynckb 框架的主体结构。
+- KES 模式进入 asynckb 的调用链路。
 - PostgreSQL Wire Protocol 的复用方式和协议自解析流程。
 - KES 类型动态发现和 Codec 注册机制。
 - MySQL/Oracle/SQL Server 事务、PreparedStatement、COPY、Pool 等功能的适配方式。
 - SQLAlchemy 异步方言的实现方式。
 - 已完成的功能、测试结果和当前边界。
 
-本文档对应当前源码实现。Oracle 风格 OUT bind 不属于 asyncpg API，当前通过普通和批量 RETURNING 提供 KES 支持的 DML 结果返回路径。
+本文档对应当前源码实现。Oracle 风格 OUT bind 不属于 asynckb API，当前通过普通和批量 RETURNING 提供 KES 支持的 DML 结果返回路径。
 
 ## 2. 设计结论
 
-本次适配没有重新实现一个 KCI/libkci 驱动，也没有另建一套 `asynckes` 连接框架，而是在 asyncpg 原有异步驱动上增加 KES 兼容层：
+本次适配没有重新实现一个 KCI/libkci 驱动，也没有另建一套 `asynckb` 连接框架，而是在 asynckb 原有异步驱动上增加 KES 兼容层：
 
 ```text
-asyncpg 原有异步协议、连接池、事务、游标、COPY
+asynckb 原有异步协议、连接池、事务、游标、COPY
                          +
               KES 模式识别和类型 Codec
                          +
@@ -29,22 +29,22 @@ asyncpg 原有异步协议、连接池、事务、游标、COPY
         SQLAlchemy MySQL/Oracle/SQL Server 方言与反射
 ```
 
-这种方案的核心优点是保留 asyncpg 已有的异步标准能力，适配代码集中在数据库差异位置，不改变 PostgreSQL 模式的默认行为。
+这种方案的核心优点是保留 asynckb 已有的异步标准能力，适配代码集中在数据库差异位置，不改变 PostgreSQL 模式的默认行为。
 
 ## 3. 总体分层架构
 
 ```mermaid
 flowchart TD
-    A[业务代码] --> B[asyncpg.connect / create_pool]
+    A[业务代码] --> B[asynckb.connect / create_pool]
     A --> C[SQLAlchemy AsyncEngine]
 
     B --> D[connect_utils.py]
     C --> E[KES SQLAlchemy Dialect]
-    E --> F[SQLAlchemy asyncpg DBAPI Adapter]
+    E --> F[SQLAlchemy asynckb DBAPI Adapter]
     F --> D
 
     D --> G[Connection]
-    G --> H[asyncpg Protocol Cython 层]
+    G --> H[asynckb Protocol Cython 层]
     H --> I[PostgreSQL Wire Protocol]
     I --> J[KingbaseES MySQL 模式]
     I --> K[KingbaseES Oracle 模式]
@@ -55,9 +55,9 @@ flowchart TD
     L --> N[Codec 注册]
     L --> O[事务语句生成]
 
-    E --> P[KESMySQLDialect_asyncpg]
-    E --> Q[KESOracleDialect_asyncpg]
-    E --> U[KESSQLServerDialect_asyncpg]
+    E --> P[KESMySQLDialect_asynckb]
+    E --> Q[KESOracleDialect_asynckb]
+    E --> U[KESSQLServerDialect_asynckb]
     P --> R[MySQL SQL 编译与目录反射]
     Q --> S[Oracle SQL 编译与目录反射]
     U --> V[SQL Server SQL 编译与目录反射]
@@ -67,13 +67,13 @@ flowchart TD
 
 | 层次 | 主要文件 | 主要职责 |
 | --- | --- | --- |
-| API 层 | `asyncpg/connection.py`、`asyncpg/pool.py` | 提供连接、查询、事务、池、COPY、通知接口 |
-| 连接参数层 | `asyncpg/connect_utils.py` | 解析 `kes_mode`、DSN、连接参数和初始化流程 |
-| 模式适配层 | `asyncpg/kes.py` | 模式校验、类型发现、Codec、事务 SQL、DEALLOCATE 识别 |
-| 协议层 | `asyncpg/protocol/protocol.pyx` | 异步 Wire Protocol 消息收发和解析 |
-| 类型层 | `asyncpg/kes.py`、协议 Settings | 按 KES 类型 OID 注册 Python 编解码器 |
+| API 层 | `asynckb/connection.py`、`asynckb/pool.py` | 提供连接、查询、事务、池、COPY、通知接口 |
+| 连接参数层 | `asynckb/connect_utils.py` | 解析 `kes_mode`、DSN、连接参数和初始化流程 |
+| 模式适配层 | `asynckb/kes.py` | 模式校验、类型发现、Codec、事务 SQL、DEALLOCATE 识别 |
+| 协议层 | `asynckb/protocol/protocol.pyx` | 异步 Wire Protocol 消息收发和解析 |
+| 类型层 | `asynckb/kes.py`、协议 Settings | 按 KES 类型 OID 注册 Python 编解码器 |
 | 资源层 | `prepared_stmt.py`、`cursor.py`、`transaction.py` | PreparedStatement、游标、事务和保存点生命周期 |
-| ORM/方言层 | `asyncpg/sa_dialect.py` | SQLAlchemy 编译、执行上下文、类型和元数据反射 |
+| ORM/方言层 | `asynckb/sa_dialect.py` | SQLAlchemy 编译、执行上下文、类型和元数据反射 |
 | 测试层 | `tests/kes` | 仓库内三模式单元、集成、异步工作流和框架回归验证 |
 
 ## 4. 连接初始化流程
@@ -83,9 +83,9 @@ flowchart TD
 支持的连接形式：
 
 ```python
-import asyncpg
+import asynckb
 
-con = await asyncpg.connect(
+con = await asynckb.connect(
     host="127.0.0.1",
     port=54321,
     user="system",
@@ -99,7 +99,7 @@ con = await asyncpg.connect(
 Oracle 模式只需更换端口和模式：
 
 ```python
-con = await asyncpg.connect(
+con = await asynckb.connect(
     host="127.0.0.1",
     port=54322,
     user="system",
@@ -126,7 +126,7 @@ sequenceDiagram
     participant Proto as Protocol
     participant KES as KingbaseES
 
-    App->>Utils: connect() 使用原 asyncpg 参数
+    App->>Utils: connect() 使用原 asynckb 参数
     Utils->>Utils: normalize_mode()
     Utils->>Proto: 建立异步 TCP 连接
     Proto->>KES: PostgreSQL StartupMessage
@@ -143,9 +143,9 @@ sequenceDiagram
 
 实现入口：
 
-- `asyncpg/connect_utils.py:863`：解析 `kes_mode`。
-- `asyncpg/connect_utils.py:1157`：连接建立后执行 KES 初始化。
-- `asyncpg/connection.py:127`：执行类型发现和 Codec 注册。
+- `asynckb/connect_utils.py:863`：解析 `kes_mode`。
+- `asynckb/connect_utils.py:1157`：连接建立后执行 KES 初始化。
+- `asynckb/connection.py:127`：执行类型发现和 Codec 注册。
 
 如果初始化失败，连接会关闭，不会将未完成 Codec 注册的连接返回给调用方。
 
@@ -153,7 +153,7 @@ sequenceDiagram
 
 ### 5.1 协议层没有重写
 
-KES 三个兼容模式仍然使用 PostgreSQL Wire Protocol，因此保留 asyncpg 原有的 Cython 协议层，继续解析：
+KES 三个兼容模式仍然使用 PostgreSQL Wire Protocol，因此保留 asynckb 原有的 Cython 协议层，继续解析：
 
 ```text
 Authentication
@@ -171,7 +171,7 @@ CopyOutResponse
 
 ```mermaid
 sequenceDiagram
-    participant App as asyncpg API
+    participant App as asynckb API
     participant Conn as Connection
     participant Proto as Cython Protocol
     participant KES as KingbaseES
@@ -213,7 +213,7 @@ sequenceDiagram
 
 ### 6.1 为什么需要动态发现
 
-asyncpg 不是简单地根据字符串类型名转换结果，而是根据协议中的类型 OID 找到 Codec：
+asynckb 不是简单地根据字符串类型名转换结果，而是根据协议中的类型 OID 找到 Codec：
 
 ```text
 RowDescription.type_oid
@@ -229,7 +229,7 @@ KES 中部分类型的 schema、名称和 OID 与标准 PostgreSQL 不完全相�
 
 ### 6.2 类型查询
 
-`asyncpg/kes.py:25` 定义了类型查询：
+`asynckb/kes.py:25` 定义了类型查询：
 
 ```sql
 SELECT
@@ -318,13 +318,13 @@ MySQL 类型位置不是固定常量：驱动按连接发现结果兼容旧布�
 | `bfile` | `str` |
 
 Oracle 的 `NUMBER`、`DATE`、`TIMESTAMP`、`CLOB`、`BLOB`、`VARCHAR2`
-等基础类型主要复用 asyncpg 已有基础 Codec，并通过 SQLAlchemy 反射层
+等基础类型主要复用 asynckb 已有基础 Codec，并通过 SQLAlchemy 反射层
 映射为 Oracle 类型对象。当前测试实例不提供 `VARBINARY`，二进制数据使用
 `BLOB` 或 `BYTEA`。
 
 ## 7. 事务适配
 
-事务语句由 `asyncpg/kes.py` 统一生成，再由 `transaction.py` 调用。
+事务语句由 `asynckb/kes.py` 统一生成，再由 `transaction.py` 调用。
 
 ### 7.1 MySQL 模式
 
@@ -414,7 +414,7 @@ DEALLOCATE statement_name;
 DEALLOCATE ALL;
 ```
 
-如果 asyncpg 本地状态不更新，会造成：
+如果 asynckb 本地状态不更新，会造成：
 
 - 本地 statement 可用但服务端已删除。
 - 同名 statement 无法重新创建。
@@ -429,7 +429,7 @@ DEALLOCATE ALL;
 self._named_statements = {}
 ```
 
-所有实际命名的 statement 都会登记，包括 asyncpg 自动生成的缓存名称。
+所有实际命名的 statement 都会登记，包括 asynckb 自动生成的缓存名称。
 
 LRU 流程：
 
@@ -447,7 +447,7 @@ flowchart LR
 
 ## 9. COPY、通知、游标和连接池
 
-这些功能继续使用 asyncpg 原有协议层：
+这些功能继续使用 asynckb 原有协议层：
 
 ```text
 COPY text
@@ -480,15 +480,15 @@ sequenceDiagram
     participant App as SQLAlchemy 应用
     participant Engine as AsyncEngine
     participant Dialect as KES Dialect
-    participant DBAPI as asyncpg DBAPI Adapter
-    participant Conn as asyncpg Connection
+    participant DBAPI as asynckb DBAPI Adapter
+    participant Conn as asynckb Connection
     participant KES as KingbaseES
 
     App->>Engine: execute(statement)
     Engine->>Dialect: 编译 SQL
     Dialect->>Dialect: 选择 MySQL 或 Oracle 语法
     Dialect->>DBAPI: 执行 SQL
-    DBAPI->>Conn: asyncpg 调用
+    DBAPI->>Conn: asynckb 调用
     Conn->>KES: PostgreSQL Wire Protocol
     KES-->>Conn: DataRow/CommandComplete
     Conn-->>DBAPI: Record
@@ -500,13 +500,13 @@ sequenceDiagram
 类：
 
 ```python
-KESMySQLDialect_asyncpg
+KESMySQLDialect_asynckb
 ```
 
 继承：
 
 ```python
-_KESAsyncpgDialectMixin
+_KESAsynckbDialectMixin
 MySQLDialect
 ```
 
@@ -527,13 +527,13 @@ MySQLDialect
 类：
 
 ```python
-KESOracleDialect_asyncpg
+KESOracleDialect_asynckb
 ```
 
 继承：
 
 ```python
-_KESAsyncpgDialectMixin
+_KESAsynckbDialectMixin
 OracleDialect
 ```
 
@@ -586,7 +586,7 @@ result = await connection.execute(
 new_id = result.scalar_one()
 ```
 
-多个参数集可以直接使用 asyncpg：
+多个参数集可以直接使用 asynckb：
 
 ```python
 rows = await con.fetchmany(
@@ -625,17 +625,17 @@ Oracle SQLAlchemy 方言增加 `_kes_oracle_expression()`，将其清理为可�
 实现位置：
 
 ```text
-asyncpg/sa_dialect.py:34
-asyncpg/sa_dialect.py:245
-asyncpg/sa_dialect.py:654
+asynckb/sa_dialect.py:34
+asynckb/sa_dialect.py:245
+asynckb/sa_dialect.py:654
 ```
 
 ## 12. 典型使用场景
 
-### 12.1 asyncpg MySQL 模式
+### 12.1 asynckb MySQL 模式
 
 ```python
-con = await asyncpg.connect(
+con = await asynckb.connect(
     host='127.0.0.1',
     port=54321,
     user='system',
@@ -655,10 +655,10 @@ finally:
     await con.close()
 ```
 
-### 12.2 asyncpg Oracle 模式
+### 12.2 asynckb Oracle 模式
 
 ```python
-con = await asyncpg.connect(
+con = await asynckb.connect(
     host='127.0.0.1',
     port=54322,
     user='system',
@@ -682,7 +682,7 @@ from sqlalchemy import Column, Identity, Integer, MetaData, String, Table
 from sqlalchemy.ext.asyncio import create_async_engine
 
 engine = create_async_engine(
-    'kingbase_oracle+asyncpg://system:your-password@127.0.0.1:54322/test')
+    'kingbase+asynckb://system:your-password@127.0.0.1:54322/test')
 
 metadata = MetaData()
 users = Table(
@@ -750,11 +750,13 @@ Cursor、COPY、Pool、类型、事务、SQLAlchemy 和 Alembic；需要自建 P
 
 当前实现的明确边界如下：
 
-1. asyncpg 不自动翻译 SQL，业务 SQL 必须使用当前 KES 模式语法。
+1. asynckb 不自动翻译 SQL，业务 SQL 必须使用当前 KES 模式语法。
 2. 三种兼容模式的数据库语义不会被伪装成 PostgreSQL 语义。
-3. Oracle 风格 OUT bind 不属于 asyncpg API，当前 KES 实例也拒绝
-   `RETURNING INTO`；已支持普通和批量 `RETURNING`。
-4. 当前 Oracle 模式拒绝 `CALL` 的扩展协议 IN 参数，字面量 `CALL` 可用。
+3. asynckb 不提供 JDBC 式输出参数注册 API，当前 KES 实例也拒绝
+   DML `RETURNING INTO`；已支持普通和批量 `RETURNING`。
+4. Oracle `CALL` 已补充 Parse 参数 OID 高位的方向标记，支持 IN、OUT 和
+   IN OUT 绑定；输出通过 `fetch`/`fetchrow`/`fetchmany` 返回，不修改传入的
+   Python 对象。已验证 V009R001C010，未验证 REF CURSOR 和多结果集。
 5. 当前 Oracle 模式不提供 `VARBINARY`，二进制数据使用 `BLOB`/`BYTEA`。
 6. 当前 SQL Server 模式不支持已测试的计算列语法。
 7. MySQL 模式无法推断部分未定型参数时，需要显式 `CAST`。
@@ -765,28 +767,28 @@ Cursor、COPY、Pool、类型、事务、SQLAlchemy 和 Alembic；需要自建 P
 ## 15. 文件修改关系
 
 ```text
-asyncpg/connect_utils.py
+asynckb/connect_utils.py
     添加 kes_mode 参数、DSN 解析和连接初始化入口
 
-asyncpg/connection.py
+asynckb/connection.py
     添加 KES 初始化、动态 Codec 注册、DEALLOCATE 同步、Statement 生命周期管理
 
-asyncpg/kes.py
+asynckb/kes.py
     添加 KES 模式、类型查询、Codec、事务 SQL 和时间类型处理
 
-asyncpg/transaction.py
+asynckb/transaction.py
     根据 MySQL/Oracle/SQL Server 模式生成事务和保存点语句
 
-asyncpg/protocol/protocol.pyx
+asynckb/protocol/protocol.pyx
     保持原协议解析，仅补充 KES 初始化所需的超时和查询计数处理
 
-asyncpg/prepared_stmt.py
+asynckb/prepared_stmt.py
     补充 MySQL 模式 PreparedStatement 行限制
 
-asyncpg/introspection.py
+asynckb/introspection.py
     修复 KES 递归类型查询中的整数类型推导问题
 
-asyncpg/sa_dialect.py
+asynckb/sa_dialect.py
     添加 MySQL/Oracle/SQL Server SQLAlchemy 异步方言、编译器、执行上下文和目录反射
 
 tests/kes
@@ -795,7 +797,7 @@ tests/kes
 
 ## 16. 总结
 
-当前适配的核心不是重写 asyncpg，而是把 KES 的差异集中到适配边界：
+当前适配的核心不是重写 asynckb，而是把 KES 的差异集中到适配边界：
 
 ```text
 连接参数差异       -> connect_utils.py
@@ -803,7 +805,7 @@ tests/kes
 事务语法差异       -> transaction.py + kes.py
 Statement 生命周期 -> connection.py
 SQLAlchemy 方言差异 -> sa_dialect.py
-协议通信           -> 继续复用 asyncpg protocol.pyx
+协议通信           -> 继续复用 asynckb protocol.pyx
 ```
 
-因此，当前框架可以继续使用原 asyncpg 的异步 API 连接对应 KingbaseES 实例，驱动会在认证后自动识别 MySQL、Oracle 或 SQL Server 兼容模式，并使用主要的连接、查询、事务、游标、连接池、COPY、通知和 SQLAlchemy 功能。`kes_mode` 仍可作为可选的显式模式校验参数。
+因此，当前框架可以继续使用原 asynckb 的异步 API 连接对应 KingbaseES 实例，驱动会在认证后自动识别 MySQL、Oracle 或 SQL Server 兼容模式，并使用主要的连接、查询、事务、游标、连接池、COPY、通知和 SQLAlchemy 功能。`kes_mode` 仍可作为可选的显式模式校验参数。

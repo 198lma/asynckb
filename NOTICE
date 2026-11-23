@@ -1,0 +1,55 @@
+asynckb
+=======
+
+Independent delivery repository: https://github.com/198lma/asynckb
+
+This distribution is derived from asyncpg 0.31.0.
+Upstream: https://github.com/MagicStack/asyncpg
+Copyright (C) 2016-present the asyncpg authors and contributors.
+Upstream author attribution is retained in AUTHORS.
+License: Apache License 2.0; see LICENSE.
+
+The asynckb project changes the Python distribution, import namespace and
+extension module names, adds KingbaseES MySQL/Oracle/SQL Server compatibility,
+and provides the kingbase+asynckb SQLAlchemy entry point. Adaptation areas
+include mode initialization, parameter binding, protocol handling, type/OID
+discovery and codecs, transaction commands, statement lifecycle, connection
+pool integration, authentication/MAC information, and ORM dialect integration.
+See CHANGELOG.md and UPSTREAM.md. This notice is not a substitute for the
+modified-file notices required by Apache License 2.0 Section 4(b).
+
+Included components with separate upstream licenses
+--------------------------------------------------
+
+1. asynckb/_asyncio_compat.py contains backports from CPython's asyncio.
+   Copyright (c) 2001-2023 Python Software Foundation; All Rights Reserved.
+   License: PSF-2.0; see LICENSES/PSF-2.0.txt.
+   The backport uses the driver's compatibility layer and timeout handling
+   on older Python versions; the independent package uses asynckb imports.
+
+2. asynckb/protocol/record/recordobj.c contains modified code from
+   CPython/Objects/tupleobject.c.
+   Portions Copyright (c) PSF (and other CPython copyright holders).
+   Portions Copyright (c) 2016-present MagicStack Inc.
+   License: PSFL v2 (PSF-2.0); see LICENSES/PSF-2.0.txt.
+   The code adapts tuple machinery into the driver's named-field Record
+   type and C extension. This distribution uses the asynckb module namespace.
+   pythoncapi_compat_extras.h supplies a CPython compatibility helper for
+   older versions and is covered by the same PSF terms.
+
+3. asynckb/protocol/record/pythoncapi_compat.h
+   Copyright Contributors to the pythoncapi_compat project.
+   Upstream: https://github.com/python/pythoncapi-compat
+   License: 0BSD; see LICENSES/0BSD.txt.
+
+The package-level SPDX expression is Apache-2.0 AND PSF-2.0 AND 0BSD
+because these components are distributed together, not because every file
+is subject to all three licenses or because recipients may choose one.
+Separately installed dependencies retain their own licenses; this list is
+not a license inventory for an application that bundles those dependencies.
+
+The names asyncpg, MagicStack, CPython and pythoncapi_compat are used to
+identify upstream sources. This independent derivative is not an official
+asyncpg release and does not imply upstream endorsement. The licenses do
+not grant rights to use upstream trademarks to endorse this distribution.
+This file provides attribution and does not modify any license terms.

@@ -1,1 +1,1 @@
-"""Shared support code for the asyncpg KingbaseES integration tests."""
+"""Shared support code for the asynckb KingbaseES integration tests."""

@@ -1,0 +1,4 @@
+port=54321, expected_mode=mysql, detected_mode=mysql, query_result=1
+port=54322, expected_mode=oracle, detected_mode=oracle, query_result=1
+port=54323, expected_mode=sqlserver, detected_mode=sqlserver, query_result=1
+PASS: all three mode detection and query assertions passed

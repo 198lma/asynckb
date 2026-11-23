@@ -1,9 +1,11 @@
-Releasing asyncpg-kes
-=====================
+.. Modified for asynckb: independent distribution and KES compatibility.
+
+Releasing asynckb
+==================
 
 The authoritative release process is documented in ``docs/DELIVERY.md``.
 
-A release tag must exactly match ``asyncpg/_version.py``.  Pushing the tag
+A release tag must exactly match ``asynckb/_version.py``. Pushing the tag
 starts ``.github/workflows/release.yml``, which builds the source archive and
 platform wheels, generates ``SHA256SUMS``, and creates the GitHub Release.
 

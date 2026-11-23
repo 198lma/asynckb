@@ -1,3 +1,5 @@
+# Modified for asynckb:
+# independent distribution and KingbaseES compatibility.
 [flake8]
 select = C90,E,F,W,Y0
 ignore = E402,E731,W503,W504,E252

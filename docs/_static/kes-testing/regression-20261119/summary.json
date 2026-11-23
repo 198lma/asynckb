@@ -1,0 +1,63 @@
+{
+  "date": "2026-11-19",
+  "points": 160,
+  "nodes": 669,
+  "outcomes": {
+    "passed": 663,
+    "xfailed": 6
+  },
+  "source_sha256": "1a4bc57f8d318f2f1a08474062555e6c554be30e5f36bc0f0a05ef48fb51eb26",
+  "hash_scope": "sorted tests/kes/**/*.py: relative path + NUL + file bytes",
+  "modules": {
+    "CONN": {
+      "points": 8,
+      "nodes": 12,
+      "outcomes": {
+        "passed": 12
+      }
+    },
+    "PROTO": {
+      "points": 28,
+      "nodes": 100,
+      "outcomes": {
+        "passed": 100
+      }
+    },
+    "TYPE": {
+      "points": 34,
+      "nodes": 87,
+      "outcomes": {
+        "passed": 87
+      }
+    },
+    "EXEC": {
+      "points": 42,
+      "nodes": 200,
+      "outcomes": {
+        "passed": 194,
+        "xfailed": 6
+      }
+    },
+    "POOL": {
+      "points": 13,
+      "nodes": 43,
+      "outcomes": {
+        "passed": 43
+      }
+    },
+    "SA": {
+      "points": 20,
+      "nodes": 40,
+      "outcomes": {
+        "passed": 40
+      }
+    },
+    "AUTH": {
+      "points": 15,
+      "nodes": 187,
+      "outcomes": {
+        "passed": 187
+      }
+    }
+  }
+}

@@ -1,3 +1,5 @@
+<!-- Modified for asynckb: independent distribution and KES compatibility. -->
+
 # Contributing
 
 ## Development setup
@@ -19,7 +21,7 @@ compatibility instances. Export the variables listed in
 `tests/kes/kes-test.env.example`; never commit their real values.
 
 ```bash
-ASYNCPG_KES_PASSWORD='<password>' ./run_kes_tests.sh all -q
+ASYNCKB_KES_PASSWORD='<password>' ./run_kes_tests.sh all -q
 ```
 
 Every test function must have a single clear responsibility and a docstring

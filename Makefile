@@ -1,3 +1,5 @@
+# Modified for asynckb:
+# independent distribution and KingbaseES compatibility.
 .PHONY: compile debug test quicktest clean all
 
 
@@ -10,21 +12,21 @@ all: compile
 
 clean:
 	rm -fr dist/ doc/_build/
-	rm -fr asyncpg/pgproto/*.c asyncpg/pgproto/*.html
-	rm -fr asyncpg/pgproto/codecs/*.html
-	rm -fr asyncpg/pgproto/*.so
-	rm -fr asyncpg/protocol/*.c asyncpg/protocol/*.html
-	rm -fr asyncpg/protocol/*.so build *.egg-info
-	rm -fr asyncpg/protocol/codecs/*.html
+	rm -fr asynckb/pgproto/*.c asynckb/pgproto/*.html
+	rm -fr asynckb/pgproto/codecs/*.html
+	rm -fr asynckb/pgproto/*.so
+	rm -fr asynckb/protocol/*.c asynckb/protocol/*.html
+	rm -fr asynckb/protocol/*.so build *.egg-info
+	rm -fr asynckb/protocol/codecs/*.html
 	find . -name '__pycache__' | xargs rm -rf
 
 
 compile:
-	env ASYNCPG_BUILD_CYTHON_ALWAYS=1 $(PYTHON) -m pip install -e .
+	env ASYNCKB_BUILD_CYTHON_ALWAYS=1 $(PYTHON) -m pip install -e .
 
 
 debug:
-	env ASYNCPG_DEBUG=1 $(PYTHON) -m pip install -e .
+	env ASYNCKB_DEBUG=1 $(PYTHON) -m pip install -e .
 
 test:
 	PYTHONASYNCIODEBUG=1 $(PYTHON) -m pytest tests/kes

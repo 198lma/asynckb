@@ -1,0 +1,4336 @@
+{
+  "started_utc": "2026-11-19T07:33:39.920950+00:00",
+  "driver_version": "0.31.0.post12",
+  "python": "3.10.12",
+  "platform": "Linux-6.8.0-149-generic-x86_64-with-glibc2.35",
+  "cpu_count": 12,
+  "application_name": "asynckb_perf_761263ebc65f",
+  "configuration": {
+    "phase_seconds": 10.0,
+    "stress_seconds": 120.0,
+    "pool_size": 8,
+    "max_workers": 32,
+    "ssl": false,
+    "latency_includes_pool_acquire_and_release": true,
+    "warmup_operations_per_query_path": 100,
+    "percentile_method": "nearest-rank over all successful operations",
+    "notes": "Short closed-loop local test, not a 24-hour soak or certified capacity benchmark."
+  },
+  "modes": [
+    {
+      "mode": "mysql",
+      "phases": [
+        {
+          "completed": 18148,
+          "elapsed_seconds": 10.0005,
+          "operations_per_second": 1814.7,
+          "latency_ms": {
+            "p50": 0.4965,
+            "p95": 0.8221,
+            "p99": 1.1183,
+            "max": 28.9817
+          },
+          "workers": 1,
+          "requested_seconds": 10.0,
+          "errors": 0,
+          "error_types": {},
+          "first_error": null,
+          "client_cpu_seconds": 5.8157,
+          "resource_samples": [
+            {
+              "rss_mib": 32.176,
+              "file_descriptors": 9,
+              "asyncio_tasks": 3,
+              "seconds": 0.0,
+              "completed": 0
+            },
+            {
+              "rss_mib": 32.352,
+              "file_descriptors": 9,
+              "asyncio_tasks": 3,
+              "seconds": 1.001,
+              "completed": 1782
+            },
+            {
+              "rss_mib": 32.438,
+              "file_descriptors": 9,
+              "asyncio_tasks": 3,
+              "seconds": 2.002,
+              "completed": 3543
+            },
+            {
+              "rss_mib": 32.598,
+              "file_descriptors": 9,
+              "asyncio_tasks": 3,
+              "seconds": 3.002,
+              "completed": 5436
+            },
+            {
+              "rss_mib": 32.348,
+              "file_descriptors": 9,
+              "asyncio_tasks": 3,
+              "seconds": 4.003,
+              "completed": 7225
+            },
+            {
+              "rss_mib": 32.422,
+              "file_descriptors": 9,
+              "asyncio_tasks": 3,
+              "seconds": 5.003,
+              "completed": 8994
+            },
+            {
+              "rss_mib": 32.562,
+              "file_descriptors": 9,
+              "asyncio_tasks": 3,
+              "seconds": 6.004,
+              "completed": 10933
+            },
+            {
+              "rss_mib": 32.742,
+              "file_descriptors": 9,
+              "asyncio_tasks": 3,
+              "seconds": 7.004,
+              "completed": 12826
+            },
+            {
+              "rss_mib": 32.449,
+              "file_descriptors": 9,
+              "asyncio_tasks": 3,
+              "seconds": 8.005,
+              "completed": 14600
+            },
+            {
+              "rss_mib": 32.531,
+              "file_descriptors": 9,
+              "asyncio_tasks": 3,
+              "seconds": 9.005,
+              "completed": 16423
+            }
+          ],
+          "name": "single_cache_0",
+          "unit": "queries/second"
+        },
+        {
+          "completed": 41743,
+          "elapsed_seconds": 10.0003,
+          "operations_per_second": 4174.18,
+          "latency_ms": {
+            "p50": 0.2095,
+            "p95": 0.391,
+            "p99": 0.606,
+            "max": 6.4897
+          },
+          "workers": 1,
+          "requested_seconds": 10.0,
+          "errors": 0,
+          "error_types": {},
+          "first_error": null,
+          "client_cpu_seconds": 5.7616,
+          "resource_samples": [
+            {
+              "rss_mib": 32.855,
+              "file_descriptors": 9,
+              "asyncio_tasks": 3,
+              "seconds": 0.0,
+              "completed": 0
+            },
+            {
+              "rss_mib": 33.02,
+              "file_descriptors": 9,
+              "asyncio_tasks": 3,
+              "seconds": 1.001,
+              "completed": 4367
+            },
+            {
+              "rss_mib": 33.242,
+              "file_descriptors": 9,
+              "asyncio_tasks": 3,
+              "seconds": 2.001,
+              "completed": 8458
+            },
+            {
+              "rss_mib": 32.988,
+              "file_descriptors": 9,
+              "asyncio_tasks": 3,
+              "seconds": 3.002,
+              "completed": 12329
+            },
+            {
+              "rss_mib": 33.18,
+              "file_descriptors": 9,
+              "asyncio_tasks": 3,
+              "seconds": 4.003,
+              "completed": 16682
+            },
+            {
+              "rss_mib": 33.352,
+              "file_descriptors": 9,
+              "asyncio_tasks": 3,
+              "seconds": 5.003,
+              "completed": 20408
+            },
+            {
+              "rss_mib": 33.574,
+              "file_descriptors": 9,
+              "asyncio_tasks": 3,
+              "seconds": 6.004,
+              "completed": 24655
+            },
+            {
+              "rss_mib": 33.43,
+              "file_descriptors": 9,
+              "asyncio_tasks": 3,
+              "seconds": 7.004,
+              "completed": 29068
+            },
+            {
+              "rss_mib": 33.633,
+              "file_descriptors": 9,
+              "asyncio_tasks": 3,
+              "seconds": 8.005,
+              "completed": 33512
+            },
+            {
+              "rss_mib": 33.465,
+              "file_descriptors": 9,
+              "asyncio_tasks": 3,
+              "seconds": 9.006,
+              "completed": 37666
+            }
+          ],
+          "name": "single_cache_100",
+          "unit": "queries/second"
+        },
+        {
+          "completed": 16514,
+          "elapsed_seconds": 10.0007,
+          "operations_per_second": 1651.29,
+          "latency_ms": {
+            "p50": 0.5506,
+            "p95": 0.8939,
+            "p99": 1.2157,
+            "max": 8.4223
+          },
+          "workers": 1,
+          "requested_seconds": 10.0,
+          "errors": 0,
+          "error_types": {},
+          "first_error": null,
+          "client_cpu_seconds": 5.9947,
+          "resource_samples": [
+            {
+              "rss_mib": 33.93,
+              "file_descriptors": 16,
+              "asyncio_tasks": 3,
+              "seconds": 0.0,
+              "completed": 0
+            },
+            {
+              "rss_mib": 34.273,
+              "file_descriptors": 16,
+              "asyncio_tasks": 4,
+              "seconds": 1.002,
+              "completed": 1586
+            },
+            {
+              "rss_mib": 34.277,
+              "file_descriptors": 16,
+              "asyncio_tasks": 4,
+              "seconds": 2.002,
+              "completed": 3117
+            },
+            {
+              "rss_mib": 34.277,
+              "file_descriptors": 16,
+              "asyncio_tasks": 3,
+              "seconds": 3.003,
+              "completed": 4830
+            },
+            {
+              "rss_mib": 34.277,
+              "file_descriptors": 16,
+              "asyncio_tasks": 3,
+              "seconds": 4.003,
+              "completed": 6540
+            },
+            {
+              "rss_mib": 34.277,
+              "file_descriptors": 16,
+              "asyncio_tasks": 4,
+              "seconds": 5.004,
+              "completed": 8140
+            },
+            {
+              "rss_mib": 34.277,
+              "file_descriptors": 16,
+              "asyncio_tasks": 3,
+              "seconds": 6.004,
+              "completed": 9876
+            },
+            {
+              "rss_mib": 34.277,
+              "file_descriptors": 16,
+              "asyncio_tasks": 4,
+              "seconds": 7.005,
+              "completed": 11443
+            },
+            {
+              "rss_mib": 34.277,
+              "file_descriptors": 16,
+              "asyncio_tasks": 3,
+              "seconds": 8.006,
+              "completed": 13166
+            },
+            {
+              "rss_mib": 34.277,
+              "file_descriptors": 16,
+              "asyncio_tasks": 4,
+              "seconds": 9.006,
+              "completed": 14853
+            }
+          ],
+          "name": "pool_workers_1",
+          "unit": "queries/second",
+          "pool_size": 8
+        },
+        {
+          "completed": 36520,
+          "elapsed_seconds": 10.001,
+          "operations_per_second": 3651.62,
+          "latency_ms": {
+            "p50": 2.078,
+            "p95": 2.9953,
+            "p99": 3.743,
+            "max": 21.9622
+          },
+          "workers": 8,
+          "requested_seconds": 10.0,
+          "errors": 0,
+          "error_types": {},
+          "first_error": null,
+          "client_cpu_seconds": 9.307,
+          "resource_samples": [
+            {
+              "rss_mib": 34.465,
+              "file_descriptors": 16,
+              "asyncio_tasks": 10,
+              "seconds": 0.001,
+              "completed": 0
+            },
+            {
+              "rss_mib": 34.406,
+              "file_descriptors": 16,
+              "asyncio_tasks": 15,
+              "seconds": 1.002,
+              "completed": 3356
+            },
+            {
+              "rss_mib": 35.039,
+              "file_descriptors": 16,
+              "asyncio_tasks": 13,
+              "seconds": 2.004,
+              "completed": 6781
+            },
+            {
+              "rss_mib": 35.477,
+              "file_descriptors": 16,
+              "asyncio_tasks": 14,
+              "seconds": 3.006,
+              "completed": 10429
+            },
+            {
+              "rss_mib": 35.504,
+              "file_descriptors": 16,
+              "asyncio_tasks": 15,
+              "seconds": 4.008,
+              "completed": 14137
+            },
+            {
+              "rss_mib": 36.094,
+              "file_descriptors": 16,
+              "asyncio_tasks": 14,
+              "seconds": 5.01,
+              "completed": 17749
+            },
+            {
+              "rss_mib": 36.422,
+              "file_descriptors": 16,
+              "asyncio_tasks": 13,
+              "seconds": 6.011,
+              "completed": 21283
+            },
+            {
+              "rss_mib": 36.609,
+              "file_descriptors": 16,
+              "asyncio_tasks": 13,
+              "seconds": 7.013,
+              "completed": 24846
+            },
+            {
+              "rss_mib": 36.797,
+              "file_descriptors": 16,
+              "asyncio_tasks": 12,
+              "seconds": 8.014,
+              "completed": 28786
+            },
+            {
+              "rss_mib": 37.137,
+              "file_descriptors": 16,
+              "asyncio_tasks": 13,
+              "seconds": 9.015,
+              "completed": 32867
+            }
+          ],
+          "name": "pool_workers_8",
+          "unit": "queries/second",
+          "pool_size": 8
+        },
+        {
+          "completed": 36546,
+          "elapsed_seconds": 10.0083,
+          "operations_per_second": 3651.57,
+          "latency_ms": {
+            "p50": 6.5577,
+            "p95": 25.3888,
+            "p99": 36.5958,
+            "max": 90.1833
+          },
+          "workers": 32,
+          "requested_seconds": 10.0,
+          "errors": 0,
+          "error_types": {},
+          "first_error": null,
+          "client_cpu_seconds": 9.3004,
+          "resource_samples": [
+            {
+              "rss_mib": 37.289,
+              "file_descriptors": 16,
+              "asyncio_tasks": 34,
+              "seconds": 0.0,
+              "completed": 0
+            },
+            {
+              "rss_mib": 37.5,
+              "file_descriptors": 16,
+              "asyncio_tasks": 39,
+              "seconds": 1.002,
+              "completed": 3548
+            },
+            {
+              "rss_mib": 37.512,
+              "file_descriptors": 16,
+              "asyncio_tasks": 38,
+              "seconds": 2.004,
+              "completed": 7429
+            },
+            {
+              "rss_mib": 37.535,
+              "file_descriptors": 16,
+              "asyncio_tasks": 35,
+              "seconds": 3.005,
+              "completed": 11404
+            },
+            {
+              "rss_mib": 37.551,
+              "file_descriptors": 16,
+              "asyncio_tasks": 39,
+              "seconds": 4.007,
+              "completed": 15141
+            },
+            {
+              "rss_mib": 37.797,
+              "file_descriptors": 16,
+              "asyncio_tasks": 41,
+              "seconds": 5.01,
+              "completed": 18805
+            },
+            {
+              "rss_mib": 37.891,
+              "file_descriptors": 16,
+              "asyncio_tasks": 40,
+              "seconds": 6.011,
+              "completed": 22619
+            },
+            {
+              "rss_mib": 37.898,
+              "file_descriptors": 16,
+              "asyncio_tasks": 41,
+              "seconds": 7.013,
+              "completed": 26332
+            },
+            {
+              "rss_mib": 37.898,
+              "file_descriptors": 16,
+              "asyncio_tasks": 34,
+              "seconds": 8.015,
+              "completed": 29421
+            },
+            {
+              "rss_mib": 38.102,
+              "file_descriptors": 16,
+              "asyncio_tasks": 39,
+              "seconds": 9.016,
+              "completed": 32850
+            }
+          ],
+          "name": "pool_workers_32",
+          "unit": "queries/second",
+          "pool_size": 8
+        },
+        {
+          "completed": 454854,
+          "elapsed_seconds": 120.0064,
+          "operations_per_second": 3790.25,
+          "latency_ms": {
+            "p50": 3.9878,
+            "p95": 24.6623,
+            "p99": 35.4012,
+            "max": 147.7489
+          },
+          "workers": 32,
+          "requested_seconds": 120.0,
+          "errors": 0,
+          "error_types": {},
+          "first_error": null,
+          "client_cpu_seconds": 110.8977,
+          "resource_samples": [
+            {
+              "rss_mib": 38.336,
+              "file_descriptors": 16,
+              "asyncio_tasks": 34,
+              "seconds": 0.001,
+              "completed": 0
+            },
+            {
+              "rss_mib": 38.027,
+              "file_descriptors": 16,
+              "asyncio_tasks": 40,
+              "seconds": 1.002,
+              "completed": 3533
+            },
+            {
+              "rss_mib": 38.027,
+              "file_descriptors": 16,
+              "asyncio_tasks": 38,
+              "seconds": 2.004,
+              "completed": 7332
+            },
+            {
+              "rss_mib": 38.078,
+              "file_descriptors": 16,
+              "asyncio_tasks": 40,
+              "seconds": 3.007,
+              "completed": 10973
+            },
+            {
+              "rss_mib": 38.09,
+              "file_descriptors": 16,
+              "asyncio_tasks": 41,
+              "seconds": 4.009,
+              "completed": 14810
+            },
+            {
+              "rss_mib": 38.09,
+              "file_descriptors": 16,
+              "asyncio_tasks": 37,
+              "seconds": 5.01,
+              "completed": 18422
+            },
+            {
+              "rss_mib": 38.09,
+              "file_descriptors": 16,
+              "asyncio_tasks": 34,
+              "seconds": 6.012,
+              "completed": 22132
+            },
+            {
+              "rss_mib": 38.09,
+              "file_descriptors": 16,
+              "asyncio_tasks": 40,
+              "seconds": 7.014,
+              "completed": 25810
+            },
+            {
+              "rss_mib": 38.09,
+              "file_descriptors": 16,
+              "asyncio_tasks": 35,
+              "seconds": 8.016,
+              "completed": 29264
+            },
+            {
+              "rss_mib": 38.109,
+              "file_descriptors": 16,
+              "asyncio_tasks": 37,
+              "seconds": 9.018,
+              "completed": 32686
+            },
+            {
+              "rss_mib": 38.145,
+              "file_descriptors": 16,
+              "asyncio_tasks": 40,
+              "seconds": 10.02,
+              "completed": 36364
+            },
+            {
+              "rss_mib": 38.199,
+              "file_descriptors": 16,
+              "asyncio_tasks": 40,
+              "seconds": 11.021,
+              "completed": 40067
+            },
+            {
+              "rss_mib": 38.234,
+              "file_descriptors": 16,
+              "asyncio_tasks": 36,
+              "seconds": 12.023,
+              "completed": 43764
+            },
+            {
+              "rss_mib": 38.617,
+              "file_descriptors": 16,
+              "asyncio_tasks": 38,
+              "seconds": 13.025,
+              "completed": 47457
+            },
+            {
+              "rss_mib": 38.648,
+              "file_descriptors": 16,
+              "asyncio_tasks": 37,
+              "seconds": 14.027,
+              "completed": 51329
+            },
+            {
+              "rss_mib": 38.676,
+              "file_descriptors": 16,
+              "asyncio_tasks": 36,
+              "seconds": 15.029,
+              "completed": 55147
+            },
+            {
+              "rss_mib": 38.703,
+              "file_descriptors": 16,
+              "asyncio_tasks": 37,
+              "seconds": 16.04,
+              "completed": 58490
+            },
+            {
+              "rss_mib": 38.73,
+              "file_descriptors": 16,
+              "asyncio_tasks": 39,
+              "seconds": 17.042,
+              "completed": 62026
+            },
+            {
+              "rss_mib": 38.758,
+              "file_descriptors": 16,
+              "asyncio_tasks": 36,
+              "seconds": 18.043,
+              "completed": 66008
+            },
+            {
+              "rss_mib": 38.789,
+              "file_descriptors": 16,
+              "asyncio_tasks": 38,
+              "seconds": 19.045,
+              "completed": 70062
+            },
+            {
+              "rss_mib": 38.82,
+              "file_descriptors": 16,
+              "asyncio_tasks": 37,
+              "seconds": 20.048,
+              "completed": 74041
+            },
+            {
+              "rss_mib": 38.852,
+              "file_descriptors": 16,
+              "asyncio_tasks": 36,
+              "seconds": 21.049,
+              "completed": 77997
+            },
+            {
+              "rss_mib": 38.883,
+              "file_descriptors": 16,
+              "asyncio_tasks": 39,
+              "seconds": 22.051,
+              "completed": 81976
+            },
+            {
+              "rss_mib": 38.91,
+              "file_descriptors": 16,
+              "asyncio_tasks": 37,
+              "seconds": 23.053,
+              "completed": 85877
+            },
+            {
+              "rss_mib": 38.941,
+              "file_descriptors": 16,
+              "asyncio_tasks": 42,
+              "seconds": 24.055,
+              "completed": 89945
+            },
+            {
+              "rss_mib": 38.973,
+              "file_descriptors": 16,
+              "asyncio_tasks": 40,
+              "seconds": 25.056,
+              "completed": 94141
+            },
+            {
+              "rss_mib": 39.004,
+              "file_descriptors": 16,
+              "asyncio_tasks": 41,
+              "seconds": 26.058,
+              "completed": 98194
+            },
+            {
+              "rss_mib": 39.035,
+              "file_descriptors": 16,
+              "asyncio_tasks": 39,
+              "seconds": 27.06,
+              "completed": 102130
+            },
+            {
+              "rss_mib": 39.066,
+              "file_descriptors": 16,
+              "asyncio_tasks": 38,
+              "seconds": 28.061,
+              "completed": 106072
+            },
+            {
+              "rss_mib": 39.094,
+              "file_descriptors": 16,
+              "asyncio_tasks": 41,
+              "seconds": 29.063,
+              "completed": 110073
+            },
+            {
+              "rss_mib": 39.129,
+              "file_descriptors": 16,
+              "asyncio_tasks": 40,
+              "seconds": 30.065,
+              "completed": 114179
+            },
+            {
+              "rss_mib": 39.156,
+              "file_descriptors": 16,
+              "asyncio_tasks": 37,
+              "seconds": 31.067,
+              "completed": 118173
+            },
+            {
+              "rss_mib": 39.195,
+              "file_descriptors": 16,
+              "asyncio_tasks": 35,
+              "seconds": 32.069,
+              "completed": 122134
+            },
+            {
+              "rss_mib": 39.227,
+              "file_descriptors": 16,
+              "asyncio_tasks": 39,
+              "seconds": 33.07,
+              "completed": 126208
+            },
+            {
+              "rss_mib": 39.258,
+              "file_descriptors": 16,
+              "asyncio_tasks": 38,
+              "seconds": 34.072,
+              "completed": 130344
+            },
+            {
+              "rss_mib": 39.289,
+              "file_descriptors": 16,
+              "asyncio_tasks": 38,
+              "seconds": 35.074,
+              "completed": 134422
+            },
+            {
+              "rss_mib": 39.32,
+              "file_descriptors": 16,
+              "asyncio_tasks": 36,
+              "seconds": 36.076,
+              "completed": 138252
+            },
+            {
+              "rss_mib": 39.348,
+              "file_descriptors": 16,
+              "asyncio_tasks": 38,
+              "seconds": 37.078,
+              "completed": 142227
+            },
+            {
+              "rss_mib": 39.379,
+              "file_descriptors": 16,
+              "asyncio_tasks": 40,
+              "seconds": 38.08,
+              "completed": 146083
+            },
+            {
+              "rss_mib": 39.41,
+              "file_descriptors": 16,
+              "asyncio_tasks": 39,
+              "seconds": 39.081,
+              "completed": 150090
+            },
+            {
+              "rss_mib": 39.438,
+              "file_descriptors": 16,
+              "asyncio_tasks": 37,
+              "seconds": 40.083,
+              "completed": 154032
+            },
+            {
+              "rss_mib": 39.469,
+              "file_descriptors": 16,
+              "asyncio_tasks": 36,
+              "seconds": 41.085,
+              "completed": 158026
+            },
+            {
+              "rss_mib": 39.5,
+              "file_descriptors": 16,
+              "asyncio_tasks": 40,
+              "seconds": 42.087,
+              "completed": 161962
+            },
+            {
+              "rss_mib": 39.527,
+              "file_descriptors": 16,
+              "asyncio_tasks": 41,
+              "seconds": 43.088,
+              "completed": 165797
+            },
+            {
+              "rss_mib": 39.559,
+              "file_descriptors": 16,
+              "asyncio_tasks": 38,
+              "seconds": 44.09,
+              "completed": 169736
+            },
+            {
+              "rss_mib": 39.59,
+              "file_descriptors": 16,
+              "asyncio_tasks": 39,
+              "seconds": 45.092,
+              "completed": 173722
+            },
+            {
+              "rss_mib": 39.617,
+              "file_descriptors": 16,
+              "asyncio_tasks": 39,
+              "seconds": 46.094,
+              "completed": 177657
+            },
+            {
+              "rss_mib": 39.648,
+              "file_descriptors": 16,
+              "asyncio_tasks": 37,
+              "seconds": 47.095,
+              "completed": 181647
+            },
+            {
+              "rss_mib": 39.68,
+              "file_descriptors": 16,
+              "asyncio_tasks": 36,
+              "seconds": 48.097,
+              "completed": 185596
+            },
+            {
+              "rss_mib": 39.711,
+              "file_descriptors": 16,
+              "asyncio_tasks": 41,
+              "seconds": 49.099,
+              "completed": 189657
+            },
+            {
+              "rss_mib": 39.742,
+              "file_descriptors": 16,
+              "asyncio_tasks": 35,
+              "seconds": 50.101,
+              "completed": 193567
+            },
+            {
+              "rss_mib": 39.77,
+              "file_descriptors": 16,
+              "asyncio_tasks": 40,
+              "seconds": 51.103,
+              "completed": 197438
+            },
+            {
+              "rss_mib": 39.797,
+              "file_descriptors": 16,
+              "asyncio_tasks": 41,
+              "seconds": 52.105,
+              "completed": 201145
+            },
+            {
+              "rss_mib": 39.824,
+              "file_descriptors": 16,
+              "asyncio_tasks": 38,
+              "seconds": 53.108,
+              "completed": 204721
+            },
+            {
+              "rss_mib": 39.855,
+              "file_descriptors": 16,
+              "asyncio_tasks": 36,
+              "seconds": 54.109,
+              "completed": 208760
+            },
+            {
+              "rss_mib": 39.883,
+              "file_descriptors": 16,
+              "asyncio_tasks": 37,
+              "seconds": 55.111,
+              "completed": 212319
+            },
+            {
+              "rss_mib": 39.914,
+              "file_descriptors": 16,
+              "asyncio_tasks": 36,
+              "seconds": 56.112,
+              "completed": 216189
+            },
+            {
+              "rss_mib": 39.938,
+              "file_descriptors": 16,
+              "asyncio_tasks": 38,
+              "seconds": 57.114,
+              "completed": 219607
+            },
+            {
+              "rss_mib": 39.969,
+              "file_descriptors": 16,
+              "asyncio_tasks": 37,
+              "seconds": 58.116,
+              "completed": 223258
+            },
+            {
+              "rss_mib": 39.996,
+              "file_descriptors": 16,
+              "asyncio_tasks": 38,
+              "seconds": 59.117,
+              "completed": 226910
+            },
+            {
+              "rss_mib": 40.023,
+              "file_descriptors": 16,
+              "asyncio_tasks": 37,
+              "seconds": 60.121,
+              "completed": 230620
+            },
+            {
+              "rss_mib": 40.051,
+              "file_descriptors": 16,
+              "asyncio_tasks": 37,
+              "seconds": 61.122,
+              "completed": 234408
+            },
+            {
+              "rss_mib": 40.082,
+              "file_descriptors": 16,
+              "asyncio_tasks": 40,
+              "seconds": 62.123,
+              "completed": 238105
+            },
+            {
+              "rss_mib": 40.109,
+              "file_descriptors": 16,
+              "asyncio_tasks": 36,
+              "seconds": 63.125,
+              "completed": 241783
+            },
+            {
+              "rss_mib": 40.137,
+              "file_descriptors": 16,
+              "asyncio_tasks": 40,
+              "seconds": 64.127,
+              "completed": 245301
+            },
+            {
+              "rss_mib": 40.164,
+              "file_descriptors": 16,
+              "asyncio_tasks": 40,
+              "seconds": 65.129,
+              "completed": 248835
+            },
+            {
+              "rss_mib": 40.188,
+              "file_descriptors": 16,
+              "asyncio_tasks": 38,
+              "seconds": 66.13,
+              "completed": 252326
+            },
+            {
+              "rss_mib": 40.215,
+              "file_descriptors": 16,
+              "asyncio_tasks": 34,
+              "seconds": 67.132,
+              "completed": 255761
+            },
+            {
+              "rss_mib": 40.242,
+              "file_descriptors": 16,
+              "asyncio_tasks": 42,
+              "seconds": 68.135,
+              "completed": 259520
+            },
+            {
+              "rss_mib": 40.273,
+              "file_descriptors": 16,
+              "asyncio_tasks": 37,
+              "seconds": 69.137,
+              "completed": 263358
+            },
+            {
+              "rss_mib": 40.301,
+              "file_descriptors": 16,
+              "asyncio_tasks": 37,
+              "seconds": 70.138,
+              "completed": 267243
+            },
+            {
+              "rss_mib": 40.332,
+              "file_descriptors": 16,
+              "asyncio_tasks": 35,
+              "seconds": 71.139,
+              "completed": 271135
+            },
+            {
+              "rss_mib": 40.363,
+              "file_descriptors": 16,
+              "asyncio_tasks": 37,
+              "seconds": 72.141,
+              "completed": 275082
+            },
+            {
+              "rss_mib": 40.391,
+              "file_descriptors": 16,
+              "asyncio_tasks": 40,
+              "seconds": 73.143,
+              "completed": 279006
+            },
+            {
+              "rss_mib": 40.422,
+              "file_descriptors": 16,
+              "asyncio_tasks": 37,
+              "seconds": 74.144,
+              "completed": 282879
+            },
+            {
+              "rss_mib": 40.449,
+              "file_descriptors": 16,
+              "asyncio_tasks": 39,
+              "seconds": 75.147,
+              "completed": 286600
+            },
+            {
+              "rss_mib": 40.48,
+              "file_descriptors": 16,
+              "asyncio_tasks": 41,
+              "seconds": 76.149,
+              "completed": 290306
+            },
+            {
+              "rss_mib": 40.504,
+              "file_descriptors": 16,
+              "asyncio_tasks": 41,
+              "seconds": 77.151,
+              "completed": 293825
+            },
+            {
+              "rss_mib": 40.535,
+              "file_descriptors": 16,
+              "asyncio_tasks": 39,
+              "seconds": 78.153,
+              "completed": 297594
+            },
+            {
+              "rss_mib": 40.562,
+              "file_descriptors": 16,
+              "asyncio_tasks": 36,
+              "seconds": 79.154,
+              "completed": 301452
+            },
+            {
+              "rss_mib": 40.586,
+              "file_descriptors": 16,
+              "asyncio_tasks": 36,
+              "seconds": 80.156,
+              "completed": 304485
+            },
+            {
+              "rss_mib": 40.613,
+              "file_descriptors": 16,
+              "asyncio_tasks": 40,
+              "seconds": 81.158,
+              "completed": 308134
+            },
+            {
+              "rss_mib": 40.645,
+              "file_descriptors": 16,
+              "asyncio_tasks": 35,
+              "seconds": 82.16,
+              "completed": 311857
+            },
+            {
+              "rss_mib": 40.672,
+              "file_descriptors": 16,
+              "asyncio_tasks": 38,
+              "seconds": 83.162,
+              "completed": 315488
+            },
+            {
+              "rss_mib": 40.695,
+              "file_descriptors": 16,
+              "asyncio_tasks": 36,
+              "seconds": 84.164,
+              "completed": 318861
+            },
+            {
+              "rss_mib": 40.723,
+              "file_descriptors": 16,
+              "asyncio_tasks": 42,
+              "seconds": 85.167,
+              "completed": 322272
+            },
+            {
+              "rss_mib": 40.75,
+              "file_descriptors": 16,
+              "asyncio_tasks": 38,
+              "seconds": 86.169,
+              "completed": 325813
+            },
+            {
+              "rss_mib": 40.785,
+              "file_descriptors": 16,
+              "asyncio_tasks": 36,
+              "seconds": 87.171,
+              "completed": 329549
+            },
+            {
+              "rss_mib": 40.816,
+              "file_descriptors": 16,
+              "asyncio_tasks": 38,
+              "seconds": 88.173,
+              "completed": 333331
+            },
+            {
+              "rss_mib": 40.844,
+              "file_descriptors": 16,
+              "asyncio_tasks": 36,
+              "seconds": 89.175,
+              "completed": 336919
+            },
+            {
+              "rss_mib": 40.871,
+              "file_descriptors": 16,
+              "asyncio_tasks": 38,
+              "seconds": 90.176,
+              "completed": 340899
+            },
+            {
+              "rss_mib": 40.902,
+              "file_descriptors": 16,
+              "asyncio_tasks": 37,
+              "seconds": 91.179,
+              "completed": 344870
+            },
+            {
+              "rss_mib": 40.93,
+              "file_descriptors": 16,
+              "asyncio_tasks": 38,
+              "seconds": 92.181,
+              "completed": 348605
+            },
+            {
+              "rss_mib": 40.961,
+              "file_descriptors": 16,
+              "asyncio_tasks": 40,
+              "seconds": 93.183,
+              "completed": 352307
+            },
+            {
+              "rss_mib": 40.988,
+              "file_descriptors": 16,
+              "asyncio_tasks": 41,
+              "seconds": 94.185,
+              "completed": 356307
+            },
+            {
+              "rss_mib": 41.02,
+              "file_descriptors": 16,
+              "asyncio_tasks": 39,
+              "seconds": 95.186,
+              "completed": 360236
+            },
+            {
+              "rss_mib": 41.051,
+              "file_descriptors": 16,
+              "asyncio_tasks": 41,
+              "seconds": 96.188,
+              "completed": 364161
+            },
+            {
+              "rss_mib": 41.078,
+              "file_descriptors": 16,
+              "asyncio_tasks": 37,
+              "seconds": 97.189,
+              "completed": 367901
+            },
+            {
+              "rss_mib": 41.105,
+              "file_descriptors": 16,
+              "asyncio_tasks": 38,
+              "seconds": 98.191,
+              "completed": 371406
+            },
+            {
+              "rss_mib": 41.133,
+              "file_descriptors": 16,
+              "asyncio_tasks": 40,
+              "seconds": 99.192,
+              "completed": 375252
+            },
+            {
+              "rss_mib": 41.164,
+              "file_descriptors": 16,
+              "asyncio_tasks": 35,
+              "seconds": 100.194,
+              "completed": 379184
+            },
+            {
+              "rss_mib": 41.188,
+              "file_descriptors": 16,
+              "asyncio_tasks": 39,
+              "seconds": 101.195,
+              "completed": 382462
+            },
+            {
+              "rss_mib": 41.219,
+              "file_descriptors": 16,
+              "asyncio_tasks": 36,
+              "seconds": 102.197,
+              "completed": 386523
+            },
+            {
+              "rss_mib": 41.25,
+              "file_descriptors": 16,
+              "asyncio_tasks": 35,
+              "seconds": 103.199,
+              "completed": 390444
+            },
+            {
+              "rss_mib": 41.277,
+              "file_descriptors": 16,
+              "asyncio_tasks": 42,
+              "seconds": 104.201,
+              "completed": 394089
+            },
+            {
+              "rss_mib": 41.309,
+              "file_descriptors": 16,
+              "asyncio_tasks": 40,
+              "seconds": 105.202,
+              "completed": 398060
+            },
+            {
+              "rss_mib": 41.332,
+              "file_descriptors": 16,
+              "asyncio_tasks": 38,
+              "seconds": 106.204,
+              "completed": 400924
+            },
+            {
+              "rss_mib": 41.359,
+              "file_descriptors": 16,
+              "asyncio_tasks": 35,
+              "seconds": 107.206,
+              "completed": 404655
+            },
+            {
+              "rss_mib": 41.387,
+              "file_descriptors": 16,
+              "asyncio_tasks": 36,
+              "seconds": 108.208,
+              "completed": 408523
+            },
+            {
+              "rss_mib": 41.418,
+              "file_descriptors": 16,
+              "asyncio_tasks": 36,
+              "seconds": 109.21,
+              "completed": 412427
+            },
+            {
+              "rss_mib": 41.445,
+              "file_descriptors": 16,
+              "asyncio_tasks": 40,
+              "seconds": 110.211,
+              "completed": 416158
+            },
+            {
+              "rss_mib": 41.477,
+              "file_descriptors": 16,
+              "asyncio_tasks": 37,
+              "seconds": 111.213,
+              "completed": 420257
+            },
+            {
+              "rss_mib": 41.508,
+              "file_descriptors": 16,
+              "asyncio_tasks": 41,
+              "seconds": 112.214,
+              "completed": 424218
+            },
+            {
+              "rss_mib": 41.539,
+              "file_descriptors": 16,
+              "asyncio_tasks": 40,
+              "seconds": 113.216,
+              "completed": 428259
+            },
+            {
+              "rss_mib": 41.57,
+              "file_descriptors": 16,
+              "asyncio_tasks": 36,
+              "seconds": 114.218,
+              "completed": 432485
+            },
+            {
+              "rss_mib": 41.602,
+              "file_descriptors": 16,
+              "asyncio_tasks": 36,
+              "seconds": 115.22,
+              "completed": 436265
+            },
+            {
+              "rss_mib": 41.629,
+              "file_descriptors": 16,
+              "asyncio_tasks": 38,
+              "seconds": 116.221,
+              "completed": 440134
+            },
+            {
+              "rss_mib": 41.66,
+              "file_descriptors": 16,
+              "asyncio_tasks": 38,
+              "seconds": 117.223,
+              "completed": 443991
+            },
+            {
+              "rss_mib": 41.688,
+              "file_descriptors": 16,
+              "asyncio_tasks": 38,
+              "seconds": 118.226,
+              "completed": 447954
+            },
+            {
+              "rss_mib": 41.719,
+              "file_descriptors": 16,
+              "asyncio_tasks": 39,
+              "seconds": 119.227,
+              "completed": 451837
+            }
+          ],
+          "name": "sustained_workers_32",
+          "unit": "queries/second",
+          "pool_size": 8
+        },
+        {
+          "completed": 18185,
+          "elapsed_seconds": 10.0134,
+          "operations_per_second": 1816.07,
+          "latency_ms": {
+            "p50": 16.5128,
+            "p95": 44.8549,
+            "p99": 64.9677,
+            "max": 117.5369
+          },
+          "workers": 32,
+          "requested_seconds": 10.0,
+          "errors": 0,
+          "error_types": {},
+          "first_error": null,
+          "client_cpu_seconds": 10.0058,
+          "resource_samples": [
+            {
+              "rss_mib": 51.129,
+              "file_descriptors": 16,
+              "asyncio_tasks": 34,
+              "seconds": 0.0,
+              "completed": 0
+            },
+            {
+              "rss_mib": 51.133,
+              "file_descriptors": 16,
+              "asyncio_tasks": 35,
+              "seconds": 1.002,
+              "completed": 1802
+            },
+            {
+              "rss_mib": 51.133,
+              "file_descriptors": 16,
+              "asyncio_tasks": 34,
+              "seconds": 2.005,
+              "completed": 3637
+            },
+            {
+              "rss_mib": 51.133,
+              "file_descriptors": 16,
+              "asyncio_tasks": 38,
+              "seconds": 3.007,
+              "completed": 5382
+            },
+            {
+              "rss_mib": 51.133,
+              "file_descriptors": 16,
+              "asyncio_tasks": 35,
+              "seconds": 4.009,
+              "completed": 7234
+            },
+            {
+              "rss_mib": 51.133,
+              "file_descriptors": 16,
+              "asyncio_tasks": 37,
+              "seconds": 5.01,
+              "completed": 9020
+            },
+            {
+              "rss_mib": 51.133,
+              "file_descriptors": 16,
+              "asyncio_tasks": 34,
+              "seconds": 6.012,
+              "completed": 10766
+            },
+            {
+              "rss_mib": 51.133,
+              "file_descriptors": 16,
+              "asyncio_tasks": 35,
+              "seconds": 7.013,
+              "completed": 12652
+            },
+            {
+              "rss_mib": 51.141,
+              "file_descriptors": 16,
+              "asyncio_tasks": 37,
+              "seconds": 8.015,
+              "completed": 14486
+            },
+            {
+              "rss_mib": 51.141,
+              "file_descriptors": 16,
+              "asyncio_tasks": 35,
+              "seconds": 9.017,
+              "completed": 16334
+            }
+          ],
+          "name": "transaction_mix",
+          "unit": "transactions/second",
+          "pool_size": 8
+        }
+      ],
+      "checks": {
+        "pool_queue_timeout": true,
+        "recovered_after_acquire_timeout": true,
+        "committed_rows": 9100,
+        "expected_committed_rows": 9100,
+        "all_pool_connections_returned": true,
+        "sessions_after_pool_close_including_observer": 1,
+        "test_table_removed": true
+      },
+      "database_version": "KingbaseES V009R003C018",
+      "resources_before": {
+        "rss_mib": 32.105,
+        "file_descriptors": 8,
+        "asyncio_tasks": 1
+      },
+      "resources_after": {
+        "rss_mib": 48.188,
+        "file_descriptors": 7,
+        "asyncio_tasks": 1
+      },
+      "passed": true
+    },
+    {
+      "mode": "oracle",
+      "phases": [
+        {
+          "completed": 18557,
+          "elapsed_seconds": 10.0003,
+          "operations_per_second": 1855.64,
+          "latency_ms": {
+            "p50": 0.5021,
+            "p95": 0.7212,
+            "p99": 1.0197,
+            "max": 4.3062
+          },
+          "workers": 1,
+          "requested_seconds": 10.0,
+          "errors": 0,
+          "error_types": {},
+          "first_error": null,
+          "client_cpu_seconds": 5.7583,
+          "resource_samples": [
+            {
+              "rss_mib": 48.223,
+              "file_descriptors": 9,
+              "asyncio_tasks": 3,
+              "seconds": 0.0,
+              "completed": 0
+            },
+            {
+              "rss_mib": 48.625,
+              "file_descriptors": 9,
+              "asyncio_tasks": 3,
+              "seconds": 1.001,
+              "completed": 1873
+            },
+            {
+              "rss_mib": 48.625,
+              "file_descriptors": 9,
+              "asyncio_tasks": 3,
+              "seconds": 2.001,
+              "completed": 3713
+            },
+            {
+              "rss_mib": 48.625,
+              "file_descriptors": 9,
+              "asyncio_tasks": 3,
+              "seconds": 3.002,
+              "completed": 5561
+            },
+            {
+              "rss_mib": 48.625,
+              "file_descriptors": 9,
+              "asyncio_tasks": 3,
+              "seconds": 4.002,
+              "completed": 7390
+            },
+            {
+              "rss_mib": 48.625,
+              "file_descriptors": 9,
+              "asyncio_tasks": 3,
+              "seconds": 5.003,
+              "completed": 9248
+            },
+            {
+              "rss_mib": 48.625,
+              "file_descriptors": 9,
+              "asyncio_tasks": 3,
+              "seconds": 6.004,
+              "completed": 11139
+            },
+            {
+              "rss_mib": 48.625,
+              "file_descriptors": 9,
+              "asyncio_tasks": 3,
+              "seconds": 7.004,
+              "completed": 13034
+            },
+            {
+              "rss_mib": 48.625,
+              "file_descriptors": 9,
+              "asyncio_tasks": 3,
+              "seconds": 8.005,
+              "completed": 14882
+            },
+            {
+              "rss_mib": 48.625,
+              "file_descriptors": 9,
+              "asyncio_tasks": 3,
+              "seconds": 9.005,
+              "completed": 16715
+            }
+          ],
+          "name": "single_cache_0",
+          "unit": "queries/second"
+        },
+        {
+          "completed": 45031,
+          "elapsed_seconds": 10.0002,
+          "operations_per_second": 4503.0,
+          "latency_ms": {
+            "p50": 0.2056,
+            "p95": 0.2921,
+            "p99": 0.5112,
+            "max": 17.3487
+          },
+          "workers": 1,
+          "requested_seconds": 10.0,
+          "errors": 0,
+          "error_types": {},
+          "first_error": null,
+          "client_cpu_seconds": 5.8472,
+          "resource_samples": [
+            {
+              "rss_mib": 47.641,
+              "file_descriptors": 9,
+              "asyncio_tasks": 3,
+              "seconds": 0.0,
+              "completed": 0
+            },
+            {
+              "rss_mib": 47.641,
+              "file_descriptors": 9,
+              "asyncio_tasks": 3,
+              "seconds": 1.001,
+              "completed": 4468
+            },
+            {
+              "rss_mib": 47.641,
+              "file_descriptors": 9,
+              "asyncio_tasks": 3,
+              "seconds": 2.001,
+              "completed": 8908
+            },
+            {
+              "rss_mib": 47.641,
+              "file_descriptors": 9,
+              "asyncio_tasks": 3,
+              "seconds": 3.002,
+              "completed": 13477
+            },
+            {
+              "rss_mib": 47.641,
+              "file_descriptors": 9,
+              "asyncio_tasks": 3,
+              "seconds": 4.002,
+              "completed": 17794
+            },
+            {
+              "rss_mib": 47.641,
+              "file_descriptors": 9,
+              "asyncio_tasks": 3,
+              "seconds": 5.003,
+              "completed": 22291
+            },
+            {
+              "rss_mib": 47.82,
+              "file_descriptors": 9,
+              "asyncio_tasks": 3,
+              "seconds": 6.003,
+              "completed": 26778
+            },
+            {
+              "rss_mib": 47.883,
+              "file_descriptors": 9,
+              "asyncio_tasks": 3,
+              "seconds": 7.004,
+              "completed": 31382
+            },
+            {
+              "rss_mib": 47.918,
+              "file_descriptors": 9,
+              "asyncio_tasks": 3,
+              "seconds": 8.004,
+              "completed": 35858
+            },
+            {
+              "rss_mib": 47.934,
+              "file_descriptors": 9,
+              "asyncio_tasks": 3,
+              "seconds": 9.005,
+              "completed": 40473
+            }
+          ],
+          "name": "single_cache_100",
+          "unit": "queries/second"
+        },
+        {
+          "completed": 16994,
+          "elapsed_seconds": 10.0006,
+          "operations_per_second": 1699.3,
+          "latency_ms": {
+            "p50": 0.5446,
+            "p95": 0.8088,
+            "p99": 1.1513,
+            "max": 28.3864
+          },
+          "workers": 1,
+          "requested_seconds": 10.0,
+          "errors": 0,
+          "error_types": {},
+          "first_error": null,
+          "client_cpu_seconds": 5.9905,
+          "resource_samples": [
+            {
+              "rss_mib": 48.059,
+              "file_descriptors": 16,
+              "asyncio_tasks": 3,
+              "seconds": 0.0,
+              "completed": 0
+            },
+            {
+              "rss_mib": 48.059,
+              "file_descriptors": 16,
+              "asyncio_tasks": 4,
+              "seconds": 1.001,
+              "completed": 1759
+            },
+            {
+              "rss_mib": 48.059,
+              "file_descriptors": 16,
+              "asyncio_tasks": 4,
+              "seconds": 2.001,
+              "completed": 3505
+            },
+            {
+              "rss_mib": 48.059,
+              "file_descriptors": 16,
+              "asyncio_tasks": 3,
+              "seconds": 3.002,
+              "completed": 5278
+            },
+            {
+              "rss_mib": 48.059,
+              "file_descriptors": 16,
+              "asyncio_tasks": 3,
+              "seconds": 4.003,
+              "completed": 7016
+            },
+            {
+              "rss_mib": 48.059,
+              "file_descriptors": 16,
+              "asyncio_tasks": 4,
+              "seconds": 5.003,
+              "completed": 8759
+            },
+            {
+              "rss_mib": 48.059,
+              "file_descriptors": 16,
+              "asyncio_tasks": 3,
+              "seconds": 6.003,
+              "completed": 10484
+            },
+            {
+              "rss_mib": 48.059,
+              "file_descriptors": 16,
+              "asyncio_tasks": 4,
+              "seconds": 7.004,
+              "completed": 12269
+            },
+            {
+              "rss_mib": 48.059,
+              "file_descriptors": 16,
+              "asyncio_tasks": 3,
+              "seconds": 8.005,
+              "completed": 13899
+            },
+            {
+              "rss_mib": 48.059,
+              "file_descriptors": 16,
+              "asyncio_tasks": 3,
+              "seconds": 9.006,
+              "completed": 15423
+            }
+          ],
+          "name": "pool_workers_1",
+          "unit": "queries/second",
+          "pool_size": 8
+        },
+        {
+          "completed": 37505,
+          "elapsed_seconds": 10.0011,
+          "operations_per_second": 3750.1,
+          "latency_ms": {
+            "p50": 2.0206,
+            "p95": 2.9229,
+            "p99": 3.7835,
+            "max": 13.9396
+          },
+          "workers": 8,
+          "requested_seconds": 10.0,
+          "errors": 0,
+          "error_types": {},
+          "first_error": null,
+          "client_cpu_seconds": 9.5123,
+          "resource_samples": [
+            {
+              "rss_mib": 48.059,
+              "file_descriptors": 16,
+              "asyncio_tasks": 10,
+              "seconds": 0.001,
+              "completed": 0
+            },
+            {
+              "rss_mib": 48.059,
+              "file_descriptors": 16,
+              "asyncio_tasks": 14,
+              "seconds": 1.002,
+              "completed": 3870
+            },
+            {
+              "rss_mib": 48.059,
+              "file_descriptors": 16,
+              "asyncio_tasks": 13,
+              "seconds": 2.004,
+              "completed": 7675
+            },
+            {
+              "rss_mib": 48.242,
+              "file_descriptors": 16,
+              "asyncio_tasks": 14,
+              "seconds": 3.006,
+              "completed": 11271
+            },
+            {
+              "rss_mib": 48.281,
+              "file_descriptors": 16,
+              "asyncio_tasks": 12,
+              "seconds": 4.008,
+              "completed": 14908
+            },
+            {
+              "rss_mib": 48.312,
+              "file_descriptors": 16,
+              "asyncio_tasks": 15,
+              "seconds": 5.009,
+              "completed": 19058
+            },
+            {
+              "rss_mib": 48.328,
+              "file_descriptors": 16,
+              "asyncio_tasks": 16,
+              "seconds": 6.01,
+              "completed": 22478
+            },
+            {
+              "rss_mib": 48.613,
+              "file_descriptors": 16,
+              "asyncio_tasks": 16,
+              "seconds": 7.012,
+              "completed": 26032
+            },
+            {
+              "rss_mib": 48.805,
+              "file_descriptors": 16,
+              "asyncio_tasks": 12,
+              "seconds": 8.014,
+              "completed": 29697
+            },
+            {
+              "rss_mib": 48.859,
+              "file_descriptors": 16,
+              "asyncio_tasks": 12,
+              "seconds": 9.015,
+              "completed": 33729
+            }
+          ],
+          "name": "pool_workers_8",
+          "unit": "queries/second",
+          "pool_size": 8
+        },
+        {
+          "completed": 37304,
+          "elapsed_seconds": 10.0079,
+          "operations_per_second": 3727.44,
+          "latency_ms": {
+            "p50": 3.3448,
+            "p95": 25.5597,
+            "p99": 36.1095,
+            "max": 80.3466
+          },
+          "workers": 32,
+          "requested_seconds": 10.0,
+          "errors": 0,
+          "error_types": {},
+          "first_error": null,
+          "client_cpu_seconds": 9.2293,
+          "resource_samples": [
+            {
+              "rss_mib": 49.699,
+              "file_descriptors": 16,
+              "asyncio_tasks": 34,
+              "seconds": 0.001,
+              "completed": 0
+            },
+            {
+              "rss_mib": 49.703,
+              "file_descriptors": 16,
+              "asyncio_tasks": 41,
+              "seconds": 1.002,
+              "completed": 3792
+            },
+            {
+              "rss_mib": 49.703,
+              "file_descriptors": 16,
+              "asyncio_tasks": 35,
+              "seconds": 2.004,
+              "completed": 7665
+            },
+            {
+              "rss_mib": 49.703,
+              "file_descriptors": 16,
+              "asyncio_tasks": 35,
+              "seconds": 3.005,
+              "completed": 11356
+            },
+            {
+              "rss_mib": 49.703,
+              "file_descriptors": 16,
+              "asyncio_tasks": 37,
+              "seconds": 4.007,
+              "completed": 15340
+            },
+            {
+              "rss_mib": 49.723,
+              "file_descriptors": 16,
+              "asyncio_tasks": 36,
+              "seconds": 5.009,
+              "completed": 18987
+            },
+            {
+              "rss_mib": 49.73,
+              "file_descriptors": 16,
+              "asyncio_tasks": 37,
+              "seconds": 6.011,
+              "completed": 22747
+            },
+            {
+              "rss_mib": 49.852,
+              "file_descriptors": 16,
+              "asyncio_tasks": 38,
+              "seconds": 7.012,
+              "completed": 26458
+            },
+            {
+              "rss_mib": 49.852,
+              "file_descriptors": 16,
+              "asyncio_tasks": 40,
+              "seconds": 8.015,
+              "completed": 29959
+            },
+            {
+              "rss_mib": 49.855,
+              "file_descriptors": 16,
+              "asyncio_tasks": 38,
+              "seconds": 9.017,
+              "completed": 33695
+            }
+          ],
+          "name": "pool_workers_32",
+          "unit": "queries/second",
+          "pool_size": 8
+        },
+        {
+          "completed": 458987,
+          "elapsed_seconds": 120.0065,
+          "operations_per_second": 3824.68,
+          "latency_ms": {
+            "p50": 3.2211,
+            "p95": 24.968,
+            "p99": 35.3713,
+            "max": 110.2533
+          },
+          "workers": 32,
+          "requested_seconds": 120.0,
+          "errors": 0,
+          "error_types": {},
+          "first_error": null,
+          "client_cpu_seconds": 110.9426,
+          "resource_samples": [
+            {
+              "rss_mib": 50.035,
+              "file_descriptors": 16,
+              "asyncio_tasks": 34,
+              "seconds": 0.001,
+              "completed": 0
+            },
+            {
+              "rss_mib": 50.035,
+              "file_descriptors": 16,
+              "asyncio_tasks": 36,
+              "seconds": 1.003,
+              "completed": 3608
+            },
+            {
+              "rss_mib": 50.035,
+              "file_descriptors": 16,
+              "asyncio_tasks": 41,
+              "seconds": 2.004,
+              "completed": 7411
+            },
+            {
+              "rss_mib": 50.035,
+              "file_descriptors": 16,
+              "asyncio_tasks": 41,
+              "seconds": 3.006,
+              "completed": 11299
+            },
+            {
+              "rss_mib": 50.035,
+              "file_descriptors": 16,
+              "asyncio_tasks": 40,
+              "seconds": 4.008,
+              "completed": 15194
+            },
+            {
+              "rss_mib": 50.035,
+              "file_descriptors": 16,
+              "asyncio_tasks": 37,
+              "seconds": 5.01,
+              "completed": 19072
+            },
+            {
+              "rss_mib": 50.035,
+              "file_descriptors": 16,
+              "asyncio_tasks": 41,
+              "seconds": 6.012,
+              "completed": 22977
+            },
+            {
+              "rss_mib": 50.035,
+              "file_descriptors": 16,
+              "asyncio_tasks": 40,
+              "seconds": 7.014,
+              "completed": 26579
+            },
+            {
+              "rss_mib": 50.035,
+              "file_descriptors": 16,
+              "asyncio_tasks": 40,
+              "seconds": 8.016,
+              "completed": 30026
+            },
+            {
+              "rss_mib": 50.145,
+              "file_descriptors": 16,
+              "asyncio_tasks": 36,
+              "seconds": 9.018,
+              "completed": 33740
+            },
+            {
+              "rss_mib": 50.207,
+              "file_descriptors": 16,
+              "asyncio_tasks": 38,
+              "seconds": 10.019,
+              "completed": 37474
+            },
+            {
+              "rss_mib": 50.25,
+              "file_descriptors": 16,
+              "asyncio_tasks": 36,
+              "seconds": 11.021,
+              "completed": 41129
+            },
+            {
+              "rss_mib": 50.301,
+              "file_descriptors": 16,
+              "asyncio_tasks": 36,
+              "seconds": 12.023,
+              "completed": 44978
+            },
+            {
+              "rss_mib": 50.328,
+              "file_descriptors": 16,
+              "asyncio_tasks": 40,
+              "seconds": 13.024,
+              "completed": 48810
+            },
+            {
+              "rss_mib": 50.363,
+              "file_descriptors": 16,
+              "asyncio_tasks": 40,
+              "seconds": 14.026,
+              "completed": 52620
+            },
+            {
+              "rss_mib": 50.395,
+              "file_descriptors": 16,
+              "asyncio_tasks": 39,
+              "seconds": 15.028,
+              "completed": 56667
+            },
+            {
+              "rss_mib": 50.422,
+              "file_descriptors": 16,
+              "asyncio_tasks": 38,
+              "seconds": 16.033,
+              "completed": 60343
+            },
+            {
+              "rss_mib": 50.449,
+              "file_descriptors": 16,
+              "asyncio_tasks": 40,
+              "seconds": 17.035,
+              "completed": 63756
+            },
+            {
+              "rss_mib": 50.477,
+              "file_descriptors": 16,
+              "asyncio_tasks": 41,
+              "seconds": 18.037,
+              "completed": 67463
+            },
+            {
+              "rss_mib": 50.508,
+              "file_descriptors": 16,
+              "asyncio_tasks": 40,
+              "seconds": 19.038,
+              "completed": 71504
+            },
+            {
+              "rss_mib": 50.535,
+              "file_descriptors": 16,
+              "asyncio_tasks": 37,
+              "seconds": 20.041,
+              "completed": 75408
+            },
+            {
+              "rss_mib": 50.566,
+              "file_descriptors": 16,
+              "asyncio_tasks": 37,
+              "seconds": 21.042,
+              "completed": 79145
+            },
+            {
+              "rss_mib": 50.594,
+              "file_descriptors": 16,
+              "asyncio_tasks": 37,
+              "seconds": 22.043,
+              "completed": 83033
+            },
+            {
+              "rss_mib": 50.625,
+              "file_descriptors": 16,
+              "asyncio_tasks": 38,
+              "seconds": 23.045,
+              "completed": 87187
+            },
+            {
+              "rss_mib": 50.66,
+              "file_descriptors": 16,
+              "asyncio_tasks": 39,
+              "seconds": 24.047,
+              "completed": 91305
+            },
+            {
+              "rss_mib": 50.691,
+              "file_descriptors": 16,
+              "asyncio_tasks": 40,
+              "seconds": 25.048,
+              "completed": 95140
+            },
+            {
+              "rss_mib": 50.727,
+              "file_descriptors": 16,
+              "asyncio_tasks": 38,
+              "seconds": 26.05,
+              "completed": 99088
+            },
+            {
+              "rss_mib": 50.754,
+              "file_descriptors": 16,
+              "asyncio_tasks": 35,
+              "seconds": 27.052,
+              "completed": 102967
+            },
+            {
+              "rss_mib": 50.781,
+              "file_descriptors": 16,
+              "asyncio_tasks": 39,
+              "seconds": 28.054,
+              "completed": 106617
+            },
+            {
+              "rss_mib": 50.816,
+              "file_descriptors": 16,
+              "asyncio_tasks": 36,
+              "seconds": 29.055,
+              "completed": 110359
+            },
+            {
+              "rss_mib": 50.844,
+              "file_descriptors": 16,
+              "asyncio_tasks": 37,
+              "seconds": 30.057,
+              "completed": 114164
+            },
+            {
+              "rss_mib": 50.887,
+              "file_descriptors": 16,
+              "asyncio_tasks": 38,
+              "seconds": 31.06,
+              "completed": 117621
+            },
+            {
+              "rss_mib": 50.91,
+              "file_descriptors": 16,
+              "asyncio_tasks": 34,
+              "seconds": 32.063,
+              "completed": 120675
+            },
+            {
+              "rss_mib": 50.938,
+              "file_descriptors": 16,
+              "asyncio_tasks": 39,
+              "seconds": 33.064,
+              "completed": 124254
+            },
+            {
+              "rss_mib": 50.965,
+              "file_descriptors": 16,
+              "asyncio_tasks": 35,
+              "seconds": 34.066,
+              "completed": 127929
+            },
+            {
+              "rss_mib": 51.0,
+              "file_descriptors": 16,
+              "asyncio_tasks": 36,
+              "seconds": 35.069,
+              "completed": 131393
+            },
+            {
+              "rss_mib": 51.027,
+              "file_descriptors": 16,
+              "asyncio_tasks": 39,
+              "seconds": 36.071,
+              "completed": 134954
+            },
+            {
+              "rss_mib": 51.051,
+              "file_descriptors": 16,
+              "asyncio_tasks": 37,
+              "seconds": 37.073,
+              "completed": 138741
+            },
+            {
+              "rss_mib": 51.078,
+              "file_descriptors": 16,
+              "asyncio_tasks": 36,
+              "seconds": 38.074,
+              "completed": 142405
+            },
+            {
+              "rss_mib": 51.109,
+              "file_descriptors": 16,
+              "asyncio_tasks": 39,
+              "seconds": 39.076,
+              "completed": 146211
+            },
+            {
+              "rss_mib": 51.133,
+              "file_descriptors": 16,
+              "asyncio_tasks": 40,
+              "seconds": 40.078,
+              "completed": 150092
+            },
+            {
+              "rss_mib": 51.164,
+              "file_descriptors": 16,
+              "asyncio_tasks": 37,
+              "seconds": 41.08,
+              "completed": 153998
+            },
+            {
+              "rss_mib": 51.188,
+              "file_descriptors": 16,
+              "asyncio_tasks": 38,
+              "seconds": 42.082,
+              "completed": 157730
+            },
+            {
+              "rss_mib": 51.219,
+              "file_descriptors": 16,
+              "asyncio_tasks": 36,
+              "seconds": 43.083,
+              "completed": 161584
+            },
+            {
+              "rss_mib": 51.238,
+              "file_descriptors": 16,
+              "asyncio_tasks": 39,
+              "seconds": 44.085,
+              "completed": 165486
+            },
+            {
+              "rss_mib": 51.281,
+              "file_descriptors": 16,
+              "asyncio_tasks": 35,
+              "seconds": 45.087,
+              "completed": 169368
+            },
+            {
+              "rss_mib": 51.301,
+              "file_descriptors": 16,
+              "asyncio_tasks": 37,
+              "seconds": 46.089,
+              "completed": 173118
+            },
+            {
+              "rss_mib": 51.328,
+              "file_descriptors": 16,
+              "asyncio_tasks": 37,
+              "seconds": 47.092,
+              "completed": 176832
+            },
+            {
+              "rss_mib": 51.359,
+              "file_descriptors": 16,
+              "asyncio_tasks": 39,
+              "seconds": 48.094,
+              "completed": 180914
+            },
+            {
+              "rss_mib": 51.387,
+              "file_descriptors": 16,
+              "asyncio_tasks": 38,
+              "seconds": 49.095,
+              "completed": 184694
+            },
+            {
+              "rss_mib": 51.414,
+              "file_descriptors": 16,
+              "asyncio_tasks": 39,
+              "seconds": 50.097,
+              "completed": 188668
+            },
+            {
+              "rss_mib": 51.449,
+              "file_descriptors": 16,
+              "asyncio_tasks": 39,
+              "seconds": 51.099,
+              "completed": 192684
+            },
+            {
+              "rss_mib": 51.48,
+              "file_descriptors": 16,
+              "asyncio_tasks": 37,
+              "seconds": 52.101,
+              "completed": 196816
+            },
+            {
+              "rss_mib": 51.508,
+              "file_descriptors": 16,
+              "asyncio_tasks": 36,
+              "seconds": 53.103,
+              "completed": 200611
+            },
+            {
+              "rss_mib": 51.539,
+              "file_descriptors": 16,
+              "asyncio_tasks": 36,
+              "seconds": 54.104,
+              "completed": 204544
+            },
+            {
+              "rss_mib": 51.566,
+              "file_descriptors": 16,
+              "asyncio_tasks": 38,
+              "seconds": 55.106,
+              "completed": 208312
+            },
+            {
+              "rss_mib": 51.594,
+              "file_descriptors": 16,
+              "asyncio_tasks": 38,
+              "seconds": 56.108,
+              "completed": 212171
+            },
+            {
+              "rss_mib": 51.621,
+              "file_descriptors": 16,
+              "asyncio_tasks": 40,
+              "seconds": 57.109,
+              "completed": 215859
+            },
+            {
+              "rss_mib": 51.648,
+              "file_descriptors": 16,
+              "asyncio_tasks": 39,
+              "seconds": 58.111,
+              "completed": 219865
+            },
+            {
+              "rss_mib": 51.676,
+              "file_descriptors": 16,
+              "asyncio_tasks": 36,
+              "seconds": 59.113,
+              "completed": 223657
+            },
+            {
+              "rss_mib": 51.719,
+              "file_descriptors": 16,
+              "asyncio_tasks": 39,
+              "seconds": 60.115,
+              "completed": 227607
+            },
+            {
+              "rss_mib": 51.746,
+              "file_descriptors": 16,
+              "asyncio_tasks": 37,
+              "seconds": 61.117,
+              "completed": 231512
+            },
+            {
+              "rss_mib": 51.773,
+              "file_descriptors": 16,
+              "asyncio_tasks": 37,
+              "seconds": 62.118,
+              "completed": 235520
+            },
+            {
+              "rss_mib": 51.805,
+              "file_descriptors": 16,
+              "asyncio_tasks": 36,
+              "seconds": 63.121,
+              "completed": 239405
+            },
+            {
+              "rss_mib": 51.836,
+              "file_descriptors": 16,
+              "asyncio_tasks": 39,
+              "seconds": 64.123,
+              "completed": 243419
+            },
+            {
+              "rss_mib": 51.859,
+              "file_descriptors": 16,
+              "asyncio_tasks": 37,
+              "seconds": 65.124,
+              "completed": 247370
+            },
+            {
+              "rss_mib": 51.891,
+              "file_descriptors": 16,
+              "asyncio_tasks": 40,
+              "seconds": 66.126,
+              "completed": 251187
+            },
+            {
+              "rss_mib": 53.84,
+              "file_descriptors": 16,
+              "asyncio_tasks": 39,
+              "seconds": 67.128,
+              "completed": 255016
+            },
+            {
+              "rss_mib": 53.867,
+              "file_descriptors": 16,
+              "asyncio_tasks": 36,
+              "seconds": 68.129,
+              "completed": 258911
+            },
+            {
+              "rss_mib": 53.898,
+              "file_descriptors": 16,
+              "asyncio_tasks": 38,
+              "seconds": 69.131,
+              "completed": 262885
+            },
+            {
+              "rss_mib": 53.93,
+              "file_descriptors": 16,
+              "asyncio_tasks": 36,
+              "seconds": 70.133,
+              "completed": 266937
+            },
+            {
+              "rss_mib": 53.961,
+              "file_descriptors": 16,
+              "asyncio_tasks": 37,
+              "seconds": 71.135,
+              "completed": 270736
+            },
+            {
+              "rss_mib": 53.992,
+              "file_descriptors": 16,
+              "asyncio_tasks": 38,
+              "seconds": 72.136,
+              "completed": 274702
+            },
+            {
+              "rss_mib": 54.023,
+              "file_descriptors": 16,
+              "asyncio_tasks": 36,
+              "seconds": 73.138,
+              "completed": 278509
+            },
+            {
+              "rss_mib": 54.051,
+              "file_descriptors": 16,
+              "asyncio_tasks": 38,
+              "seconds": 74.14,
+              "completed": 282514
+            },
+            {
+              "rss_mib": 54.082,
+              "file_descriptors": 16,
+              "asyncio_tasks": 42,
+              "seconds": 75.142,
+              "completed": 286330
+            },
+            {
+              "rss_mib": 54.113,
+              "file_descriptors": 16,
+              "asyncio_tasks": 38,
+              "seconds": 76.144,
+              "completed": 290311
+            },
+            {
+              "rss_mib": 54.141,
+              "file_descriptors": 16,
+              "asyncio_tasks": 38,
+              "seconds": 77.146,
+              "completed": 294244
+            },
+            {
+              "rss_mib": 54.172,
+              "file_descriptors": 16,
+              "asyncio_tasks": 38,
+              "seconds": 78.147,
+              "completed": 298281
+            },
+            {
+              "rss_mib": 54.199,
+              "file_descriptors": 16,
+              "asyncio_tasks": 36,
+              "seconds": 79.148,
+              "completed": 302050
+            },
+            {
+              "rss_mib": 54.23,
+              "file_descriptors": 16,
+              "asyncio_tasks": 35,
+              "seconds": 80.15,
+              "completed": 305652
+            },
+            {
+              "rss_mib": 54.258,
+              "file_descriptors": 16,
+              "asyncio_tasks": 38,
+              "seconds": 81.152,
+              "completed": 309485
+            },
+            {
+              "rss_mib": 54.289,
+              "file_descriptors": 16,
+              "asyncio_tasks": 36,
+              "seconds": 82.154,
+              "completed": 313365
+            },
+            {
+              "rss_mib": 54.316,
+              "file_descriptors": 16,
+              "asyncio_tasks": 37,
+              "seconds": 83.156,
+              "completed": 317256
+            },
+            {
+              "rss_mib": 54.348,
+              "file_descriptors": 16,
+              "asyncio_tasks": 38,
+              "seconds": 84.157,
+              "completed": 321407
+            },
+            {
+              "rss_mib": 54.379,
+              "file_descriptors": 16,
+              "asyncio_tasks": 38,
+              "seconds": 85.159,
+              "completed": 325337
+            },
+            {
+              "rss_mib": 54.41,
+              "file_descriptors": 16,
+              "asyncio_tasks": 41,
+              "seconds": 86.161,
+              "completed": 329252
+            },
+            {
+              "rss_mib": 54.438,
+              "file_descriptors": 16,
+              "asyncio_tasks": 41,
+              "seconds": 87.164,
+              "completed": 332974
+            },
+            {
+              "rss_mib": 54.465,
+              "file_descriptors": 16,
+              "asyncio_tasks": 37,
+              "seconds": 88.165,
+              "completed": 336787
+            },
+            {
+              "rss_mib": 54.496,
+              "file_descriptors": 16,
+              "asyncio_tasks": 34,
+              "seconds": 89.167,
+              "completed": 340763
+            },
+            {
+              "rss_mib": 54.527,
+              "file_descriptors": 16,
+              "asyncio_tasks": 39,
+              "seconds": 90.169,
+              "completed": 344741
+            },
+            {
+              "rss_mib": 54.555,
+              "file_descriptors": 16,
+              "asyncio_tasks": 39,
+              "seconds": 91.171,
+              "completed": 348610
+            },
+            {
+              "rss_mib": 54.578,
+              "file_descriptors": 16,
+              "asyncio_tasks": 39,
+              "seconds": 92.173,
+              "completed": 351699
+            },
+            {
+              "rss_mib": 54.609,
+              "file_descriptors": 16,
+              "asyncio_tasks": 37,
+              "seconds": 93.175,
+              "completed": 355652
+            },
+            {
+              "rss_mib": 54.641,
+              "file_descriptors": 16,
+              "asyncio_tasks": 38,
+              "seconds": 94.177,
+              "completed": 359702
+            },
+            {
+              "rss_mib": 54.672,
+              "file_descriptors": 16,
+              "asyncio_tasks": 39,
+              "seconds": 95.179,
+              "completed": 363798
+            },
+            {
+              "rss_mib": 54.703,
+              "file_descriptors": 16,
+              "asyncio_tasks": 38,
+              "seconds": 96.18,
+              "completed": 367912
+            },
+            {
+              "rss_mib": 54.734,
+              "file_descriptors": 16,
+              "asyncio_tasks": 40,
+              "seconds": 97.183,
+              "completed": 371893
+            },
+            {
+              "rss_mib": 54.766,
+              "file_descriptors": 16,
+              "asyncio_tasks": 39,
+              "seconds": 98.185,
+              "completed": 375846
+            },
+            {
+              "rss_mib": 54.793,
+              "file_descriptors": 16,
+              "asyncio_tasks": 37,
+              "seconds": 99.186,
+              "completed": 379861
+            },
+            {
+              "rss_mib": 54.824,
+              "file_descriptors": 16,
+              "asyncio_tasks": 40,
+              "seconds": 100.188,
+              "completed": 383510
+            },
+            {
+              "rss_mib": 54.852,
+              "file_descriptors": 16,
+              "asyncio_tasks": 41,
+              "seconds": 101.19,
+              "completed": 387389
+            },
+            {
+              "rss_mib": 54.883,
+              "file_descriptors": 16,
+              "asyncio_tasks": 39,
+              "seconds": 102.191,
+              "completed": 391301
+            },
+            {
+              "rss_mib": 54.914,
+              "file_descriptors": 16,
+              "asyncio_tasks": 39,
+              "seconds": 103.193,
+              "completed": 395243
+            },
+            {
+              "rss_mib": 54.941,
+              "file_descriptors": 16,
+              "asyncio_tasks": 38,
+              "seconds": 104.195,
+              "completed": 399241
+            },
+            {
+              "rss_mib": 54.973,
+              "file_descriptors": 16,
+              "asyncio_tasks": 38,
+              "seconds": 105.197,
+              "completed": 403135
+            },
+            {
+              "rss_mib": 55.004,
+              "file_descriptors": 16,
+              "asyncio_tasks": 39,
+              "seconds": 106.198,
+              "completed": 407091
+            },
+            {
+              "rss_mib": 55.031,
+              "file_descriptors": 16,
+              "asyncio_tasks": 40,
+              "seconds": 107.2,
+              "completed": 410975
+            },
+            {
+              "rss_mib": 55.062,
+              "file_descriptors": 16,
+              "asyncio_tasks": 38,
+              "seconds": 108.202,
+              "completed": 414822
+            },
+            {
+              "rss_mib": 55.094,
+              "file_descriptors": 16,
+              "asyncio_tasks": 35,
+              "seconds": 109.204,
+              "completed": 418808
+            },
+            {
+              "rss_mib": 55.121,
+              "file_descriptors": 16,
+              "asyncio_tasks": 40,
+              "seconds": 110.205,
+              "completed": 422765
+            },
+            {
+              "rss_mib": 55.152,
+              "file_descriptors": 16,
+              "asyncio_tasks": 40,
+              "seconds": 111.208,
+              "completed": 426838
+            },
+            {
+              "rss_mib": 55.184,
+              "file_descriptors": 16,
+              "asyncio_tasks": 36,
+              "seconds": 112.21,
+              "completed": 430696
+            },
+            {
+              "rss_mib": 55.211,
+              "file_descriptors": 16,
+              "asyncio_tasks": 40,
+              "seconds": 113.212,
+              "completed": 434288
+            },
+            {
+              "rss_mib": 55.238,
+              "file_descriptors": 16,
+              "asyncio_tasks": 38,
+              "seconds": 114.214,
+              "completed": 437874
+            },
+            {
+              "rss_mib": 55.266,
+              "file_descriptors": 16,
+              "asyncio_tasks": 38,
+              "seconds": 115.216,
+              "completed": 441696
+            },
+            {
+              "rss_mib": 55.297,
+              "file_descriptors": 16,
+              "asyncio_tasks": 37,
+              "seconds": 116.217,
+              "completed": 445470
+            },
+            {
+              "rss_mib": 55.324,
+              "file_descriptors": 16,
+              "asyncio_tasks": 34,
+              "seconds": 117.219,
+              "completed": 449039
+            },
+            {
+              "rss_mib": 55.348,
+              "file_descriptors": 16,
+              "asyncio_tasks": 36,
+              "seconds": 118.221,
+              "completed": 452483
+            },
+            {
+              "rss_mib": 55.375,
+              "file_descriptors": 16,
+              "asyncio_tasks": 36,
+              "seconds": 119.223,
+              "completed": 455953
+            }
+          ],
+          "name": "sustained_workers_32",
+          "unit": "queries/second",
+          "pool_size": 8
+        },
+        {
+          "completed": 18813,
+          "elapsed_seconds": 10.0135,
+          "operations_per_second": 1878.77,
+          "latency_ms": {
+            "p50": 16.2057,
+            "p95": 43.912,
+            "p99": 64.5741,
+            "max": 102.6215
+          },
+          "workers": 32,
+          "requested_seconds": 10.0,
+          "errors": 0,
+          "error_types": {},
+          "first_error": null,
+          "client_cpu_seconds": 10.0067,
+          "resource_samples": [
+            {
+              "rss_mib": 54.086,
+              "file_descriptors": 16,
+              "asyncio_tasks": 34,
+              "seconds": 0.0,
+              "completed": 0
+            },
+            {
+              "rss_mib": 54.457,
+              "file_descriptors": 16,
+              "asyncio_tasks": 35,
+              "seconds": 1.002,
+              "completed": 1875
+            },
+            {
+              "rss_mib": 54.457,
+              "file_descriptors": 16,
+              "asyncio_tasks": 34,
+              "seconds": 2.004,
+              "completed": 3734
+            },
+            {
+              "rss_mib": 54.492,
+              "file_descriptors": 16,
+              "asyncio_tasks": 35,
+              "seconds": 3.006,
+              "completed": 5564
+            },
+            {
+              "rss_mib": 54.504,
+              "file_descriptors": 16,
+              "asyncio_tasks": 36,
+              "seconds": 4.008,
+              "completed": 7445
+            },
+            {
+              "rss_mib": 54.504,
+              "file_descriptors": 16,
+              "asyncio_tasks": 35,
+              "seconds": 5.009,
+              "completed": 9293
+            },
+            {
+              "rss_mib": 54.504,
+              "file_descriptors": 16,
+              "asyncio_tasks": 34,
+              "seconds": 6.011,
+              "completed": 11195
+            },
+            {
+              "rss_mib": 54.504,
+              "file_descriptors": 16,
+              "asyncio_tasks": 36,
+              "seconds": 7.013,
+              "completed": 13033
+            },
+            {
+              "rss_mib": 54.543,
+              "file_descriptors": 16,
+              "asyncio_tasks": 35,
+              "seconds": 8.015,
+              "completed": 14920
+            },
+            {
+              "rss_mib": 54.586,
+              "file_descriptors": 16,
+              "asyncio_tasks": 36,
+              "seconds": 9.016,
+              "completed": 16861
+            }
+          ],
+          "name": "transaction_mix",
+          "unit": "transactions/second",
+          "pool_size": 8
+        }
+      ],
+      "checks": {
+        "pool_queue_timeout": true,
+        "recovered_after_acquire_timeout": true,
+        "committed_rows": 9414,
+        "expected_committed_rows": 9414,
+        "all_pool_connections_returned": true,
+        "sessions_after_pool_close_including_observer": 1,
+        "test_table_removed": true
+      },
+      "database_version": "KingbaseES V009R002C016",
+      "resources_before": {
+        "rss_mib": 48.188,
+        "file_descriptors": 8,
+        "asyncio_tasks": 1
+      },
+      "resources_after": {
+        "rss_mib": 54.602,
+        "file_descriptors": 7,
+        "asyncio_tasks": 1
+      },
+      "passed": true
+    },
+    {
+      "mode": "sqlserver",
+      "phases": [
+        {
+          "completed": 19699,
+          "elapsed_seconds": 10.0001,
+          "operations_per_second": 1969.87,
+          "latency_ms": {
+            "p50": 0.4763,
+            "p95": 0.6685,
+            "p99": 0.9506,
+            "max": 1.567
+          },
+          "workers": 1,
+          "requested_seconds": 10.0,
+          "errors": 0,
+          "error_types": {},
+          "first_error": null,
+          "client_cpu_seconds": 6.1016,
+          "resource_samples": [
+            {
+              "rss_mib": 54.602,
+              "file_descriptors": 9,
+              "asyncio_tasks": 3,
+              "seconds": 0.0,
+              "completed": 0
+            },
+            {
+              "rss_mib": 54.602,
+              "file_descriptors": 9,
+              "asyncio_tasks": 3,
+              "seconds": 1.001,
+              "completed": 1897
+            },
+            {
+              "rss_mib": 54.602,
+              "file_descriptors": 9,
+              "asyncio_tasks": 3,
+              "seconds": 2.002,
+              "completed": 3898
+            },
+            {
+              "rss_mib": 54.602,
+              "file_descriptors": 9,
+              "asyncio_tasks": 3,
+              "seconds": 3.002,
+              "completed": 5896
+            },
+            {
+              "rss_mib": 54.602,
+              "file_descriptors": 9,
+              "asyncio_tasks": 3,
+              "seconds": 4.003,
+              "completed": 7850
+            },
+            {
+              "rss_mib": 54.602,
+              "file_descriptors": 9,
+              "asyncio_tasks": 3,
+              "seconds": 5.003,
+              "completed": 9771
+            },
+            {
+              "rss_mib": 54.602,
+              "file_descriptors": 9,
+              "asyncio_tasks": 3,
+              "seconds": 6.004,
+              "completed": 11694
+            },
+            {
+              "rss_mib": 54.602,
+              "file_descriptors": 9,
+              "asyncio_tasks": 3,
+              "seconds": 7.004,
+              "completed": 13695
+            },
+            {
+              "rss_mib": 54.602,
+              "file_descriptors": 9,
+              "asyncio_tasks": 3,
+              "seconds": 8.005,
+              "completed": 15725
+            },
+            {
+              "rss_mib": 54.602,
+              "file_descriptors": 9,
+              "asyncio_tasks": 3,
+              "seconds": 9.005,
+              "completed": 17722
+            }
+          ],
+          "name": "single_cache_0",
+          "unit": "queries/second"
+        },
+        {
+          "completed": 47271,
+          "elapsed_seconds": 10.0003,
+          "operations_per_second": 4726.95,
+          "latency_ms": {
+            "p50": 0.1963,
+            "p95": 0.2861,
+            "p99": 0.491,
+            "max": 8.5923
+          },
+          "workers": 1,
+          "requested_seconds": 10.0,
+          "errors": 0,
+          "error_types": {},
+          "first_error": null,
+          "client_cpu_seconds": 6.0765,
+          "resource_samples": [
+            {
+              "rss_mib": 54.602,
+              "file_descriptors": 9,
+              "asyncio_tasks": 3,
+              "seconds": 0.0,
+              "completed": 0
+            },
+            {
+              "rss_mib": 54.602,
+              "file_descriptors": 9,
+              "asyncio_tasks": 3,
+              "seconds": 1.001,
+              "completed": 4820
+            },
+            {
+              "rss_mib": 54.602,
+              "file_descriptors": 9,
+              "asyncio_tasks": 3,
+              "seconds": 2.001,
+              "completed": 9624
+            },
+            {
+              "rss_mib": 54.602,
+              "file_descriptors": 9,
+              "asyncio_tasks": 3,
+              "seconds": 3.002,
+              "completed": 14330
+            },
+            {
+              "rss_mib": 54.602,
+              "file_descriptors": 9,
+              "asyncio_tasks": 3,
+              "seconds": 4.002,
+              "completed": 19061
+            },
+            {
+              "rss_mib": 54.602,
+              "file_descriptors": 9,
+              "asyncio_tasks": 3,
+              "seconds": 5.003,
+              "completed": 23716
+            },
+            {
+              "rss_mib": 54.602,
+              "file_descriptors": 9,
+              "asyncio_tasks": 3,
+              "seconds": 6.003,
+              "completed": 28374
+            },
+            {
+              "rss_mib": 54.602,
+              "file_descriptors": 9,
+              "asyncio_tasks": 3,
+              "seconds": 7.004,
+              "completed": 33022
+            },
+            {
+              "rss_mib": 54.602,
+              "file_descriptors": 9,
+              "asyncio_tasks": 3,
+              "seconds": 8.004,
+              "completed": 37712
+            },
+            {
+              "rss_mib": 54.602,
+              "file_descriptors": 9,
+              "asyncio_tasks": 3,
+              "seconds": 9.005,
+              "completed": 42510
+            }
+          ],
+          "name": "single_cache_100",
+          "unit": "queries/second"
+        },
+        {
+          "completed": 17489,
+          "elapsed_seconds": 10.0003,
+          "operations_per_second": 1748.85,
+          "latency_ms": {
+            "p50": 0.5352,
+            "p95": 0.7506,
+            "p99": 0.9987,
+            "max": 18.9506
+          },
+          "workers": 1,
+          "requested_seconds": 10.0,
+          "errors": 0,
+          "error_types": {},
+          "first_error": null,
+          "client_cpu_seconds": 6.1541,
+          "resource_samples": [
+            {
+              "rss_mib": 54.613,
+              "file_descriptors": 16,
+              "asyncio_tasks": 3,
+              "seconds": 0.0,
+              "completed": 0
+            },
+            {
+              "rss_mib": 54.613,
+              "file_descriptors": 16,
+              "asyncio_tasks": 4,
+              "seconds": 1.001,
+              "completed": 1610
+            },
+            {
+              "rss_mib": 54.613,
+              "file_descriptors": 16,
+              "asyncio_tasks": 4,
+              "seconds": 2.001,
+              "completed": 3377
+            },
+            {
+              "rss_mib": 54.613,
+              "file_descriptors": 16,
+              "asyncio_tasks": 4,
+              "seconds": 3.002,
+              "completed": 5146
+            },
+            {
+              "rss_mib": 54.613,
+              "file_descriptors": 16,
+              "asyncio_tasks": 4,
+              "seconds": 4.002,
+              "completed": 6936
+            },
+            {
+              "rss_mib": 54.613,
+              "file_descriptors": 16,
+              "asyncio_tasks": 4,
+              "seconds": 5.003,
+              "completed": 8681
+            },
+            {
+              "rss_mib": 54.613,
+              "file_descriptors": 16,
+              "asyncio_tasks": 3,
+              "seconds": 6.003,
+              "completed": 10403
+            },
+            {
+              "rss_mib": 54.613,
+              "file_descriptors": 16,
+              "asyncio_tasks": 4,
+              "seconds": 7.004,
+              "completed": 12187
+            },
+            {
+              "rss_mib": 54.613,
+              "file_descriptors": 16,
+              "asyncio_tasks": 3,
+              "seconds": 8.004,
+              "completed": 13962
+            },
+            {
+              "rss_mib": 54.613,
+              "file_descriptors": 16,
+              "asyncio_tasks": 4,
+              "seconds": 9.005,
+              "completed": 15727
+            }
+          ],
+          "name": "pool_workers_1",
+          "unit": "queries/second",
+          "pool_size": 8
+        },
+        {
+          "completed": 40302,
+          "elapsed_seconds": 10.0008,
+          "operations_per_second": 4029.88,
+          "latency_ms": {
+            "p50": 1.9292,
+            "p95": 2.5188,
+            "p99": 3.0336,
+            "max": 5.9022
+          },
+          "workers": 8,
+          "requested_seconds": 10.0,
+          "errors": 0,
+          "error_types": {},
+          "first_error": null,
+          "client_cpu_seconds": 9.3185,
+          "resource_samples": [
+            {
+              "rss_mib": 54.613,
+              "file_descriptors": 16,
+              "asyncio_tasks": 10,
+              "seconds": 0.0,
+              "completed": 0
+            },
+            {
+              "rss_mib": 54.613,
+              "file_descriptors": 16,
+              "asyncio_tasks": 14,
+              "seconds": 1.002,
+              "completed": 4325
+            },
+            {
+              "rss_mib": 54.613,
+              "file_descriptors": 16,
+              "asyncio_tasks": 12,
+              "seconds": 2.004,
+              "completed": 8375
+            },
+            {
+              "rss_mib": 54.613,
+              "file_descriptors": 16,
+              "asyncio_tasks": 15,
+              "seconds": 3.005,
+              "completed": 12361
+            },
+            {
+              "rss_mib": 54.613,
+              "file_descriptors": 16,
+              "asyncio_tasks": 13,
+              "seconds": 4.007,
+              "completed": 16402
+            },
+            {
+              "rss_mib": 54.613,
+              "file_descriptors": 16,
+              "asyncio_tasks": 12,
+              "seconds": 5.008,
+              "completed": 20433
+            },
+            {
+              "rss_mib": 54.613,
+              "file_descriptors": 16,
+              "asyncio_tasks": 14,
+              "seconds": 6.01,
+              "completed": 24483
+            },
+            {
+              "rss_mib": 54.613,
+              "file_descriptors": 16,
+              "asyncio_tasks": 10,
+              "seconds": 7.012,
+              "completed": 28292
+            },
+            {
+              "rss_mib": 54.613,
+              "file_descriptors": 16,
+              "asyncio_tasks": 15,
+              "seconds": 8.014,
+              "completed": 32276
+            },
+            {
+              "rss_mib": 54.613,
+              "file_descriptors": 16,
+              "asyncio_tasks": 14,
+              "seconds": 9.015,
+              "completed": 36373
+            }
+          ],
+          "name": "pool_workers_8",
+          "unit": "queries/second",
+          "pool_size": 8
+        },
+        {
+          "completed": 37523,
+          "elapsed_seconds": 10.0063,
+          "operations_per_second": 3749.93,
+          "latency_ms": {
+            "p50": 3.844,
+            "p95": 25.062,
+            "p99": 34.9848,
+            "max": 77.1269
+          },
+          "workers": 32,
+          "requested_seconds": 10.0,
+          "errors": 0,
+          "error_types": {},
+          "first_error": null,
+          "client_cpu_seconds": 9.2949,
+          "resource_samples": [
+            {
+              "rss_mib": 54.613,
+              "file_descriptors": 16,
+              "asyncio_tasks": 34,
+              "seconds": 0.0,
+              "completed": 0
+            },
+            {
+              "rss_mib": 54.613,
+              "file_descriptors": 16,
+              "asyncio_tasks": 36,
+              "seconds": 1.002,
+              "completed": 3974
+            },
+            {
+              "rss_mib": 54.613,
+              "file_descriptors": 16,
+              "asyncio_tasks": 41,
+              "seconds": 2.004,
+              "completed": 8114
+            },
+            {
+              "rss_mib": 54.613,
+              "file_descriptors": 16,
+              "asyncio_tasks": 38,
+              "seconds": 3.005,
+              "completed": 12093
+            },
+            {
+              "rss_mib": 54.613,
+              "file_descriptors": 16,
+              "asyncio_tasks": 38,
+              "seconds": 4.008,
+              "completed": 15925
+            },
+            {
+              "rss_mib": 54.656,
+              "file_descriptors": 16,
+              "asyncio_tasks": 34,
+              "seconds": 5.009,
+              "completed": 19475
+            },
+            {
+              "rss_mib": 54.719,
+              "file_descriptors": 16,
+              "asyncio_tasks": 38,
+              "seconds": 6.011,
+              "completed": 23161
+            },
+            {
+              "rss_mib": 54.719,
+              "file_descriptors": 16,
+              "asyncio_tasks": 37,
+              "seconds": 7.012,
+              "completed": 26791
+            },
+            {
+              "rss_mib": 54.723,
+              "file_descriptors": 16,
+              "asyncio_tasks": 39,
+              "seconds": 8.015,
+              "completed": 30178
+            },
+            {
+              "rss_mib": 55.012,
+              "file_descriptors": 16,
+              "asyncio_tasks": 37,
+              "seconds": 9.017,
+              "completed": 33679
+            }
+          ],
+          "name": "pool_workers_32",
+          "unit": "queries/second",
+          "pool_size": 8
+        },
+        {
+          "completed": 464505,
+          "elapsed_seconds": 120.0083,
+          "operations_per_second": 3870.61,
+          "latency_ms": {
+            "p50": 3.841,
+            "p95": 24.2717,
+            "p99": 34.3788,
+            "max": 91.4083
+          },
+          "workers": 32,
+          "requested_seconds": 120.0,
+          "errors": 0,
+          "error_types": {},
+          "first_error": null,
+          "client_cpu_seconds": 110.8087,
+          "resource_samples": [
+            {
+              "rss_mib": 55.168,
+              "file_descriptors": 16,
+              "asyncio_tasks": 34,
+              "seconds": 0.0,
+              "completed": 0
+            },
+            {
+              "rss_mib": 55.168,
+              "file_descriptors": 16,
+              "asyncio_tasks": 39,
+              "seconds": 1.002,
+              "completed": 4019
+            },
+            {
+              "rss_mib": 55.168,
+              "file_descriptors": 16,
+              "asyncio_tasks": 39,
+              "seconds": 2.004,
+              "completed": 7725
+            },
+            {
+              "rss_mib": 55.168,
+              "file_descriptors": 16,
+              "asyncio_tasks": 38,
+              "seconds": 3.005,
+              "completed": 11643
+            },
+            {
+              "rss_mib": 55.289,
+              "file_descriptors": 16,
+              "asyncio_tasks": 40,
+              "seconds": 4.007,
+              "completed": 15599
+            },
+            {
+              "rss_mib": 55.555,
+              "file_descriptors": 16,
+              "asyncio_tasks": 35,
+              "seconds": 5.009,
+              "completed": 19616
+            },
+            {
+              "rss_mib": 55.559,
+              "file_descriptors": 16,
+              "asyncio_tasks": 36,
+              "seconds": 6.011,
+              "completed": 23722
+            },
+            {
+              "rss_mib": 55.559,
+              "file_descriptors": 16,
+              "asyncio_tasks": 36,
+              "seconds": 7.012,
+              "completed": 27678
+            },
+            {
+              "rss_mib": 55.559,
+              "file_descriptors": 16,
+              "asyncio_tasks": 41,
+              "seconds": 8.014,
+              "completed": 31761
+            },
+            {
+              "rss_mib": 56.094,
+              "file_descriptors": 16,
+              "asyncio_tasks": 40,
+              "seconds": 9.015,
+              "completed": 35903
+            },
+            {
+              "rss_mib": 56.25,
+              "file_descriptors": 16,
+              "asyncio_tasks": 41,
+              "seconds": 10.017,
+              "completed": 40053
+            },
+            {
+              "rss_mib": 56.293,
+              "file_descriptors": 16,
+              "asyncio_tasks": 41,
+              "seconds": 11.019,
+              "completed": 44056
+            },
+            {
+              "rss_mib": 56.293,
+              "file_descriptors": 16,
+              "asyncio_tasks": 38,
+              "seconds": 12.021,
+              "completed": 48046
+            },
+            {
+              "rss_mib": 56.297,
+              "file_descriptors": 16,
+              "asyncio_tasks": 35,
+              "seconds": 13.022,
+              "completed": 52047
+            },
+            {
+              "rss_mib": 56.297,
+              "file_descriptors": 16,
+              "asyncio_tasks": 37,
+              "seconds": 14.024,
+              "completed": 56014
+            },
+            {
+              "rss_mib": 56.297,
+              "file_descriptors": 16,
+              "asyncio_tasks": 38,
+              "seconds": 15.026,
+              "completed": 59962
+            },
+            {
+              "rss_mib": 56.391,
+              "file_descriptors": 16,
+              "asyncio_tasks": 38,
+              "seconds": 16.028,
+              "completed": 63881
+            },
+            {
+              "rss_mib": 56.441,
+              "file_descriptors": 16,
+              "asyncio_tasks": 40,
+              "seconds": 17.03,
+              "completed": 67917
+            },
+            {
+              "rss_mib": 56.469,
+              "file_descriptors": 16,
+              "asyncio_tasks": 36,
+              "seconds": 18.031,
+              "completed": 71884
+            },
+            {
+              "rss_mib": 56.516,
+              "file_descriptors": 16,
+              "asyncio_tasks": 38,
+              "seconds": 19.033,
+              "completed": 75779
+            },
+            {
+              "rss_mib": 56.543,
+              "file_descriptors": 16,
+              "asyncio_tasks": 39,
+              "seconds": 20.034,
+              "completed": 79618
+            },
+            {
+              "rss_mib": 56.582,
+              "file_descriptors": 16,
+              "asyncio_tasks": 39,
+              "seconds": 21.036,
+              "completed": 83500
+            },
+            {
+              "rss_mib": 57.223,
+              "file_descriptors": 16,
+              "asyncio_tasks": 38,
+              "seconds": 22.038,
+              "completed": 87573
+            },
+            {
+              "rss_mib": 57.254,
+              "file_descriptors": 16,
+              "asyncio_tasks": 38,
+              "seconds": 23.039,
+              "completed": 91847
+            },
+            {
+              "rss_mib": 57.281,
+              "file_descriptors": 16,
+              "asyncio_tasks": 37,
+              "seconds": 24.041,
+              "completed": 95868
+            },
+            {
+              "rss_mib": 57.312,
+              "file_descriptors": 16,
+              "asyncio_tasks": 37,
+              "seconds": 25.042,
+              "completed": 99724
+            },
+            {
+              "rss_mib": 57.348,
+              "file_descriptors": 16,
+              "asyncio_tasks": 37,
+              "seconds": 26.044,
+              "completed": 103863
+            },
+            {
+              "rss_mib": 57.379,
+              "file_descriptors": 16,
+              "asyncio_tasks": 37,
+              "seconds": 27.046,
+              "completed": 107765
+            },
+            {
+              "rss_mib": 57.41,
+              "file_descriptors": 16,
+              "asyncio_tasks": 40,
+              "seconds": 28.047,
+              "completed": 111679
+            },
+            {
+              "rss_mib": 57.438,
+              "file_descriptors": 16,
+              "asyncio_tasks": 38,
+              "seconds": 29.049,
+              "completed": 115591
+            },
+            {
+              "rss_mib": 57.469,
+              "file_descriptors": 16,
+              "asyncio_tasks": 39,
+              "seconds": 30.05,
+              "completed": 119535
+            },
+            {
+              "rss_mib": 57.5,
+              "file_descriptors": 16,
+              "asyncio_tasks": 41,
+              "seconds": 31.052,
+              "completed": 123542
+            },
+            {
+              "rss_mib": 57.531,
+              "file_descriptors": 16,
+              "asyncio_tasks": 39,
+              "seconds": 32.054,
+              "completed": 127513
+            },
+            {
+              "rss_mib": 57.562,
+              "file_descriptors": 16,
+              "asyncio_tasks": 39,
+              "seconds": 33.056,
+              "completed": 131563
+            },
+            {
+              "rss_mib": 57.59,
+              "file_descriptors": 16,
+              "asyncio_tasks": 39,
+              "seconds": 34.057,
+              "completed": 135529
+            },
+            {
+              "rss_mib": 57.617,
+              "file_descriptors": 16,
+              "asyncio_tasks": 40,
+              "seconds": 35.059,
+              "completed": 139201
+            },
+            {
+              "rss_mib": 57.645,
+              "file_descriptors": 16,
+              "asyncio_tasks": 38,
+              "seconds": 36.062,
+              "completed": 142565
+            },
+            {
+              "rss_mib": 57.672,
+              "file_descriptors": 16,
+              "asyncio_tasks": 40,
+              "seconds": 37.064,
+              "completed": 145897
+            },
+            {
+              "rss_mib": 57.695,
+              "file_descriptors": 16,
+              "asyncio_tasks": 40,
+              "seconds": 38.065,
+              "completed": 149395
+            },
+            {
+              "rss_mib": 57.723,
+              "file_descriptors": 16,
+              "asyncio_tasks": 40,
+              "seconds": 39.067,
+              "completed": 152752
+            },
+            {
+              "rss_mib": 57.754,
+              "file_descriptors": 16,
+              "asyncio_tasks": 34,
+              "seconds": 40.068,
+              "completed": 156649
+            },
+            {
+              "rss_mib": 57.777,
+              "file_descriptors": 16,
+              "asyncio_tasks": 37,
+              "seconds": 41.07,
+              "completed": 160140
+            },
+            {
+              "rss_mib": 57.805,
+              "file_descriptors": 16,
+              "asyncio_tasks": 39,
+              "seconds": 42.072,
+              "completed": 163773
+            },
+            {
+              "rss_mib": 57.832,
+              "file_descriptors": 16,
+              "asyncio_tasks": 36,
+              "seconds": 43.074,
+              "completed": 167394
+            },
+            {
+              "rss_mib": 57.859,
+              "file_descriptors": 16,
+              "asyncio_tasks": 38,
+              "seconds": 44.075,
+              "completed": 170926
+            },
+            {
+              "rss_mib": 57.887,
+              "file_descriptors": 16,
+              "asyncio_tasks": 35,
+              "seconds": 45.077,
+              "completed": 174564
+            },
+            {
+              "rss_mib": 57.914,
+              "file_descriptors": 16,
+              "asyncio_tasks": 40,
+              "seconds": 46.078,
+              "completed": 178065
+            },
+            {
+              "rss_mib": 57.941,
+              "file_descriptors": 16,
+              "asyncio_tasks": 36,
+              "seconds": 47.08,
+              "completed": 181511
+            },
+            {
+              "rss_mib": 57.969,
+              "file_descriptors": 16,
+              "asyncio_tasks": 37,
+              "seconds": 48.082,
+              "completed": 185119
+            },
+            {
+              "rss_mib": 57.996,
+              "file_descriptors": 16,
+              "asyncio_tasks": 37,
+              "seconds": 49.084,
+              "completed": 188684
+            },
+            {
+              "rss_mib": 58.023,
+              "file_descriptors": 16,
+              "asyncio_tasks": 39,
+              "seconds": 50.085,
+              "completed": 192094
+            },
+            {
+              "rss_mib": 58.051,
+              "file_descriptors": 16,
+              "asyncio_tasks": 39,
+              "seconds": 51.087,
+              "completed": 195713
+            },
+            {
+              "rss_mib": 58.078,
+              "file_descriptors": 16,
+              "asyncio_tasks": 38,
+              "seconds": 52.089,
+              "completed": 199557
+            },
+            {
+              "rss_mib": 58.109,
+              "file_descriptors": 16,
+              "asyncio_tasks": 35,
+              "seconds": 53.091,
+              "completed": 203386
+            },
+            {
+              "rss_mib": 58.133,
+              "file_descriptors": 16,
+              "asyncio_tasks": 40,
+              "seconds": 54.093,
+              "completed": 206581
+            },
+            {
+              "rss_mib": 58.16,
+              "file_descriptors": 16,
+              "asyncio_tasks": 36,
+              "seconds": 55.095,
+              "completed": 210100
+            },
+            {
+              "rss_mib": 58.184,
+              "file_descriptors": 16,
+              "asyncio_tasks": 40,
+              "seconds": 56.097,
+              "completed": 213929
+            },
+            {
+              "rss_mib": 58.215,
+              "file_descriptors": 16,
+              "asyncio_tasks": 40,
+              "seconds": 57.099,
+              "completed": 217674
+            },
+            {
+              "rss_mib": 58.238,
+              "file_descriptors": 16,
+              "asyncio_tasks": 39,
+              "seconds": 58.101,
+              "completed": 221131
+            },
+            {
+              "rss_mib": 58.273,
+              "file_descriptors": 16,
+              "asyncio_tasks": 39,
+              "seconds": 59.102,
+              "completed": 225019
+            },
+            {
+              "rss_mib": 58.301,
+              "file_descriptors": 16,
+              "asyncio_tasks": 38,
+              "seconds": 60.104,
+              "completed": 228625
+            },
+            {
+              "rss_mib": 58.328,
+              "file_descriptors": 16,
+              "asyncio_tasks": 39,
+              "seconds": 61.106,
+              "completed": 232082
+            },
+            {
+              "rss_mib": 58.355,
+              "file_descriptors": 16,
+              "asyncio_tasks": 35,
+              "seconds": 62.108,
+              "completed": 235825
+            },
+            {
+              "rss_mib": 58.387,
+              "file_descriptors": 16,
+              "asyncio_tasks": 38,
+              "seconds": 63.109,
+              "completed": 239711
+            },
+            {
+              "rss_mib": 58.414,
+              "file_descriptors": 16,
+              "asyncio_tasks": 37,
+              "seconds": 64.112,
+              "completed": 243556
+            },
+            {
+              "rss_mib": 58.445,
+              "file_descriptors": 16,
+              "asyncio_tasks": 39,
+              "seconds": 65.114,
+              "completed": 247442
+            },
+            {
+              "rss_mib": 58.473,
+              "file_descriptors": 16,
+              "asyncio_tasks": 37,
+              "seconds": 66.117,
+              "completed": 251167
+            },
+            {
+              "rss_mib": 58.5,
+              "file_descriptors": 16,
+              "asyncio_tasks": 38,
+              "seconds": 67.118,
+              "completed": 254569
+            },
+            {
+              "rss_mib": 58.531,
+              "file_descriptors": 16,
+              "asyncio_tasks": 37,
+              "seconds": 68.12,
+              "completed": 258643
+            },
+            {
+              "rss_mib": 58.562,
+              "file_descriptors": 16,
+              "asyncio_tasks": 39,
+              "seconds": 69.121,
+              "completed": 262767
+            },
+            {
+              "rss_mib": 58.594,
+              "file_descriptors": 16,
+              "asyncio_tasks": 35,
+              "seconds": 70.123,
+              "completed": 266831
+            },
+            {
+              "rss_mib": 58.625,
+              "file_descriptors": 16,
+              "asyncio_tasks": 35,
+              "seconds": 71.125,
+              "completed": 270821
+            },
+            {
+              "rss_mib": 58.652,
+              "file_descriptors": 16,
+              "asyncio_tasks": 38,
+              "seconds": 72.126,
+              "completed": 274749
+            },
+            {
+              "rss_mib": 58.684,
+              "file_descriptors": 16,
+              "asyncio_tasks": 38,
+              "seconds": 73.128,
+              "completed": 278811
+            },
+            {
+              "rss_mib": 58.715,
+              "file_descriptors": 16,
+              "asyncio_tasks": 37,
+              "seconds": 74.129,
+              "completed": 282776
+            },
+            {
+              "rss_mib": 58.742,
+              "file_descriptors": 16,
+              "asyncio_tasks": 41,
+              "seconds": 75.131,
+              "completed": 286458
+            },
+            {
+              "rss_mib": 58.773,
+              "file_descriptors": 16,
+              "asyncio_tasks": 39,
+              "seconds": 76.132,
+              "completed": 290467
+            },
+            {
+              "rss_mib": 58.805,
+              "file_descriptors": 16,
+              "asyncio_tasks": 38,
+              "seconds": 77.134,
+              "completed": 294511
+            },
+            {
+              "rss_mib": 58.836,
+              "file_descriptors": 16,
+              "asyncio_tasks": 36,
+              "seconds": 78.135,
+              "completed": 298562
+            },
+            {
+              "rss_mib": 58.863,
+              "file_descriptors": 16,
+              "asyncio_tasks": 38,
+              "seconds": 79.137,
+              "completed": 302410
+            },
+            {
+              "rss_mib": 58.895,
+              "file_descriptors": 16,
+              "asyncio_tasks": 38,
+              "seconds": 80.138,
+              "completed": 306376
+            },
+            {
+              "rss_mib": 58.926,
+              "file_descriptors": 16,
+              "asyncio_tasks": 41,
+              "seconds": 81.14,
+              "completed": 310361
+            },
+            {
+              "rss_mib": 58.957,
+              "file_descriptors": 16,
+              "asyncio_tasks": 37,
+              "seconds": 82.141,
+              "completed": 314358
+            },
+            {
+              "rss_mib": 58.984,
+              "file_descriptors": 16,
+              "asyncio_tasks": 41,
+              "seconds": 83.143,
+              "completed": 318373
+            },
+            {
+              "rss_mib": 59.016,
+              "file_descriptors": 16,
+              "asyncio_tasks": 37,
+              "seconds": 84.145,
+              "completed": 322419
+            },
+            {
+              "rss_mib": 59.047,
+              "file_descriptors": 16,
+              "asyncio_tasks": 40,
+              "seconds": 85.147,
+              "completed": 326350
+            },
+            {
+              "rss_mib": 59.078,
+              "file_descriptors": 16,
+              "asyncio_tasks": 39,
+              "seconds": 86.148,
+              "completed": 330326
+            },
+            {
+              "rss_mib": 59.105,
+              "file_descriptors": 16,
+              "asyncio_tasks": 38,
+              "seconds": 87.15,
+              "completed": 334233
+            },
+            {
+              "rss_mib": 59.137,
+              "file_descriptors": 16,
+              "asyncio_tasks": 38,
+              "seconds": 88.151,
+              "completed": 338125
+            },
+            {
+              "rss_mib": 59.164,
+              "file_descriptors": 16,
+              "asyncio_tasks": 36,
+              "seconds": 89.153,
+              "completed": 341853
+            },
+            {
+              "rss_mib": 59.195,
+              "file_descriptors": 16,
+              "asyncio_tasks": 35,
+              "seconds": 90.154,
+              "completed": 345761
+            },
+            {
+              "rss_mib": 59.227,
+              "file_descriptors": 16,
+              "asyncio_tasks": 38,
+              "seconds": 91.157,
+              "completed": 349699
+            },
+            {
+              "rss_mib": 59.254,
+              "file_descriptors": 16,
+              "asyncio_tasks": 36,
+              "seconds": 92.159,
+              "completed": 353439
+            },
+            {
+              "rss_mib": 59.285,
+              "file_descriptors": 16,
+              "asyncio_tasks": 36,
+              "seconds": 93.161,
+              "completed": 357508
+            },
+            {
+              "rss_mib": 59.316,
+              "file_descriptors": 16,
+              "asyncio_tasks": 40,
+              "seconds": 94.163,
+              "completed": 361512
+            },
+            {
+              "rss_mib": 59.348,
+              "file_descriptors": 16,
+              "asyncio_tasks": 39,
+              "seconds": 95.164,
+              "completed": 365583
+            },
+            {
+              "rss_mib": 59.375,
+              "file_descriptors": 16,
+              "asyncio_tasks": 39,
+              "seconds": 96.165,
+              "completed": 369552
+            },
+            {
+              "rss_mib": 59.406,
+              "file_descriptors": 16,
+              "asyncio_tasks": 38,
+              "seconds": 97.167,
+              "completed": 373497
+            },
+            {
+              "rss_mib": 59.438,
+              "file_descriptors": 16,
+              "asyncio_tasks": 41,
+              "seconds": 98.169,
+              "completed": 377485
+            },
+            {
+              "rss_mib": 59.469,
+              "file_descriptors": 16,
+              "asyncio_tasks": 37,
+              "seconds": 99.171,
+              "completed": 381479
+            },
+            {
+              "rss_mib": 59.496,
+              "file_descriptors": 16,
+              "asyncio_tasks": 39,
+              "seconds": 100.172,
+              "completed": 385444
+            },
+            {
+              "rss_mib": 59.527,
+              "file_descriptors": 16,
+              "asyncio_tasks": 40,
+              "seconds": 101.174,
+              "completed": 389337
+            },
+            {
+              "rss_mib": 59.559,
+              "file_descriptors": 16,
+              "asyncio_tasks": 38,
+              "seconds": 102.176,
+              "completed": 393332
+            },
+            {
+              "rss_mib": 59.59,
+              "file_descriptors": 16,
+              "asyncio_tasks": 36,
+              "seconds": 103.177,
+              "completed": 397310
+            },
+            {
+              "rss_mib": 59.617,
+              "file_descriptors": 16,
+              "asyncio_tasks": 37,
+              "seconds": 104.179,
+              "completed": 401288
+            },
+            {
+              "rss_mib": 59.648,
+              "file_descriptors": 16,
+              "asyncio_tasks": 40,
+              "seconds": 105.18,
+              "completed": 405309
+            },
+            {
+              "rss_mib": 59.68,
+              "file_descriptors": 16,
+              "asyncio_tasks": 37,
+              "seconds": 106.182,
+              "completed": 409196
+            },
+            {
+              "rss_mib": 59.703,
+              "file_descriptors": 16,
+              "asyncio_tasks": 38,
+              "seconds": 107.184,
+              "completed": 412606
+            },
+            {
+              "rss_mib": 59.734,
+              "file_descriptors": 16,
+              "asyncio_tasks": 37,
+              "seconds": 108.186,
+              "completed": 416716
+            },
+            {
+              "rss_mib": 59.77,
+              "file_descriptors": 16,
+              "asyncio_tasks": 37,
+              "seconds": 109.188,
+              "completed": 420928
+            },
+            {
+              "rss_mib": 59.801,
+              "file_descriptors": 16,
+              "asyncio_tasks": 38,
+              "seconds": 110.189,
+              "completed": 425181
+            },
+            {
+              "rss_mib": 59.832,
+              "file_descriptors": 16,
+              "asyncio_tasks": 39,
+              "seconds": 111.191,
+              "completed": 429227
+            },
+            {
+              "rss_mib": 59.863,
+              "file_descriptors": 16,
+              "asyncio_tasks": 35,
+              "seconds": 112.193,
+              "completed": 433360
+            },
+            {
+              "rss_mib": 59.891,
+              "file_descriptors": 16,
+              "asyncio_tasks": 41,
+              "seconds": 113.195,
+              "completed": 437492
+            },
+            {
+              "rss_mib": 59.926,
+              "file_descriptors": 16,
+              "asyncio_tasks": 40,
+              "seconds": 114.197,
+              "completed": 441463
+            },
+            {
+              "rss_mib": 59.953,
+              "file_descriptors": 16,
+              "asyncio_tasks": 41,
+              "seconds": 115.199,
+              "completed": 445392
+            },
+            {
+              "rss_mib": 59.984,
+              "file_descriptors": 16,
+              "asyncio_tasks": 39,
+              "seconds": 116.201,
+              "completed": 449368
+            },
+            {
+              "rss_mib": 60.016,
+              "file_descriptors": 16,
+              "asyncio_tasks": 36,
+              "seconds": 117.202,
+              "completed": 453437
+            },
+            {
+              "rss_mib": 60.047,
+              "file_descriptors": 16,
+              "asyncio_tasks": 38,
+              "seconds": 118.204,
+              "completed": 457422
+            },
+            {
+              "rss_mib": 60.078,
+              "file_descriptors": 16,
+              "asyncio_tasks": 39,
+              "seconds": 119.206,
+              "completed": 461384
+            }
+          ],
+          "name": "sustained_workers_32",
+          "unit": "queries/second",
+          "pool_size": 8
+        },
+        {
+          "completed": 18913,
+          "elapsed_seconds": 10.0134,
+          "operations_per_second": 1888.78,
+          "latency_ms": {
+            "p50": 16.1074,
+            "p95": 41.9269,
+            "p99": 60.3923,
+            "max": 101.8982
+          },
+          "workers": 32,
+          "requested_seconds": 10.0,
+          "errors": 0,
+          "error_types": {},
+          "first_error": null,
+          "client_cpu_seconds": 9.9996,
+          "resource_samples": [
+            {
+              "rss_mib": 57.191,
+              "file_descriptors": 16,
+              "asyncio_tasks": 34,
+              "seconds": 0.0,
+              "completed": 0
+            },
+            {
+              "rss_mib": 57.191,
+              "file_descriptors": 16,
+              "asyncio_tasks": 38,
+              "seconds": 1.004,
+              "completed": 1935
+            },
+            {
+              "rss_mib": 57.191,
+              "file_descriptors": 16,
+              "asyncio_tasks": 34,
+              "seconds": 2.006,
+              "completed": 3671
+            },
+            {
+              "rss_mib": 57.191,
+              "file_descriptors": 16,
+              "asyncio_tasks": 38,
+              "seconds": 3.007,
+              "completed": 5393
+            },
+            {
+              "rss_mib": 57.191,
+              "file_descriptors": 16,
+              "asyncio_tasks": 36,
+              "seconds": 4.009,
+              "completed": 7287
+            },
+            {
+              "rss_mib": 57.191,
+              "file_descriptors": 16,
+              "asyncio_tasks": 35,
+              "seconds": 5.011,
+              "completed": 9198
+            },
+            {
+              "rss_mib": 57.191,
+              "file_descriptors": 16,
+              "asyncio_tasks": 34,
+              "seconds": 6.013,
+              "completed": 11149
+            },
+            {
+              "rss_mib": 57.191,
+              "file_descriptors": 16,
+              "asyncio_tasks": 36,
+              "seconds": 7.015,
+              "completed": 13053
+            },
+            {
+              "rss_mib": 57.191,
+              "file_descriptors": 16,
+              "asyncio_tasks": 36,
+              "seconds": 8.016,
+              "completed": 14992
+            },
+            {
+              "rss_mib": 57.191,
+              "file_descriptors": 16,
+              "asyncio_tasks": 34,
+              "seconds": 9.018,
+              "completed": 16957
+            }
+          ],
+          "name": "transaction_mix",
+          "unit": "transactions/second",
+          "pool_size": 8
+        }
+      ],
+      "checks": {
+        "pool_queue_timeout": true,
+        "recovered_after_acquire_timeout": true,
+        "committed_rows": 9463,
+        "expected_committed_rows": 9463,
+        "all_pool_connections_returned": true,
+        "sessions_after_pool_close_including_observer": 1,
+        "test_table_removed": true
+      },
+      "database_version": "KingbaseES V009R004C019",
+      "resources_before": {
+        "rss_mib": 54.602,
+        "file_descriptors": 8,
+        "asyncio_tasks": 1
+      },
+      "resources_after": {
+        "rss_mib": 57.191,
+        "file_descriptors": 7,
+        "asyncio_tasks": 1
+      },
+      "passed": true
+    }
+  ],
+  "finished_utc": "2026-11-19T07:42:42.670588+00:00"
+}

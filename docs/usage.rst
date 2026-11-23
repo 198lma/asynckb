@@ -1,25 +1,28 @@
+.. Modified for asynckb:
+   independent distribution and KingbaseES compatibility.
+
 .. _asyncpg-examples:
 
 
-asyncpg Usage
+asynckb Usage
 =============
 
 The interaction with the database normally starts with a call to
-:func:`connect() <asyncpg.connection.connect>`, which establishes
+:func:`connect() <asynckb.connection.connect>`, which establishes
 a new database session and returns a new
-:class:`Connection <asyncpg.connection.Connection>` instance,
+:class:`Connection <asynckb.connection.Connection>` instance,
 which provides methods to run queries and manage transactions.
 
 
 .. code-block:: python
 
     import asyncio
-    import asyncpg
+    import asynckb
     import datetime
 
     async def main():
         # Connect to a KingbaseES MySQL compatibility instance.
-        conn = await asyncpg.connect(
+        conn = await asynckb.connect(
             host='127.0.0.1', port=54321, user='system',
             password='your-password', database='test', ssl=False)
         # Execute a statement to create a new table.
@@ -40,7 +43,7 @@ which provides methods to run queries and manage transactions.
         row = await conn.fetchrow(
             'SELECT * FROM users WHERE name = $1', 'Bob')
         # *row* now contains
-        # asyncpg.Record(id=1, name='Bob', dob=datetime.date(1984, 3, 1))
+        # asynckb.Record(id=1, name='Bob', dob=datetime.date(1984, 3, 1))
 
         # Close the connection.
         await conn.close()
@@ -50,21 +53,25 @@ which provides methods to run queries and manage transactions.
 
 .. note::
 
-   asyncpg-kes retains asyncpg's ``$n`` query parameter syntax.  SQL text is
-   not translated; use syntax and types supported by the selected KES mode.
+   asynckb retains the upstream ``$n`` query parameter syntax. Parameterized
+   calls also translate MySQL ``?``, Oracle ``:n`` / ``:name``, and SQL Server
+   ``@name`` markers to ``$n`` before preparation.  Pass values positionally;
+   strings, identifiers and comments are preserved.  Other SQL syntax is not
+   translated; use types and syntax supported by the selected KES mode.
+   ``execute(sql)`` without arguments sends the original SQL unchanged.
 
 
 
 Type Conversion
 ---------------
 
-asyncpg-kes converts types exposed through the KingbaseES PostgreSQL wire
+asynckb converts types exposed through the KingbaseES PostgreSQL wire
 protocol to corresponding Python types and vice versa.  The exact set of
 types is determined by the selected KES compatibility mode and server
 version.  It is possible to supply codecs for non-standard types or override
-standard codecs.  See :ref:`asyncpg-custom-codecs` for more information.
+standard codecs.  See :ref:`asynckb-custom-codecs` for more information.
 
-The table below shows the correspondence used by the inherited asyncpg codec
+The table below shows the correspondence used by the inherited asynckb codec
 layer.  A type is available only when the connected KES mode exposes it.
 
 +----------------------+-----------------------------------------------------+
@@ -74,22 +81,22 @@ layer.  A type is available only when the connected KES mode exposes it.
 +----------------------+-----------------------------------------------------+
 | ``anyenum``          | :class:`str <python:str>`                           |
 +----------------------+-----------------------------------------------------+
-| ``anyrange``         | :class:`asyncpg.Range <asyncpg.types.Range>`,       |
+| ``anyrange``         | :class:`asynckb.Range <asynckb.types.Range>`,       |
 |                      | :class:`tuple <python:tuple>`                       |
 +----------------------+-----------------------------------------------------+
-| ``anymultirange``    | ``list[``:class:`asyncpg.Range\                     |
-|                      | <asyncpg.types.Range>` ``]``,                       |
+| ``anymultirange``    | ``list[``:class:`asynckb.Range\                     |
+|                      | <asynckb.types.Range>` ``]``,                       |
 |                      | ``list[``:class:`tuple <python:tuple>` ``]`` [#f1]_ |
 +----------------------+-----------------------------------------------------+
-| ``record``           | :class:`asyncpg.Record`,                            |
+| ``record``           | :class:`asynckb.Record`,                            |
 |                      | :class:`tuple <python:tuple>`,                      |
 |                      | :class:`Mapping <python:collections.abc.Mapping>`   |
 +----------------------+-----------------------------------------------------+
-| ``bit``, ``varbit``  | :class:`asyncpg.BitString <asyncpg.types.BitString>`|
+| ``bit``, ``varbit``  | :class:`asynckb.BitString <asynckb.types.BitString>`|
 +----------------------+-----------------------------------------------------+
 | ``bool``             | :class:`bool <python:bool>`                         |
 +----------------------+-----------------------------------------------------+
-| ``box``              | :class:`asyncpg.Box <asyncpg.types.Box>`            |
+| ``box``              | :class:`asynckb.Box <asynckb.types.Box>`            |
 +----------------------+-----------------------------------------------------+
 | ``bytea``            | :class:`bytes <python:bytes>`                       |
 +----------------------+-----------------------------------------------------+
@@ -114,7 +121,7 @@ layer.  A type is available only when the connected KES mode exposes it.
 +----------------------+-----------------------------------------------------+
 | ``macaddr``          | :class:`str <python:str>`                           |
 +----------------------+-----------------------------------------------------+
-| ``circle``           | :class:`asyncpg.Circle <asyncpg.types.Circle>`      |
+| ``circle``           | :class:`asynckb.Circle <asynckb.types.Circle>`      |
 +----------------------+-----------------------------------------------------+
 | ``date``             | :class:`datetime.date <python:datetime.date>`       |
 +----------------------+-----------------------------------------------------+
@@ -144,18 +151,18 @@ layer.  A type is available only when the connected KES mode exposes it.
 +----------------------+-----------------------------------------------------+
 | ``json``, ``jsonb``  | :class:`str <python:str>`                           |
 +----------------------+-----------------------------------------------------+
-| ``line``             | :class:`asyncpg.Line <asyncpg.types.Line>`          |
+| ``line``             | :class:`asynckb.Line <asynckb.types.Line>`          |
 +----------------------+-----------------------------------------------------+
-| ``lseg``             | :class:`asyncpg.LineSegment \                       |
-|                      | <asyncpg.types.LineSegment>`                        |
+| ``lseg``             | :class:`asynckb.LineSegment \                       |
+|                      | <asynckb.types.LineSegment>`                        |
 +----------------------+-----------------------------------------------------+
 | ``money``            | :class:`str <python:str>`                           |
 +----------------------+-----------------------------------------------------+
-| ``path``             | :class:`asyncpg.Path <asyncpg.types.Path>`          |
+| ``path``             | :class:`asynckb.Path <asynckb.types.Path>`          |
 +----------------------+-----------------------------------------------------+
-| ``point``            | :class:`asyncpg.Point <asyncpg.types.Point>`        |
+| ``point``            | :class:`asynckb.Point <asynckb.types.Point>`        |
 +----------------------+-----------------------------------------------------+
-| ``polygon``          | :class:`asyncpg.Polygon <asyncpg.types.Polygon>`    |
+| ``polygon``          | :class:`asynckb.Polygon <asynckb.types.Polygon>`    |
 +----------------------+-----------------------------------------------------+
 | ``uuid``             | :class:`uuid.UUID <python:uuid.UUID>`               |
 +----------------------+-----------------------------------------------------+
@@ -166,7 +173,7 @@ All other types are encoded and decoded as text by default.
 
 .. [#f1] Since version 0.25.0
 
-.. [#f2] Prior to version 0.20.0, asyncpg erroneously treated ``inet`` values
+.. [#f2] Prior to version 0.20.0, asynckb erroneously treated ``inet`` values
          with prefix as ``IPvXNetwork`` instead of ``IPvXInterface``.
 
 .. [#f3] Inexact single-precision ``float`` values may have a different
@@ -180,28 +187,28 @@ All other types are encoded and decoded as text by default.
 Custom Type Conversions
 -----------------------
 
-asyncpg allows defining custom type conversion functions both for standard
+asynckb allows defining custom type conversion functions both for standard
 and user-defined types using the :meth:`Connection.set_type_codec() \
-<asyncpg.connection.Connection.set_type_codec>` and
+<asynckb.connection.Connection.set_type_codec>` and
 :meth:`Connection.set_builtin_type_codec() \
-<asyncpg.connection.Connection.set_builtin_type_codec>` methods.
+<asynckb.connection.Connection.set_builtin_type_codec>` methods.
 
 
 Example: automatic JSON conversion
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-The example below shows how to configure asyncpg to encode and decode
+The example below shows how to configure asynckb to encode and decode
 JSON values using the :mod:`json <python:json>` module.
 
 .. code-block:: python
 
     import asyncio
-    import asyncpg
+    import asynckb
     import json
 
 
     async def main():
-        conn = await asyncpg.connect()
+        conn = await asynckb.connect()
 
         try:
             await conn.set_type_codec(
@@ -223,18 +230,18 @@ JSON values using the :mod:`json <python:json>` module.
 Example: complex types
 ~~~~~~~~~~~~~~~~~~~~~~
 
-The example below shows how to configure asyncpg to encode and decode
+The example below shows how to configure asynckb to encode and decode
 Python :class:`complex <python:complex>` values to a custom composite
 type in PostgreSQL.
 
 .. code-block:: python
 
     import asyncio
-    import asyncpg
+    import asynckb
 
 
     async def main():
-        conn = await asyncpg.connect()
+        conn = await asynckb.connect()
 
         try:
             await conn.execute(
@@ -262,7 +269,7 @@ type in PostgreSQL.
 Example: automatic conversion of PostGIS types
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-The example below shows how to configure asyncpg to encode and decode
+The example below shows how to configure asynckb to encode and decode
 the PostGIS ``geometry`` type.  It works for any Python object that
 conforms to the `geo interface specification`_ and relies on Shapely_,
 although any library that supports reading and writing the WKB format
@@ -274,7 +281,7 @@ will work.
 .. code-block:: python
 
     import asyncio
-    import asyncpg
+    import asynckb
 
     import shapely.geometry
     import shapely.wkb
@@ -282,7 +289,7 @@ will work.
 
 
     async def main():
-        conn = await asyncpg.connect()
+        conn = await asynckb.connect()
 
         try:
             def encode_geometry(geometry):
@@ -320,18 +327,18 @@ will work.
 Example: decoding numeric columns as floats
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-By default asyncpg decodes numeric columns as Python
+By default asynckb decodes numeric columns as Python
 :class:`Decimal <python:decimal.Decimal>` instances.  The example below
-shows how to instruct asyncpg to use floats instead.
+shows how to instruct asynckb to use floats instead.
 
 .. code-block:: python
 
     import asyncio
-    import asyncpg
+    import asynckb
 
 
     async def main():
-        conn = await asyncpg.connect()
+        conn = await asynckb.connect()
 
         try:
             await conn.set_type_codec(
@@ -352,18 +359,18 @@ Example: decoding hstore values
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 hstore_ is an extension data type used for storing key/value pairs.
-asyncpg includes a codec to decode and encode hstore values as ``dict``
+asynckb includes a codec to decode and encode hstore values as ``dict``
 objects.  Because ``hstore`` is not a builtin type, the codec must
 be registered on a connection using :meth:`Connection.set_builtin_type_codec()
-<asyncpg.connection.Connection.set_builtin_type_codec>`:
+<asynckb.connection.Connection.set_builtin_type_codec>`:
 
 .. code-block:: python
 
-    import asyncpg
+    import asynckb
     import asyncio
 
     async def run():
-        conn = await asyncpg.connect()
+        conn = await asynckb.connect()
         # Assuming the hstore extension exists in the public schema.
         await conn.set_builtin_type_codec(
             'hstore', codec_name='pg_contrib.hstore')
@@ -379,7 +386,7 @@ Transactions
 ------------
 
 To create transactions, the
-:meth:`Connection.transaction() <asyncpg.connection.Connection>` method
+:meth:`Connection.transaction() <asynckb.connection.Connection>` method
 should be used.
 
 The most common way to use transactions is through an ``async with`` statement:
@@ -394,7 +401,7 @@ The most common way to use transactions is through an ``async with`` statement:
    When not in an explicit transaction block, any changes to the database
    will be applied immediately.  This is also known as *auto-commit*.
 
-See the :ref:`asyncpg-api-transaction` API documentation for more information.
+See the :ref:`asynckb-api-transaction` API documentation for more information.
 
 
 .. _asyncpg-connection-pool:
@@ -404,23 +411,23 @@ Connection Pools
 
 For server-type type applications, that handle frequent requests and need
 the database connection for a short period time while handling a request,
-the use of a connection pool is recommended.  asyncpg provides an advanced
+the use of a connection pool is recommended.  asynckb provides an advanced
 pool implementation, which eliminates the need to use an external connection
 pooler such as PgBouncer.
 
 To create a connection pool, use the
-:func:`asyncpg.create_pool() <asyncpg.pool.create_pool>` function.
-The resulting :class:`Pool <asyncpg.pool.Pool>` object can then be used
+:func:`asynckb.create_pool() <asynckb.pool.create_pool>` function.
+The resulting :class:`Pool <asynckb.pool.Pool>` object can then be used
 to borrow connections from the pool.
 
-Below is an example of how **asyncpg** can be used to implement a simple
+Below is an example of how **asynckb** can be used to implement a simple
 Web service that computes the requested power of two.
 
 
 .. code-block:: python
 
     import asyncio
-    import asyncpg
+    import asynckb
     from aiohttp import web
 
 
@@ -441,7 +448,7 @@ Web service that computes the requested power of two.
 
     async def init_db(app):
         """Initialize a connection pool."""
-         app['pool'] = await asyncpg.create_pool(database='postgres',
+         app['pool'] = await asynckb.create_pool(database='postgres',
                                                  user='postgres')
          yield
          await app['pool'].close()
@@ -461,4 +468,4 @@ Web service that computes the requested power of two.
     app = init_app()
     web.run_app(app)
 
-See :ref:`asyncpg-api-pool` API documentation for more information.
+See :ref:`asynckb-api-pool` API documentation for more information.

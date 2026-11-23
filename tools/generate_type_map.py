@@ -1,16 +1,17 @@
 #!/usr/bin/env python3
+# Modified for asynckb: independent package imports and generated notices.
 #
 # Copyright (C) 2016-present the asyncpg authors and contributors
 # <see AUTHORS file>
 #
-# This module is part of asyncpg and is released under
+# This module is part of asynckb and is released under
 # the Apache 2.0 License: http://www.apache.org/licenses/LICENSE-2.0
 
 
 import argparse
 import asyncio
 
-import asyncpg
+import asynckb
 
 
 # Array types with builtin codecs, necessary for codec
@@ -44,14 +45,15 @@ _TYPE_ALIASES = {
 
 
 async def runner(args):
-    conn = await asyncpg.connect(host=args.pghost, port=args.pgport,
+    conn = await asynckb.connect(host=args.pghost, port=args.pgport,
                                  user=args.pguser)
 
     buf = (
+        '# Modified for asynckb: independent distribution and KES support.\n'
         '# Copyright (C) 2016-present the asyncpg authors and contributors\n'
         '# <see AUTHORS file>\n'
         '#\n'
-        '# This module is part of asyncpg and is released under\n'
+        '# This module is part of asynckb and is released under\n'
         '# the Apache 2.0 License: http://www.apache.org/licenses/LICENSE-2.0'
         '\n\n\n'
         '# GENERATED FROM pg_catalog.pg_type\n' +

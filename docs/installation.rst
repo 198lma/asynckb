@@ -1,21 +1,24 @@
+.. Modified for asynckb:
+   independent distribution and KingbaseES compatibility.
+
 .. _asyncpg-installation:
 
 
 Installation
 ============
 
-**asyncpg-kes** has no external dependencies when not using GSSAPI/SSPI
+**asynckb** has no external dependencies when not using GSSAPI/SSPI
 authentication.  The recommended way to install it is to use **pip**:
 
 .. code-block:: bash
 
-    $ pip install asyncpg-kes
+    $ pip install asynckb
 
 If you need GSSAPI/SSPI authentication, the recommended way is to use
 
 .. code-block:: bash
 
-    $ pip install 'asyncpg-kes[gssauth]'
+    $ pip install 'asynckb[gssauth]'
 
 This installs SSPI support on Windows and GSSAPI support on non-Windows
 platforms.  SSPI and GSSAPI interoperate as clients and servers: an SSPI
@@ -38,7 +41,7 @@ It is also possible to use GSSAPI on Windows:
 Building from source
 --------------------
 
-If you want to build **asyncpg-kes** from a Git checkout you will need:
+If you want to build **asynckb** from a Git checkout you will need:
 
   * A working C compiler.
   * CPython header files.  These can usually be obtained by installing
@@ -53,11 +56,11 @@ in the root of the source checkout:
     $ pip install -e .
 
 A debug build containing more runtime checks can be created by setting
-the ``ASYNCPG_DEBUG`` environment variable when building:
+the ``ASYNCKB_DEBUG`` environment variable when building:
 
 .. code-block:: bash
 
-    $ env ASYNCPG_DEBUG=1 pip install -e .
+    $ env ASYNCKB_DEBUG=1 pip install -e .
 
 
 Running tests
@@ -71,4 +74,4 @@ the environment described in ``tests/kes/kes-test.env.example`` and run:
 .. code-block:: bash
 
     $ ./run_kes_tests.sh unit -q
-    $ ASYNCPG_KES_PASSWORD='<password>' ./run_kes_tests.sh all -q
+    $ ASYNCKB_KES_PASSWORD='<password>' ./run_kes_tests.sh all -q

@@ -1,40 +1,42 @@
-asyncpg with KingbaseES compatibility modes
+.. Modified for asynckb:
+   independent distribution and KingbaseES compatibility.
+
+asynckb with KingbaseES compatibility modes
 ============================================
 
-.. image:: https://github.com/198lma/asyncpg-kes/actions/workflows/tests.yml/badge.svg
-   :target: https://github.com/198lma/asyncpg-kes/actions/workflows/tests.yml
-   :alt: CI status
-
-This repository extends asyncpg 0.31.0 with KingbaseES MySQL, Oracle, and SQL
-Server compatibility-mode support.  It keeps asyncpg's asyncio transport,
+This repository provides the standalone ``asynckb`` driver, based on asyncpg
+0.31.0, with KingbaseES MySQL, Oracle, and SQL Server compatibility-mode
+support. It keeps the upstream asyncio transport,
 PostgreSQL Wire Protocol implementation, prepared statements, codecs,
-transactions, cursors, and connection pool.  It does not load ``libkci`` and
-does not contain a separate ``asynckes`` driver.
+transactions, cursors, and connection pool. It does not load ``libkci``.
+The distribution and Python import names are both ``asynckb``.
 
 The runtime path is::
 
     asyncio application / SQLAlchemy AsyncEngine
-        -> asyncpg Connection / Pool
-        -> asyncpg Cython protocol and codecs
+        -> asynckb Connection / Pool
+        -> asynckb Cython protocol and codecs
         -> PostgreSQL Wire Protocol
         -> KingbaseES MySQL, Oracle, or SQL Server compatibility mode
 
 KES-specific code is limited to mode validation, dynamic KES type-codec
 registration, mode transaction syntax, small protocol-behavior corrections,
 and SQLAlchemy MySQL/Oracle/SQL Server dialects.  The current implementation
-uses the original asyncpg COPY and LISTEN/NOTIFY protocol paths.
+uses the inherited COPY and LISTEN/NOTIFY protocol implementations.
 
 Installation
 ------------
 
 Python 3.9 or later is required.  SQLAlchemy support is optional::
 
-    python -m pip install 'asyncpg-kes[sqlalchemy]'
+    python -m pip install 'asynckb[sqlalchemy]'
 
-The distribution name is ``asyncpg-kes`` and the import name remains
-``asyncpg`` for API compatibility.  Do not install ``asyncpg`` and
-``asyncpg-kes`` into the same environment because both provide the
-``asyncpg`` Python package.
+The distribution and import names are both ``asynckb``. It is a standalone
+driver with its own KES adaptation and SQLAlchemy dialect.
+
+For a complete Chinese walkthrough, see
+`docs/quickstart_zh.rst <docs/quickstart_zh.rst>`_.  The full Chinese reference
+is in `docs/user_manual_zh.rst <docs/user_manual_zh.rst>`_.
 
 Basic usage
 -----------
@@ -42,10 +44,10 @@ Basic usage
 .. code-block:: python
 
     import asyncio
-    import asyncpg
+    import asynckb
 
     async def main():
-        connection = await asyncpg.connect(
+        connection = await asynckb.connect(
             host="127.0.0.1",
             port=54321,
             user="system",
@@ -81,27 +83,58 @@ Connection service files may also declare the KES compatibility mode::
     kes_mode=mysql
 
 The service can then be selected explicitly with
-``asyncpg.connect(service="kes", servicefile="/path/to/pg_service.conf")``
+``asynckb.connect(service="kes", servicefile="/path/to/pg_service.conf")``
 or through the standard ``PGSERVICE`` and ``PGSERVICEFILE`` environment
 variables.  An explicit ``kes_mode`` argument takes precedence over the
 service-file value.
 
+Parameter placeholders
+----------------------
+
+The original ``$1``, ``$2`` syntax remains available.  Parameterized queries
+also accept MySQL ``?``, Oracle ``:1`` / ``:name``, and SQL Server ``@name``.
+These markers are translated before statement preparation; values still use
+protocol Bind messages, never SQL interpolation.  For example::
+
+    # Use the form matching the connection's detected mode.
+    await connection.fetchval("SELECT CAST(? AS INT)", 42)       # MySQL
+    await connection.fetchval("SELECT CAST(:value AS INT)", 42)  # Oracle
+    await connection.fetchval("SELECT CAST(@value AS INT)", 42)  # SQL Server
+
+Values remain positional arguments, not dictionaries.  Oracle numeric
+markers retain their numbers; named markers use the first available number,
+reserving existing numeric markers.  Repeated Oracle names are
+case-insensitive; SQL Server names are case-sensitive.  Strings, quoted
+identifiers and comments are not rewritten.  MySQL ``?`` and ``$n`` markers
+cannot be mixed; use ``??`` for a literal question-mark operator in a
+parameterized MySQL query (``?|`` and ``?&`` are preserved).
+
+The conversion applies to ``fetch*()``, ``prepare()``, cursors and batch
+binding.  An already prepared statement is reused without rewriting.
+``execute(sql)`` without arguments sends the original SQL unchanged.
+SQL Server declared locals, ``@@`` variables and EXEC argument labels are
+preserved, but this does not add server support for parameterized DECLARE
+batches or named EXEC argument assignment.  Other SQL syntax is not
+translated.  See ``docs/kes-testing/PLACEHOLDER_RESULTS.md`` for tested limits.
+
 SQLAlchemy
 ----------
 
-The package registers three SQLAlchemy 2.x asynchronous dialects::
+The package registers one SQLAlchemy 2.x asynchronous dialect::
 
-    kingbase_mysql+asyncpg://user:password@host:54321/database
-    kingbase_oracle+asyncpg://user:password@host:54322/database
-    kingbase_sqlserver+asyncpg://user:password@host:54323/database
+    kingbase+asynckb://user:password@host:port/database
 
-Standard asyncpg connection options can be supplied in the URL.  For example,
+After authentication, asynckb runs ``SHOW DATABASE_MODE`` and the unified
+dialect selects its MySQL, Oracle, or SQL Server implementation from the
+detected mode.  Applications do not put the compatibility mode in the URL.
+
+Standard asynckb connection options can be supplied in the URL.  For example,
 the following disables TLS negotiation, disables SQLAlchemy's prepared
 statement cache, and sets the default command timeout::
 
-    kingbase_mysql+asyncpg://user:password@host:54321/database?sslmode=disable&prepared_statement_cache_size=0&command_timeout=5
+    kingbase+asynckb://user:password@host:port/database?sslmode=disable&prepared_statement_cache_size=0&command_timeout=5
 
-Repeated ``host=address:port`` query parameters enable asyncpg multi-host
+Repeated ``host=address:port`` query parameters enable asynckb multi-host
 fallback.  Numeric cache and timeout values and the ``direct_tls`` boolean are
 converted to their native Python types by the dialect.
 
@@ -124,12 +157,12 @@ INSERT/UPDATE/DELETE RETURNING, nested transactions, native comments, and KES
 catalog reflection.  The tested V009R001C010 server does not support computed
 column syntax, so that server capability is not advertised by this dialect.
 
-SQL passed directly to asyncpg is not translated.  Applications must use SQL
-for the active KES compatibility mode.  The ``kingbase_mysql+asyncpg``
-SQLAlchemy dialect provides MySQL quoting, ``AUTO_INCREMENT``,
+SQL passed directly to asynckb is not translated.  Applications must use SQL
+for the active KES compatibility mode.  In MySQL mode, the unified
+``kingbase+asynckb`` dialect provides MySQL quoting, ``AUTO_INCREMENT``,
 ``LIMIT/OFFSET``, ``ON DUPLICATE KEY UPDATE``, string concatenation,
-``LAST_INSERT_ID()``, and KES MySQL catalog reflection.  The
-``kingbase_oracle+asyncpg`` dialect uses SQLAlchemy's Oracle compiler.
+``LAST_INSERT_ID()``, and KES MySQL catalog reflection.  In Oracle mode it
+uses SQLAlchemy's Oracle compiler.
 PostgreSQL-specific SQL semantics such as ``||`` string concatenation or
 transactional DDL are intentionally not emulated by the driver.
 
@@ -141,8 +174,8 @@ silent timestamp shifts and binary JSON marker leakage in KES MySQL mode.
 
 KES Oracle mode returns rows for ``RETURNING`` without an Oracle ``INTO``
 clause.  The dialect compiles SQLAlchemy RETURNING to that form and maps
-SQLAlchemy executemany RETURNING to asyncpg's ``PreparedStatement.fetchmany()``.
-Oracle-style OUT bind variables remain outside asyncpg's API; regular and
+SQLAlchemy executemany RETURNING to asynckb's ``PreparedStatement.fetchmany()``.
+Oracle-style OUT bind variables remain outside asynckb's API; regular and
 batched RETURNING provide the equivalent DML result path supported by KES.
 The tested Oracle-mode server rejects extended-protocol parameters in
 ``CALL`` statements, although literal ``CALL`` statements work.  It also does
@@ -169,19 +202,19 @@ replaced by tests for the three supported KES compatibility modes.
 
 Set the password and run all three compatibility modes::
 
-    ASYNCPG_KES_PASSWORD=password ./run_kes_tests.sh all -q
+    ASYNCKB_KES_PASSWORD=password ./run_kes_tests.sh all -q
 
 Run a specific layer or compatibility mode with::
 
     ./run_kes_tests.sh unit -q
-    ASYNCPG_KES_PASSWORD=password \
-        ./run_kes_tests.sh integration --kes-mode mysql -q
-    ASYNCPG_KES_PASSWORD=password ./run_kes_tests.sh framework -q
+    ASYNCKB_KES_PASSWORD=password \
+        ./run_kes_tests.sh all --kes-mode mysql -q
+    ASYNCKB_KES_PASSWORD=password ./run_kes_tests.sh sqlalchemy -q
 
-The suite covers the portable asyncpg API, KES-specific behavior, SQLAlchemy,
+The suite covers the portable asynckb API, KES-specific behavior, SQLAlchemy,
 and Alembic against MySQL, Oracle, and SQL Server compatibility modes.  The
 default local endpoints are ports 54321, 54322, and 54323 respectively; all
-connection settings can be overridden with ``ASYNCPG_KES_*`` environment
+connection settings can be overridden with ``ASYNCKB_KES_*`` environment
 variables documented in ``docs/kes-testing/TEST_PLAN.md``.
 
 License

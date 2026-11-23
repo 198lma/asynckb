@@ -1,3 +1,5 @@
+# Modified for asynckb:
+# independent distribution and KingbaseES compatibility.
 # Makefile for Sphinx documentation
 #
 
@@ -91,9 +93,9 @@ qthelp:
 	@echo
 	@echo "Build finished; now you can run "qcollectiongenerator" with the" \
 	      ".qhcp project file in $(BUILDDIR)/qthelp, like this:"
-	@echo "# qcollectiongenerator $(BUILDDIR)/qthelp/asyncpg.qhcp"
+	@echo "# qcollectiongenerator $(BUILDDIR)/qthelp/asynckb.qhcp"
 	@echo "To view the help file:"
-	@echo "# assistant -collectionFile $(BUILDDIR)/qthelp/asyncpg.qhc"
+	@echo "# assistant -collectionFile $(BUILDDIR)/qthelp/asynckb.qhc"
 
 .PHONY: applehelp
 applehelp:
@@ -110,8 +112,8 @@ devhelp:
 	@echo
 	@echo "Build finished."
 	@echo "To view the help file:"
-	@echo "# mkdir -p $$HOME/.local/share/devhelp/asyncpg"
-	@echo "# ln -s $(BUILDDIR)/devhelp $$HOME/.local/share/devhelp/asyncpg"
+	@echo "# mkdir -p $$HOME/.local/share/devhelp/asynckb"
+	@echo "# ln -s $(BUILDDIR)/devhelp $$HOME/.local/share/devhelp/asynckb"
 	@echo "# devhelp"
 
 .PHONY: epub

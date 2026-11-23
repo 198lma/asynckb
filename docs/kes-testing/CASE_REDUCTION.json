@@ -1,0 +1,721 @@
+{
+  "date": "2026-11-19",
+  "before_points": 231,
+  "retained_points": 160,
+  "retired_points": 71,
+  "backup": "/home/rootdba/下载/asynckb-test-cleanup-backup-fqEBjtSV",
+  "policy": "保留原编号，不重排、不复用；部分为重复覆盖，部分为不再单列的非核心边界，不能声称所有被删断言仍被覆盖。",
+  "retired": [
+    {
+      "id": "KB-CONN-003",
+      "title": "同步/异步密码回调、默认查询超时和强制终止均保持兼容",
+      "nodeid": "tests/kes/connection_initialization/test_connection_initialization.py::test_password_callbacks_command_timeout_and_terminate",
+      "covered_by": [
+        "KB-AUTH-006",
+        "KB-PROTO-035",
+        "KB-EXEC-005"
+      ],
+      "reason": "密码回调、超时和终止已由专项验证"
+    },
+    {
+      "id": "KB-CONN-004",
+      "title": "prefer_standby 多候选连接只保留被选 KES 会话",
+      "nodeid": "tests/kes/connection_initialization/test_connection_initialization.py::test_prefer_standby_closes_unchosen_kes_connection_candidates",
+      "covered_by": [
+        "KB-CONN-002"
+      ],
+      "reason": "本轮不再单列 prefer-standby 多候选分支；保留基础连接和 primary 筛选"
+    },
+    {
+      "id": "KB-PROTO-005",
+      "title": "未闭合字符串或注释保持原文，交由服务器做语法校验",
+      "nodeid": "tests/kes/protocol_and_async/test_placeholders.py::test_unterminated_protected_text_is_left_for_server_validation",
+      "covered_by": [
+        "KB-PROTO-003",
+        "KB-PROTO-004",
+        "KB-PROTO-009"
+      ],
+      "reason": "不再单列畸形 SQL 原文透传；保留合法文本保护和编号拒绝"
+    },
+    {
+      "id": "KB-PROTO-007",
+      "title": "SQL Server WHERE／CASE 等比较表达式中的参数仍作为绑定位置",
+      "nodeid": "tests/kes/protocol_and_async/test_placeholders.py::test_sqlserver_predicate_bindings_are_not_assignments",
+      "covered_by": [
+        "KB-PROTO-011"
+      ],
+      "reason": "WHERE/CASE 参数比较已由真实执行验证"
+    },
+    {
+      "id": "KB-PROTO-015",
+      "title": "单连接完成握手、模式识别、基础查询和关闭",
+      "nodeid": "tests/kes/protocol_and_async/test_protocol_and_async.py::test_connection_reports_mode_and_executes_mode_select",
+      "covered_by": [
+        "KB-CONN-001"
+      ],
+      "reason": "连接、模式识别及查询重复"
+    },
+    {
+      "id": "KB-PROTO-018",
+      "title": "postgresql DSN 中的 kes_mode=mysql 能选择 MySQL 适配路径",
+      "nodeid": "tests/kes/protocol_and_async/test_protocol_and_async.py::test_mysql_dsn_selects_mysql_compatibility_mode",
+      "covered_by": [
+        "KB-CONN-006"
+      ],
+      "reason": "DSN 模式解析重复"
+    },
+    {
+      "id": "KB-PROTO-019",
+      "title": "百分号编码 kes_mode 仍选择客户端模式且不污染启动参数",
+      "nodeid": "tests/kes/protocol_and_async/test_protocol_and_async.py::test_percent_encoded_dsn_mode_is_not_sent_as_server_setting",
+      "covered_by": [
+        "KB-CONN-006"
+      ],
+      "reason": "百分号编码及客户端参数隔离重复"
+    },
+    {
+      "id": "KB-PROTO-023",
+      "title": "COPY records 三模式支持 schema、列选择和 WHERE 筛选",
+      "nodeid": "tests/kes/protocol_and_async/test_protocol_and_async.py::test_copy_records_supports_schema_columns_and_where",
+      "covered_by": [
+        "KB-PROTO-020",
+        "KB-PROTO-024"
+      ],
+      "reason": "保留 COPY 编码与异步路径；schema/列/WHERE 高级组合不再单列"
+    },
+    {
+      "id": "KB-PROTO-034",
+      "title": "statement_cache_size=2 时重复查询只保留两个缓存条目",
+      "nodeid": "tests/kes/protocol_and_async/test_protocol_and_async.py::test_statement_cache_eviction_honors_configured_cache_size",
+      "covered_by": [
+        "KB-EXEC-010",
+        "KB-SA-010"
+      ],
+      "reason": "不再单列上游通用 LRU 容量测试；保留缓存边界和失效同步"
+    },
+    {
+      "id": "KB-PROTO-036",
+      "title": "多主机首地址不可用时，ssl=prefer 能回退到真实端口",
+      "nodeid": "tests/kes/protocol_and_async/test_protocol_and_async.py::test_multihost_ssl_prefer_falls_back_to_live_kes_endpoint",
+      "covered_by": [
+        "KB-CONN-002"
+      ],
+      "reason": "多主机/TLS prefer 故障回退不列为本轮核心验收"
+    },
+    {
+      "id": "KB-PROTO-037",
+      "title": "只有 Oracle CALL 使用参数方向扩展，允许前置 SQL 注释",
+      "nodeid": "tests/kes/protocol_and_async/test_protocol_and_async.py::test_oracle_call_detection",
+      "covered_by": [
+        "KB-PROTO-001",
+        "KB-EXEC-026"
+      ],
+      "reason": "CALL 检测已由解析与实际调用覆盖"
+    },
+    {
+      "id": "KB-PROTO-038",
+      "title": "Parse 参数计数只统计真实绑定位置，忽略字符串和注释",
+      "nodeid": "tests/kes/protocol_and_async/test_protocol_and_async.py::test_sqlserver_parameter_count_ignores_quoted_sql",
+      "covered_by": [
+        "KB-PROTO-003",
+        "KB-EXEC-033"
+      ],
+      "reason": "字符串中绑定编号通过解析保护与实际批次执行核对"
+    },
+    {
+      "id": "KB-PROTO-039",
+      "title": "Parse 参数计数遵循 standard_conforming_strings 的转义规则",
+      "nodeid": "tests/kes/protocol_and_async/test_protocol_and_async.py::test_sqlserver_parameter_count_respects_backslash_string_setting",
+      "covered_by": [
+        "KB-PROTO-004"
+      ],
+      "reason": "不再对共享词法扫描重复单列计数器反斜杠单测"
+    },
+    {
+      "id": "KB-PROTO-040",
+      "title": "超出协议允许范围的绑定位置编号明确拒绝",
+      "nodeid": "tests/kes/protocol_and_async/test_protocol_and_async.py::test_sqlserver_parameter_count_rejects_out_of_range_slot",
+      "covered_by": [
+        "KB-PROTO-009"
+      ],
+      "reason": "协议位置编号上界拒绝重复"
+    },
+    {
+      "id": "KB-TYPE-021",
+      "title": "SQL Server MONEY 动态 OID 映射为 Decimal",
+      "nodeid": "tests/kes/types_and_codecs/test_types_and_codecs.py::test_sqlserver_money_round_trips_as_decimal",
+      "covered_by": [
+        "KB-TYPE-019",
+        "KB-TYPE-041"
+      ],
+      "reason": "MONEY 在类型矩阵及执行描述中已核对 Decimal"
+    },
+    {
+      "id": "KB-TYPE-024",
+      "title": "MySQL 特有类型、嵌套事务和单连接连接池均可工作",
+      "nodeid": "tests/kes/types_and_codecs/test_types_and_codecs.py::test_mysql_types_transactions_and_pool",
+      "covered_by": [
+        "KB-TYPE-017",
+        "KB-TYPE-031",
+        "KB-EXEC-045",
+        "KB-EXEC-046",
+        "KB-POOL-005"
+      ],
+      "reason": "MySQL 类型、事务、连接池组合重复"
+    },
+    {
+      "id": "KB-TYPE-028",
+      "title": "NOT NULL 的 MySQL 零值转换和 Oracle 拒绝语义均符合 KES",
+      "nodeid": "tests/kes/types_and_codecs/test_types_and_codecs.py::test_not_null_semantics_match_kes_compatibility_mode",
+      "covered_by": [
+        "KB-TYPE-027"
+      ],
+      "reason": "不再单列数据库 NOT NULL 默认零值/FK 组合语义；保留驱动异常映射"
+    },
+    {
+      "id": "KB-TYPE-029",
+      "title": "事务内层回滚、查询超时和 asyncio 取消后连接仍可复用",
+      "nodeid": "tests/kes/types_and_codecs/test_types_and_codecs.py::test_oracle_transaction_timeout_and_task_cancellation",
+      "covered_by": [
+        "KB-PROTO-035",
+        "KB-EXEC-043",
+        "KB-EXEC-046"
+      ],
+      "reason": "Oracle 嵌套事务、超时及取消已由对应测试覆盖"
+    },
+    {
+      "id": "KB-TYPE-034",
+      "title": "MySQL 日期时间 tuple codec 按 asynckb 规则转换整数",
+      "nodeid": "tests/kes/types_and_codecs/test_types_and_codecs.py::test_mysql_temporal_tuple_encoders_follow_integer_conversion_rules",
+      "covered_by": [
+        "KB-TYPE-015",
+        "KB-TYPE-035"
+      ],
+      "reason": "不再单列 tuple 浮点截断的辅助编码单测；保留 tuple 往返和边界"
+    },
+    {
+      "id": "KB-TYPE-037",
+      "title": "Codec 别名覆盖 set 发现、默认候选和不适配透传",
+      "nodeid": "tests/kes/types_and_codecs/test_types_and_codecs.py::test_kes_codec_aliases_cover_discovery_fallback_and_passthrough",
+      "covered_by": [
+        "KB-TYPE-008",
+        "KB-TYPE-012",
+        "KB-TYPE-014",
+        "KB-TYPE-038"
+      ],
+      "reason": "别名 helper 的模拟断言由真实 Codec API 和 OID 注册验证替代"
+    },
+    {
+      "id": "KB-TYPE-039",
+      "title": "SQL Server SMALLMONEY 使用连接发现的 OID 和 Decimal Codec",
+      "nodeid": "tests/kes/types_and_codecs/test_types_and_codecs.py::test_sqlserver_smallmoney_uses_discovered_oid_and_decimal_codec",
+      "covered_by": [
+        "KB-TYPE-041"
+      ],
+      "reason": "SMALLMONEY 改用真实执行结果而非模拟 Settings"
+    },
+    {
+      "id": "KB-TYPE-040",
+      "title": "KES 新版 sys 整数类型使用动态发现的 OID 和 Python int 表示",
+      "nodeid": "tests/kes/types_and_codecs/test_types_and_codecs.py::test_sqlserver_integer_codecs_use_discovered_oids",
+      "covered_by": [
+        "KB-TYPE-041",
+        "KB-TYPE-042"
+      ],
+      "reason": "整数 Codec 改用真实类型、元信息及重置测试"
+    },
+    {
+      "id": "KB-EXEC-001",
+      "title": "错误凭证和数据库被拒绝，随后正确配置仍可正常连接",
+      "nodeid": "tests/kes/execution_transactions_statements/test_execution_transactions_statements.py::test_invalid_login_and_database_are_rejected_then_valid_login_recovers",
+      "covered_by": [
+        "KB-AUTH-003",
+        "KB-CONN-002"
+      ],
+      "reason": "凭证拒绝重复；错误数据库通用分支不再单列"
+    },
+    {
+      "id": "KB-EXEC-002",
+      "title": "连接关闭可重复调用，关闭后的查询明确抛出 InterfaceError",
+      "nodeid": "tests/kes/execution_transactions_statements/test_execution_transactions_statements.py::test_closed_connection_rejects_queries_and_close_is_idempotent",
+      "covered_by": [
+        "KB-CONN-001",
+        "KB-EXEC-005"
+      ],
+      "reason": "不再单列上游 close 幂等及关闭后拒绝契约"
+    },
+    {
+      "id": "KB-EXEC-003",
+      "title": "Record 的名称、序列、映射、切片、比较和哈希接口保持兼容",
+      "nodeid": "tests/kes/execution_transactions_statements/test_execution_transactions_statements.py::test_record_mapping_sequence_and_hash_contracts",
+      "covered_by": [
+        "KB-EXEC-039",
+        "KB-TYPE-006"
+      ],
+      "reason": "不再单列上游 Record 序列/比较/哈希契约；真实结果读取保留"
+    },
+    {
+      "id": "KB-EXEC-009",
+      "title": "事务重复启动、重复提交和上下文内手动提交均被拒绝",
+      "nodeid": "tests/kes/execution_transactions_statements/test_execution_transactions_statements.py::test_transaction_state_machine_rejects_invalid_transitions",
+      "covered_by": [
+        "KB-EXEC-042",
+        "KB-EXEC-045",
+        "KB-EXEC-046"
+      ],
+      "reason": "不再单列上游重复事务状态调用；正常提交、异常回滚和保存点保留"
+    },
+    {
+      "id": "KB-EXEC-011",
+      "title": "参数绑定不会执行注入载荷，原值和目标表均保持完整",
+      "nodeid": "tests/kes/execution_transactions_statements/test_execution_transactions_statements.py::test_parameter_binding_treats_injection_payload_as_plain_data",
+      "covered_by": [
+        "KB-PROTO-010"
+      ],
+      "reason": "参数注入文本和表数据完整性在原生占位符测试中已核对"
+    },
+    {
+      "id": "KB-EXEC-012",
+      "title": "同名 MySQL prepared statement 释放后可重新创建",
+      "nodeid": "tests/kes/execution_transactions_statements/test_execution_transactions_statements.py::test_mysql_named_statement_can_be_recreated_after_gc",
+      "covered_by": [
+        "KB-EXEC-013",
+        "KB-EXEC-014"
+      ],
+      "reason": "MySQL 同名语句释放/GC/重建重复"
+    },
+    {
+      "id": "KB-EXEC-019",
+      "title": "MySQL 存储函数支持参数绑定，无参存储过程可执行",
+      "nodeid": "tests/kes/execution_transactions_statements/test_execution_transactions_statements.py::test_mysql_stored_function_binding_and_no_argument_procedure",
+      "covered_by": [
+        "KB-EXEC-055",
+        "KB-EXEC-057"
+      ],
+      "reason": "MySQL 函数及嵌套无参过程已有场景"
+    },
+    {
+      "id": "KB-EXEC-021",
+      "title": "Oracle 匿名块内 INSERT、UPDATE、DELETE 的 RETURNING INTO 输出绑定",
+      "nodeid": "tests/kes/execution_transactions_statements/test_execution_transactions_statements.py::test_oracle_dml_returning_into_output_bindings",
+      "covered_by": [
+        "KB-EXEC-054"
+      ],
+      "reason": "同样三种 RETURNING INTO DML，保留额外核对表数据与回滚的版本"
+    },
+    {
+      "id": "KB-EXEC-025",
+      "title": "Oracle CALL 的 IN 参数经 PBE 绑定，不再被提前拦截",
+      "nodeid": "tests/kes/execution_transactions_statements/test_execution_transactions_statements.py::test_oracle_stored_procedure_call_with_bound_in_parameters",
+      "covered_by": [
+        "KB-EXEC-020",
+        "KB-EXEC-026"
+      ],
+      "reason": "Oracle CALL 输入绑定由混合参数用例覆盖"
+    },
+    {
+      "id": "KB-EXEC-037",
+      "title": "Oracle 连接池中 named statement GC、替换和池级查询均正常",
+      "nodeid": "tests/kes/execution_transactions_statements/test_execution_transactions_statements.py::test_oracle_pool_named_statement_lifecycle_is_reusable",
+      "covered_by": [
+        "KB-EXEC-014",
+        "KB-EXEC-016",
+        "KB-POOL-005"
+      ],
+      "reason": "不再重复单列 Oracle 池包装下的 named statement 生命周期组合"
+    },
+    {
+      "id": "KB-EXEC-038",
+      "title": "三模式在配置数据库的当前 schema 中创建并使用表",
+      "nodeid": "tests/kes/execution_transactions_statements/test_execution_transactions_statements.py::test_create_and_use_table_in_current_schema",
+      "covered_by": [
+        "KB-EXEC-039"
+      ],
+      "reason": "当前 schema 建表与读写重复"
+    },
+    {
+      "id": "KB-EXEC-040",
+      "title": "test 数据库不指定 schema 时可在默认 schema 完成异步 CRUD",
+      "nodeid": "tests/kes/execution_transactions_statements/test_execution_transactions_statements.py::test_async_crud_uses_test_database_default_schema",
+      "covered_by": [
+        "KB-EXEC-039"
+      ],
+      "reason": "保留完整 CRUD，而非仅插入读取的默认 schema 冒烟"
+    },
+    {
+      "id": "KB-EXEC-041",
+      "title": "连接池并发调度异步 CRUD 任务且所有连接最终归还",
+      "nodeid": "tests/kes/execution_transactions_statements/test_execution_transactions_statements.py::test_async_pool_runs_concurrent_crud_tasks",
+      "covered_by": [
+        "KB-POOL-016",
+        "KB-EXEC-043",
+        "performance:transaction_mix"
+      ],
+      "reason": "池调度、容量和写读并发由核心池测试及压力测试验证"
+    },
+    {
+      "id": "KB-EXEC-044",
+      "title": "识别 DEALLOCATE ALL、带名称 DEALLOCATE 和普通 SQL",
+      "nodeid": "tests/kes/execution_transactions_statements/test_execution_transactions_statements.py::test_deallocate_parser_recognizes_all_and_named_statements",
+      "covered_by": [
+        "KB-EXEC-013",
+        "KB-EXEC-016"
+      ],
+      "reason": "DEALLOCATE 解析由真实成功执行与重建验证"
+    },
+    {
+      "id": "KB-EXEC-048",
+      "title": "旧 named statement 清理不会误关闭同名新语句",
+      "nodeid": "tests/kes/execution_transactions_statements/test_execution_transactions_statements.py::test_stale_named_statement_cleanup_does_not_close_replacement",
+      "covered_by": [
+        "KB-EXEC-014",
+        "KB-EXEC-016"
+      ],
+      "reason": "模拟 Statement/Protocol 身份检查由真实服务端 GC 场景替代"
+    },
+    {
+      "id": "KB-POOL-001",
+      "title": "连接/Record 扩展、查询日志、预编译元数据和 EXPLAIN 均可用",
+      "nodeid": "tests/kes/pool/test_pool.py::test_connection_custom_classes_logging_and_prepared_metadata",
+      "covered_by": [
+        "KB-EXEC-004",
+        "KB-EXEC-036"
+      ],
+      "reason": "不再验收上游自定义 Record/Connection 扩展和 EXPLAIN；元数据/查询保留"
+    },
+    {
+      "id": "KB-POOL-002",
+      "title": "服务端日志回调、事务 reset 和连接终止回调保持原 API 语义",
+      "nodeid": "tests/kes/pool/test_pool.py::test_connection_reset_log_listener_and_termination_listener",
+      "covered_by": [
+        "KB-POOL-005",
+        "KB-PROTO-033"
+      ],
+      "reason": "不再单列上游日志/终止回调合同；事务 reset 和通知保留"
+    },
+    {
+      "id": "KB-POOL-003",
+      "title": "Pool 连接过期、重连参数及四个 COPY 代理方法均可用",
+      "nodeid": "tests/kes/pool/test_pool.py::test_pool_reconnect_configuration_and_copy_proxy_methods",
+      "covered_by": [
+        "KB-POOL-005",
+        "KB-POOL-013",
+        "KB-PROTO-020",
+        "KB-PROTO-024"
+      ],
+      "reason": "保留池重连与 COPY 本体，不再重复每个 COPY 池代理"
+    },
+    {
+      "id": "KB-POOL-004",
+      "title": "Pool 更新连接参数后可在两个 KES 模式间重建连接和 codec",
+      "nodeid": "tests/kes/pool/test_pool.py::test_pool_can_switch_between_kes_compatibility_modes",
+      "covered_by": [
+        "KB-POOL-005",
+        "KB-POOL-013"
+      ],
+      "reason": "同一 Pool 动态切换模式的高级配置不单列；三模式重连 Codec 均保留"
+    },
+    {
+      "id": "KB-POOL-008",
+      "title": "Pool init 回调失败时关闭刚建立的 KES 连接",
+      "nodeid": "tests/kes/pool/test_pool.py::test_pool_init_callback_failure_closes_kes_connection",
+      "covered_by": [
+        "KB-POOL-007"
+      ],
+      "reason": "init 失败资源清理由部分初始化失败用例覆盖"
+    },
+    {
+      "id": "KB-POOL-011",
+      "title": "Pool connect 回调返回错误连接类型时关闭已建立的 KES 会话",
+      "nodeid": "tests/kes/pool/test_pool.py::test_pool_rejects_wrong_connection_class_without_leaking_kes_session",
+      "covered_by": [
+        "KB-POOL-025"
+      ],
+      "reason": "不再单列自定义 connect 返回错误对象场景；公共参数校验保留"
+    },
+    {
+      "id": "KB-POOL-012",
+      "title": "Pool connect 回调返回其他 Pool 代理时不终止其 KES 连接",
+      "nodeid": "tests/kes/pool/test_pool.py::test_pool_rejects_foreign_proxy_without_terminating_its_kes_connection",
+      "covered_by": [
+        "KB-POOL-025"
+      ],
+      "reason": "外池代理回调返回属于非典型误用，不单列"
+    },
+    {
+      "id": "KB-POOL-014",
+      "title": "服务器元数据及日志、查询、终止回调的移除语义完整可用",
+      "nodeid": "tests/kes/pool/test_pool.py::test_connection_public_metadata_and_callback_removal",
+      "covered_by": [
+        "KB-CONN-001",
+        "KB-PROTO-033"
+      ],
+      "reason": "不再单列上游元数据方法及各类回调移除合同"
+    },
+    {
+      "id": "KB-POOL-015",
+      "title": "批处理、预编译信息、双游标及手动提交回滚保持原 API 合同",
+      "nodeid": "tests/kes/pool/test_pool.py::test_batch_cursor_and_manual_transaction_public_contracts",
+      "covered_by": [
+        "KB-EXEC-004",
+        "KB-EXEC-020",
+        "KB-EXEC-036",
+        "KB-EXEC-042"
+      ],
+      "reason": "批处理、游标、预编译元数据及手动事务已由执行模块覆盖"
+    },
+    {
+      "id": "KB-POOL-018",
+      "title": "acquire 上下文异常退出会归还连接，并使逃逸代理立即失效",
+      "nodeid": "tests/kes/pool/test_pool.py::test_pool_acquire_context_exception_releases_and_invalidates_proxy",
+      "covered_by": [
+        "KB-POOL-016",
+        "KB-POOL-019",
+        "KB-EXEC-043"
+      ],
+      "reason": "不再单列逃逸代理失效的上游合同；归还、取消和异常回滚保留"
+    },
+    {
+      "id": "KB-POOL-022",
+      "title": "Pool 自身上下文完成初始化和关闭，退出后所有操作均被拒绝",
+      "nodeid": "tests/kes/pool/test_pool.py::test_pool_context_manager_closes_pool_and_rejects_reuse",
+      "covered_by": [
+        "KB-POOL-016",
+        "performance:pool_workers_8"
+      ],
+      "reason": "池上下文初始化/关闭重复；已关闭对象所有方法拒绝不再逐项验收"
+    },
+    {
+      "id": "KB-POOL-024",
+      "title": "并发事务写读结果一致，任务结束后所有 Pool 连接均归还",
+      "nodeid": "tests/kes/pool/test_pool.py::test_concurrent_pool_transactions_preserve_data_and_release_resources",
+      "covered_by": [
+        "performance:transaction_mix",
+        "KB-EXEC-043"
+      ],
+      "reason": "并发事务值和归还由持续负载工具及取消回滚验证"
+    },
+    {
+      "id": "KB-SA-003",
+      "title": "SQLAlchemy async engine 能通过三个 KES 方言连接并执行类型 SQL",
+      "nodeid": "tests/kes/sqlalchemy_dialect/test_sqlalchemy_dialect.py::test_sqlalchemy_async_engines_connect_in_all_kes_modes",
+      "covered_by": [
+        "KB-SA-002",
+        "KB-SA-013",
+        "KB-SA-014",
+        "KB-SA-015"
+      ],
+      "reason": "基础连接和模式类型查询重复"
+    },
+    {
+      "id": "KB-SA-005",
+      "title": "三模式 async engine 的多主机 URL 能从故障端口回退到 KES",
+      "nodeid": "tests/kes/sqlalchemy_dialect/test_sqlalchemy_dialect.py::test_sqlalchemy_multihost_url_falls_back_in_all_kes_modes",
+      "covered_by": [
+        "KB-SA-004"
+      ],
+      "reason": "多主机故障回退不再单列；三模式 URL 建连保留"
+    },
+    {
+      "id": "KB-SA-007",
+      "title": "三模式 postgresql_readonly 选项传入 asynckb 并拒绝写入",
+      "nodeid": "tests/kes/sqlalchemy_dialect/test_sqlalchemy_dialect.py::test_sqlalchemy_readonly_execution_option_in_all_kes_modes",
+      "covered_by": [
+        "KB-TYPE-026",
+        "KB-SA-012"
+      ],
+      "reason": "方言只读选项组合不再单列；驱动只读与方言事务保留"
+    },
+    {
+      "id": "KB-SA-019",
+      "title": "三模式 async_fallback 适配连接能建连、查询和关闭",
+      "nodeid": "tests/kes/sqlalchemy_dialect/test_sqlalchemy_dialect.py::test_sqlalchemy_async_fallback_connects_in_all_kes_modes",
+      "covered_by": [
+        "KB-SA-002"
+      ],
+      "reason": "legacy 同步 async_fallback 不作为异步方言核心验收"
+    },
+    {
+      "id": "KB-SA-022",
+      "title": "三个 KES 方言均支持 Alembic 比对、建列、索引、删列和删表",
+      "nodeid": "tests/kes/sqlalchemy_dialect/test_sqlalchemy_dialect.py::test_alembic_autogenerate_and_operations_round_trip",
+      "covered_by": [
+        "KB-SA-011",
+        "KB-SA-013",
+        "KB-SA-014",
+        "KB-SA-015"
+      ],
+      "reason": "Alembic 自身比对/操作不作为驱动验收；方言目录反射和 DDL 保留"
+    },
+    {
+      "id": "KB-SA-023",
+      "title": "SQLAlchemy 方言分别生成三种 KES 模式兼容 SQL",
+      "nodeid": "tests/kes/sqlalchemy_dialect/test_sqlalchemy_dialect.py::test_sqlalchemy_dialects_compile_mode_specific_ddl_and_pagination",
+      "covered_by": [
+        "KB-SA-013",
+        "KB-SA-014",
+        "KB-SA-015"
+      ],
+      "reason": "编译 SQL 通过三模式真实 CRUD/分页/DDL 验证"
+    },
+    {
+      "id": "KB-SA-025",
+      "title": "统一 kingbase URL 不向驱动注入固定 KES 模式",
+      "nodeid": "tests/kes/sqlalchemy_dialect/test_sqlalchemy_dialect.py::test_sqlalchemy_unified_connection_url_leaves_mode_for_driver_detection",
+      "covered_by": [
+        "KB-SA-002"
+      ],
+      "reason": "统一入口自动模式识别真实连接已验证"
+    },
+    {
+      "id": "KB-SA-026",
+      "title": "SQLAlchemy 只暴露统一 URL 入口",
+      "nodeid": "tests/kes/sqlalchemy_dialect/test_sqlalchemy_dialect.py::test_sqlalchemy_legacy_mode_url_entries_are_not_registered",
+      "covered_by": [
+        "KB-CONN-009"
+      ],
+      "reason": "不再单列旧方言别名未注册；独立正式入口保留"
+    },
+    {
+      "id": "KB-SA-027",
+      "title": "驱动识别的模式映射到对应的 SQLAlchemy 方言",
+      "nodeid": "tests/kes/sqlalchemy_dialect/test_sqlalchemy_dialect.py::test_sqlalchemy_unified_dialect_selects_detected_mode",
+      "covered_by": [
+        "KB-SA-002"
+      ],
+      "reason": "模拟模式选择由三模式真实统一入口替代"
+    },
+    {
+      "id": "KB-SA-028",
+      "title": "统一入口切换后使用目标模式的编译器和类型编译器",
+      "nodeid": "tests/kes/sqlalchemy_dialect/test_sqlalchemy_dialect.py::test_sqlalchemy_unified_dialect_rebuilds_mode_specific_components",
+      "covered_by": [
+        "KB-SA-002",
+        "KB-SA-013",
+        "KB-SA-014",
+        "KB-SA-015"
+      ],
+      "reason": "内部编译器重建由真实方言操作验证"
+    },
+    {
+      "id": "KB-SA-031",
+      "title": "方言连接状态、版本和 MySQL 默认值辅助逻辑正确",
+      "nodeid": "tests/kes/sqlalchemy_dialect/test_sqlalchemy_dialect.py::test_sqlalchemy_dialect_helpers_preserve_connection_state_and_defaults",
+      "covered_by": [
+        "KB-SA-002",
+        "KB-SA-006",
+        "KB-SA-013"
+      ],
+      "reason": "连接状态和 MySQL 默认值 helper 不重复单列"
+    },
+    {
+      "id": "KB-SA-032",
+      "title": "三模式反射类型转换保留长度、精度和无符号信息",
+      "nodeid": "tests/kes/sqlalchemy_dialect/test_sqlalchemy_dialect.py::test_sqlalchemy_reflected_type_helpers_cover_three_mode_metadata",
+      "covered_by": [
+        "KB-SA-001",
+        "KB-SA-013",
+        "KB-SA-014",
+        "KB-SA-015",
+        "KB-SA-016"
+      ],
+      "reason": "反射类型 helper 由真实系统目录反射验证"
+    },
+    {
+      "id": "KB-SA-033",
+      "title": "方言反射保留 FK 动作、MATCH、表达式及索引长度",
+      "nodeid": "tests/kes/sqlalchemy_dialect/test_sqlalchemy_dialect.py::test_sqlalchemy_reflection_preserves_foreign_key_and_index_options",
+      "covered_by": [
+        "KB-SA-013",
+        "KB-SA-014",
+        "KB-SA-015"
+      ],
+      "reason": "保留基本 FK/索引反射；MATCH/表达式/长度高级组合不单列"
+    },
+    {
+      "id": "KB-AUTH-001",
+      "title": "当前实例真实执行 SASL/SCRAM 握手，而非 trust/MD5",
+      "nodeid": "tests/kes/authentication/test_authentication.py::test_current_instance_uses_scram_sha256",
+      "covered_by": [
+        "KB-AUTH-002"
+      ],
+      "reason": "SCRAM 真实交换由显式 HBA/算法矩阵覆盖，不依赖实例默认配置"
+    },
+    {
+      "id": "KB-AUTH-013",
+      "title": "记录服务端是否接受 PAM 配置，限制检查不冒充成功认证",
+      "nodeid": "tests/kes/authentication/test_external_authentication.py::test_pam_hba_availability",
+      "covered_by": [
+        "documentation"
+      ],
+      "reason": "PAM 不在三构建可用范围；限制写入文档，不保留不可用方式的独立测试"
+    },
+    {
+      "id": "KB-AUTH-016",
+      "title": "当前 Linux KES 拒绝 bsd HBA 方法，不冒充已验证 BSD 登录",
+      "nodeid": "tests/kes/authentication/test_external_authentication.py::test_bsd_is_not_available_on_this_linux_server",
+      "covered_by": [
+        "documentation"
+      ],
+      "reason": "BSD 不在 Linux 环境可用范围；限制写入文档"
+    },
+    {
+      "id": "KB-AUTH-018",
+      "title": "IPv4/IPv6 都获取连接所用回环接口的实际 MAC",
+      "nodeid": "tests/kes/authentication/test_mac_address.py::test_loopback_interface_mac",
+      "covered_by": [
+        "KB-AUTH-017",
+        "KB-AUTH-023"
+      ],
+      "reason": "回环 MAC 改用实际 HBA 和 SSO 白名单验证；IPv6 helper 不单列"
+    },
+    {
+      "id": "KB-AUTH-019",
+      "title": "Unix socket 不猜测网卡地址，明确拒绝 TCP MAC 上传",
+      "nodeid": "tests/kes/authentication/test_mac_address.py::test_non_tcp_mac_request_is_rejected",
+      "covered_by": [
+        "KB-AUTH-012",
+        "KB-AUTH-022"
+      ],
+      "reason": "非 TCP MAC 误用不单列；peer 身份及真实出站 MAC 保留"
+    },
+    {
+      "id": "KB-AUTH-020",
+      "title": "找不到连接接口时明确报错，不返回任意其他网卡地址",
+      "nodeid": "tests/kes/authentication/test_mac_address.py::test_unknown_local_address_is_rejected",
+      "covered_by": [
+        "KB-AUTH-017",
+        "KB-AUTH-022",
+        "KB-AUTH-023"
+      ],
+      "reason": "未知接口 helper 的报错不单列，实际上传及拒绝路径保留"
+    },
+    {
+      "id": "KB-AUTH-021",
+      "title": "非 Linux 平台不得声称已经取得真实客户端 MAC",
+      "nodeid": "tests/kes/authentication/test_mac_address.py::test_unsupported_platform_is_explicit",
+      "covered_by": [
+        "documentation"
+      ],
+      "reason": "非 Linux 明确不在本轮实测范围，不用模拟平台计数"
+    },
+    {
+      "id": "KB-AUTH-024",
+      "title": "合法密码文件中转义的冒号和反斜杠还原为真实密码",
+      "nodeid": "tests/kes/authentication/test_password_file.py::test_password_file_unescapes_password",
+      "covered_by": [
+        "KB-AUTH-007"
+      ],
+      "reason": "密码文件特殊字符转义由真实认证验证"
+    },
+    {
+      "id": "KB-AUTH-025",
+      "title": "无效行不妨碍后续合法密码记录被匹配",
+      "nodeid": "tests/kes/authentication/test_password_file.py::test_password_file_ignores_incomplete_records",
+      "covered_by": [
+        "KB-AUTH-007"
+      ],
+      "reason": "不再单列原上游无效密码文件行解析行为"
+    }
+  ]
+}

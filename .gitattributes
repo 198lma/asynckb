@@ -1,2 +1,3 @@
-asyncpg/pgproto/pgproto.c -whitespace
+# Modified for asynckb: independent distribution and KES compatibility.
+asynckb/pgproto/pgproto.c -whitespace
 docs/api/index.rst conflict-marker-size=32

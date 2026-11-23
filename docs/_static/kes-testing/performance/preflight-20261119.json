@@ -1,0 +1,703 @@
+{
+  "started_utc": "2026-11-19T07:33:20.277133+00:00",
+  "driver_version": "0.31.0.post12",
+  "python": "3.10.12",
+  "platform": "Linux-6.8.0-149-generic-x86_64-with-glibc2.35",
+  "cpu_count": 12,
+  "application_name": "asynckb_perf_41a7c0d3f108",
+  "configuration": {
+    "phase_seconds": 0.2,
+    "stress_seconds": 0.2,
+    "pool_size": 8,
+    "max_workers": 32,
+    "ssl": false,
+    "latency_includes_pool_acquire_and_release": true,
+    "warmup_operations_per_query_path": 100,
+    "percentile_method": "nearest-rank over all successful operations",
+    "notes": "Short closed-loop local test, not a 24-hour soak or certified capacity benchmark."
+  },
+  "modes": [
+    {
+      "mode": "mysql",
+      "phases": [
+        {
+          "completed": 398,
+          "elapsed_seconds": 0.2004,
+          "operations_per_second": 1985.85,
+          "latency_ms": {
+            "p50": 0.4656,
+            "p95": 0.6821,
+            "p99": 1.016,
+            "max": 1.3057
+          },
+          "workers": 1,
+          "requested_seconds": 0.2,
+          "errors": 0,
+          "error_types": {},
+          "first_error": null,
+          "client_cpu_seconds": 0.1187,
+          "resource_samples": [
+            {
+              "rss_mib": 32.176,
+              "file_descriptors": 9,
+              "asyncio_tasks": 3,
+              "seconds": 0.0,
+              "completed": 0
+            }
+          ],
+          "name": "single_cache_0",
+          "unit": "queries/second"
+        },
+        {
+          "completed": 830,
+          "elapsed_seconds": 0.2002,
+          "operations_per_second": 4146.03,
+          "latency_ms": {
+            "p50": 0.2081,
+            "p95": 0.3932,
+            "p99": 0.5193,
+            "max": 0.7182
+          },
+          "workers": 1,
+          "requested_seconds": 0.2,
+          "errors": 0,
+          "error_types": {},
+          "first_error": null,
+          "client_cpu_seconds": 0.1102,
+          "resource_samples": [
+            {
+              "rss_mib": 32.391,
+              "file_descriptors": 9,
+              "asyncio_tasks": 3,
+              "seconds": 0.0,
+              "completed": 0
+            }
+          ],
+          "name": "single_cache_100",
+          "unit": "queries/second"
+        },
+        {
+          "completed": 308,
+          "elapsed_seconds": 0.2004,
+          "operations_per_second": 1536.91,
+          "latency_ms": {
+            "p50": 0.5937,
+            "p95": 1.0144,
+            "p99": 1.1899,
+            "max": 1.7279
+          },
+          "workers": 1,
+          "requested_seconds": 0.2,
+          "errors": 0,
+          "error_types": {},
+          "first_error": null,
+          "client_cpu_seconds": 0.1214,
+          "resource_samples": [
+            {
+              "rss_mib": 32.832,
+              "file_descriptors": 16,
+              "asyncio_tasks": 3,
+              "seconds": 0.0,
+              "completed": 0
+            }
+          ],
+          "name": "pool_workers_1",
+          "unit": "queries/second",
+          "pool_size": 8
+        },
+        {
+          "completed": 630,
+          "elapsed_seconds": 0.2007,
+          "operations_per_second": 3138.86,
+          "latency_ms": {
+            "p50": 2.3917,
+            "p95": 3.6076,
+            "p99": 5.3054,
+            "max": 6.0776
+          },
+          "workers": 8,
+          "requested_seconds": 0.2,
+          "errors": 0,
+          "error_types": {},
+          "first_error": null,
+          "client_cpu_seconds": 0.198,
+          "resource_samples": [
+            {
+              "rss_mib": 32.914,
+              "file_descriptors": 16,
+              "asyncio_tasks": 10,
+              "seconds": 0.0,
+              "completed": 0
+            }
+          ],
+          "name": "pool_workers_8",
+          "unit": "queries/second",
+          "pool_size": 8
+        },
+        {
+          "completed": 797,
+          "elapsed_seconds": 0.206,
+          "operations_per_second": 3869.83,
+          "latency_ms": {
+            "p50": 6.4604,
+            "p95": 23.1469,
+            "p99": 30.1901,
+            "max": 40.6343
+          },
+          "workers": 32,
+          "requested_seconds": 0.2,
+          "errors": 0,
+          "error_types": {},
+          "first_error": null,
+          "client_cpu_seconds": 0.2004,
+          "resource_samples": [
+            {
+              "rss_mib": 33.117,
+              "file_descriptors": 16,
+              "asyncio_tasks": 34,
+              "seconds": 0.001,
+              "completed": 0
+            }
+          ],
+          "name": "pool_workers_32",
+          "unit": "queries/second",
+          "pool_size": 8
+        },
+        {
+          "completed": 877,
+          "elapsed_seconds": 0.206,
+          "operations_per_second": 4258.3,
+          "latency_ms": {
+            "p50": 2.6242,
+            "p95": 21.5563,
+            "p99": 31.0336,
+            "max": 48.3574
+          },
+          "workers": 32,
+          "requested_seconds": 0.2,
+          "errors": 0,
+          "error_types": {},
+          "first_error": null,
+          "client_cpu_seconds": 0.2044,
+          "resource_samples": [
+            {
+              "rss_mib": 33.438,
+              "file_descriptors": 16,
+              "asyncio_tasks": 34,
+              "seconds": 0.001,
+              "completed": 0
+            }
+          ],
+          "name": "sustained_workers_32",
+          "unit": "queries/second",
+          "pool_size": 8
+        },
+        {
+          "completed": 371,
+          "elapsed_seconds": 0.2138,
+          "operations_per_second": 1734.88,
+          "latency_ms": {
+            "p50": 17.0081,
+            "p95": 41.5216,
+            "p99": 56.0298,
+            "max": 67.5572
+          },
+          "workers": 32,
+          "requested_seconds": 0.2,
+          "errors": 0,
+          "error_types": {},
+          "first_error": null,
+          "client_cpu_seconds": 0.2078,
+          "resource_samples": [
+            {
+              "rss_mib": 33.684,
+              "file_descriptors": 16,
+              "asyncio_tasks": 34,
+              "seconds": 0.001,
+              "completed": 0
+            }
+          ],
+          "name": "transaction_mix",
+          "unit": "transactions/second",
+          "pool_size": 8
+        }
+      ],
+      "checks": {
+        "pool_queue_timeout": true,
+        "recovered_after_acquire_timeout": true,
+        "committed_rows": 194,
+        "expected_committed_rows": 194,
+        "all_pool_connections_returned": true,
+        "sessions_after_pool_close_including_observer": 1,
+        "test_table_removed": true
+      },
+      "database_version": "KingbaseES V009R003C018",
+      "resources_before": {
+        "rss_mib": 32.113,
+        "file_descriptors": 8,
+        "asyncio_tasks": 1
+      },
+      "resources_after": {
+        "rss_mib": 33.973,
+        "file_descriptors": 7,
+        "asyncio_tasks": 1
+      },
+      "passed": true
+    },
+    {
+      "mode": "oracle",
+      "phases": [
+        {
+          "completed": 372,
+          "elapsed_seconds": 0.2002,
+          "operations_per_second": 1858.01,
+          "latency_ms": {
+            "p50": 0.4964,
+            "p95": 0.7516,
+            "p99": 1.1804,
+            "max": 1.2804
+          },
+          "workers": 1,
+          "requested_seconds": 0.2,
+          "errors": 0,
+          "error_types": {},
+          "first_error": null,
+          "client_cpu_seconds": 0.1116,
+          "resource_samples": [
+            {
+              "rss_mib": 33.992,
+              "file_descriptors": 9,
+              "asyncio_tasks": 3,
+              "seconds": 0.0,
+              "completed": 0
+            }
+          ],
+          "name": "single_cache_0",
+          "unit": "queries/second"
+        },
+        {
+          "completed": 941,
+          "elapsed_seconds": 0.2001,
+          "operations_per_second": 4701.53,
+          "latency_ms": {
+            "p50": 0.2001,
+            "p95": 0.2632,
+            "p99": 0.473,
+            "max": 0.5422
+          },
+          "workers": 1,
+          "requested_seconds": 0.2,
+          "errors": 0,
+          "error_types": {},
+          "first_error": null,
+          "client_cpu_seconds": 0.1171,
+          "resource_samples": [
+            {
+              "rss_mib": 34.066,
+              "file_descriptors": 9,
+              "asyncio_tasks": 3,
+              "seconds": 0.0,
+              "completed": 0
+            }
+          ],
+          "name": "single_cache_100",
+          "unit": "queries/second"
+        },
+        {
+          "completed": 363,
+          "elapsed_seconds": 0.2002,
+          "operations_per_second": 1812.82,
+          "latency_ms": {
+            "p50": 0.5159,
+            "p95": 0.7943,
+            "p99": 1.0319,
+            "max": 1.2598
+          },
+          "workers": 1,
+          "requested_seconds": 0.2,
+          "errors": 0,
+          "error_types": {},
+          "first_error": null,
+          "client_cpu_seconds": 0.1201,
+          "resource_samples": [
+            {
+              "rss_mib": 34.191,
+              "file_descriptors": 16,
+              "asyncio_tasks": 3,
+              "seconds": 0.0,
+              "completed": 0
+            }
+          ],
+          "name": "pool_workers_1",
+          "unit": "queries/second",
+          "pool_size": 8
+        },
+        {
+          "completed": 758,
+          "elapsed_seconds": 0.2005,
+          "operations_per_second": 3781.23,
+          "latency_ms": {
+            "p50": 2.0686,
+            "p95": 2.7449,
+            "p99": 3.2363,
+            "max": 5.4441
+          },
+          "workers": 8,
+          "requested_seconds": 0.2,
+          "errors": 0,
+          "error_types": {},
+          "first_error": null,
+          "client_cpu_seconds": 0.1958,
+          "resource_samples": [
+            {
+              "rss_mib": 34.281,
+              "file_descriptors": 16,
+              "asyncio_tasks": 10,
+              "seconds": 0.0,
+              "completed": 0
+            }
+          ],
+          "name": "pool_workers_8",
+          "unit": "queries/second",
+          "pool_size": 8
+        },
+        {
+          "completed": 868,
+          "elapsed_seconds": 0.2058,
+          "operations_per_second": 4217.67,
+          "latency_ms": {
+            "p50": 2.7388,
+            "p95": 23.141,
+            "p99": 24.5776,
+            "max": 30.3376
+          },
+          "workers": 32,
+          "requested_seconds": 0.2,
+          "errors": 0,
+          "error_types": {},
+          "first_error": null,
+          "client_cpu_seconds": 0.2051,
+          "resource_samples": [
+            {
+              "rss_mib": 34.465,
+              "file_descriptors": 16,
+              "asyncio_tasks": 34,
+              "seconds": 0.0,
+              "completed": 0
+            }
+          ],
+          "name": "pool_workers_32",
+          "unit": "queries/second",
+          "pool_size": 8
+        },
+        {
+          "completed": 856,
+          "elapsed_seconds": 0.2057,
+          "operations_per_second": 4161.8,
+          "latency_ms": {
+            "p50": 3.0387,
+            "p95": 22.067,
+            "p99": 28.2739,
+            "max": 37.2766
+          },
+          "workers": 32,
+          "requested_seconds": 0.2,
+          "errors": 0,
+          "error_types": {},
+          "first_error": null,
+          "client_cpu_seconds": 0.2014,
+          "resource_samples": [
+            {
+              "rss_mib": 34.77,
+              "file_descriptors": 16,
+              "asyncio_tasks": 34,
+              "seconds": 0.0,
+              "completed": 0
+            }
+          ],
+          "name": "sustained_workers_32",
+          "unit": "queries/second",
+          "pool_size": 8
+        },
+        {
+          "completed": 243,
+          "elapsed_seconds": 0.2153,
+          "operations_per_second": 1128.57,
+          "latency_ms": {
+            "p50": 18.0679,
+            "p95": 86.1911,
+            "p99": 106.2927,
+            "max": 124.914
+          },
+          "workers": 32,
+          "requested_seconds": 0.2,
+          "errors": 0,
+          "error_types": {},
+          "first_error": null,
+          "client_cpu_seconds": 0.1777,
+          "resource_samples": [
+            {
+              "rss_mib": 34.984,
+              "file_descriptors": 16,
+              "asyncio_tasks": 34,
+              "seconds": 0.0,
+              "completed": 0
+            }
+          ],
+          "name": "transaction_mix",
+          "unit": "transactions/second",
+          "pool_size": 8
+        }
+      ],
+      "checks": {
+        "pool_queue_timeout": true,
+        "recovered_after_acquire_timeout": true,
+        "committed_rows": 129,
+        "expected_committed_rows": 129,
+        "all_pool_connections_returned": true,
+        "sessions_after_pool_close_including_observer": 1,
+        "test_table_removed": true
+      },
+      "database_version": "KingbaseES V009R002C016",
+      "resources_before": {
+        "rss_mib": 33.973,
+        "file_descriptors": 8,
+        "asyncio_tasks": 1
+      },
+      "resources_after": {
+        "rss_mib": 35.176,
+        "file_descriptors": 7,
+        "asyncio_tasks": 1
+      },
+      "passed": true
+    },
+    {
+      "mode": "sqlserver",
+      "phases": [
+        {
+          "completed": 389,
+          "elapsed_seconds": 0.2003,
+          "operations_per_second": 1942.13,
+          "latency_ms": {
+            "p50": 0.4776,
+            "p95": 0.7094,
+            "p99": 0.9866,
+            "max": 1.0256
+          },
+          "workers": 1,
+          "requested_seconds": 0.2,
+          "errors": 0,
+          "error_types": {},
+          "first_error": null,
+          "client_cpu_seconds": 0.1181,
+          "resource_samples": [
+            {
+              "rss_mib": 35.176,
+              "file_descriptors": 9,
+              "asyncio_tasks": 3,
+              "seconds": 0.0,
+              "completed": 0
+            }
+          ],
+          "name": "single_cache_0",
+          "unit": "queries/second"
+        },
+        {
+          "completed": 916,
+          "elapsed_seconds": 0.2002,
+          "operations_per_second": 4575.0,
+          "latency_ms": {
+            "p50": 0.1976,
+            "p95": 0.3275,
+            "p99": 0.4958,
+            "max": 0.5901
+          },
+          "workers": 1,
+          "requested_seconds": 0.2,
+          "errors": 0,
+          "error_types": {},
+          "first_error": null,
+          "client_cpu_seconds": 0.1191,
+          "resource_samples": [
+            {
+              "rss_mib": 35.176,
+              "file_descriptors": 9,
+              "asyncio_tasks": 3,
+              "seconds": 0.0,
+              "completed": 0
+            }
+          ],
+          "name": "single_cache_100",
+          "unit": "queries/second"
+        },
+        {
+          "completed": 318,
+          "elapsed_seconds": 0.2004,
+          "operations_per_second": 1587.15,
+          "latency_ms": {
+            "p50": 0.565,
+            "p95": 0.9544,
+            "p99": 1.2077,
+            "max": 1.5924
+          },
+          "workers": 1,
+          "requested_seconds": 0.2,
+          "errors": 0,
+          "error_types": {},
+          "first_error": null,
+          "client_cpu_seconds": 0.118,
+          "resource_samples": [
+            {
+              "rss_mib": 35.305,
+              "file_descriptors": 16,
+              "asyncio_tasks": 3,
+              "seconds": 0.0,
+              "completed": 0
+            }
+          ],
+          "name": "pool_workers_1",
+          "unit": "queries/second",
+          "pool_size": 8
+        },
+        {
+          "completed": 690,
+          "elapsed_seconds": 0.2012,
+          "operations_per_second": 3429.24,
+          "latency_ms": {
+            "p50": 2.2677,
+            "p95": 3.0117,
+            "p99": 3.8324,
+            "max": 4.2086
+          },
+          "workers": 8,
+          "requested_seconds": 0.2,
+          "errors": 0,
+          "error_types": {},
+          "first_error": null,
+          "client_cpu_seconds": 0.2012,
+          "resource_samples": [
+            {
+              "rss_mib": 35.305,
+              "file_descriptors": 16,
+              "asyncio_tasks": 10,
+              "seconds": 0.0,
+              "completed": 0
+            }
+          ],
+          "name": "pool_workers_8",
+          "unit": "queries/second",
+          "pool_size": 8
+        },
+        {
+          "completed": 705,
+          "elapsed_seconds": 0.2069,
+          "operations_per_second": 3407.63,
+          "latency_ms": {
+            "p50": 3.6352,
+            "p95": 28.1748,
+            "p99": 36.1141,
+            "max": 43.5837
+          },
+          "workers": 32,
+          "requested_seconds": 0.2,
+          "errors": 0,
+          "error_types": {},
+          "first_error": null,
+          "client_cpu_seconds": 0.2068,
+          "resource_samples": [
+            {
+              "rss_mib": 35.328,
+              "file_descriptors": 16,
+              "asyncio_tasks": 34,
+              "seconds": 0.0,
+              "completed": 0
+            }
+          ],
+          "name": "pool_workers_32",
+          "unit": "queries/second",
+          "pool_size": 8
+        },
+        {
+          "completed": 765,
+          "elapsed_seconds": 0.2103,
+          "operations_per_second": 3637.39,
+          "latency_ms": {
+            "p50": 3.0554,
+            "p95": 26.8253,
+            "p99": 29.9737,
+            "max": 35.5133
+          },
+          "workers": 32,
+          "requested_seconds": 0.2,
+          "errors": 0,
+          "error_types": {},
+          "first_error": null,
+          "client_cpu_seconds": 0.2103,
+          "resource_samples": [
+            {
+              "rss_mib": 35.406,
+              "file_descriptors": 16,
+              "asyncio_tasks": 34,
+              "seconds": 0.0,
+              "completed": 0
+            }
+          ],
+          "name": "sustained_workers_32",
+          "unit": "queries/second",
+          "pool_size": 8
+        },
+        {
+          "completed": 321,
+          "elapsed_seconds": 0.2151,
+          "operations_per_second": 1492.44,
+          "latency_ms": {
+            "p50": 19.8539,
+            "p95": 49.3607,
+            "p99": 71.4695,
+            "max": 112.7197
+          },
+          "workers": 32,
+          "requested_seconds": 0.2,
+          "errors": 0,
+          "error_types": {},
+          "first_error": null,
+          "client_cpu_seconds": 0.2076,
+          "resource_samples": [
+            {
+              "rss_mib": 35.527,
+              "file_descriptors": 16,
+              "asyncio_tasks": 34,
+              "seconds": 0.001,
+              "completed": 0
+            }
+          ],
+          "name": "transaction_mix",
+          "unit": "transactions/second",
+          "pool_size": 8
+        }
+      ],
+      "checks": {
+        "pool_queue_timeout": true,
+        "recovered_after_acquire_timeout": true,
+        "committed_rows": 168,
+        "expected_committed_rows": 168,
+        "all_pool_connections_returned": true,
+        "sessions_after_pool_close_including_observer": 1,
+        "test_table_removed": true
+      },
+      "database_version": "KingbaseES V009R004C019",
+      "resources_before": {
+        "rss_mib": 35.176,
+        "file_descriptors": 8,
+        "asyncio_tasks": 1
+      },
+      "resources_after": {
+        "rss_mib": 35.746,
+        "file_descriptors": 7,
+        "asyncio_tasks": 1
+      },
+      "passed": true
+    }
+  ],
+  "finished_utc": "2026-11-19T07:33:27.042898+00:00"
+}

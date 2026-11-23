@@ -1,9 +1,10 @@
 #!/usr/bin/env python3
+# Modified for asynckb: independent package imports and generated notices.
 #
 # Copyright (C) 2016-present the asyncpg authors and contributors
 # <see AUTHORS file>
 #
-# This module is part of asyncpg and is released under
+# This module is part of asynckb and is released under
 # the Apache 2.0 License: http://www.apache.org/licenses/LICENSE-2.0
 
 
@@ -13,7 +14,7 @@ import re
 import string
 import textwrap
 
-from asyncpg.exceptions import _base as apg_exc
+from asynckb.exceptions import _base as apg_exc
 
 
 _namemap = {
@@ -85,7 +86,8 @@ class {clsname}({base}):
     new_section = True
     section_class = None
 
-    buf = '# GENERATED FROM postgresql/src/backend/utils/errcodes.txt\n' + \
+    buf = '# Modified for asynckb: independent distribution and KES support.\n' + \
+          '# GENERATED FROM postgresql/src/backend/utils/errcodes.txt\n' + \
           '# DO NOT MODIFY, use tools/generate_exceptions.py to update\n\n' + \
           'from ._base import *  # NOQA\nfrom . import _base\n\n\n'
 

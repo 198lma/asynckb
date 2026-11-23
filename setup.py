@@ -1,14 +1,16 @@
 # Copyright (C) 2016-present the asyncpg authors and contributors
 # <see AUTHORS file>
 #
-# This module is part of asyncpg and is released under
+# This module is part of asynckb and is released under
 # the Apache 2.0 License: http://www.apache.org/licenses/LICENSE-2.0
+# Modified for asynckb: independent package identity, KES integration and
+# distribution of upstream and third-party license notices.
 
 
 import sys
 
 if sys.version_info < (3, 9):
-    raise RuntimeError('asyncpg requires Python 3.9 or greater')
+    raise RuntimeError('asynckb requires Python 3.9 or greater')
 
 import os
 import os.path
@@ -43,7 +45,7 @@ with open(str(_ROOT / 'README.rst')) as f:
     readme = f.read()
 
 
-with open(str(_ROOT / 'asyncpg' / '_version.py')) as f:
+with open(str(_ROOT / 'asynckb' / '_version.py')) as f:
     for line in f:
         if line.startswith('__version__: typing.Final ='):
             _, _, version = line.partition('=')
@@ -51,7 +53,7 @@ with open(str(_ROOT / 'asyncpg' / '_version.py')) as f:
             break
     else:
         raise RuntimeError(
-            'unable to read the version from asyncpg/_version.py')
+            'unable to read the version from asynckb/_version.py')
 
 
 if (_ROOT / '.git').is_dir() and 'dev' in VERSION:
@@ -78,7 +80,7 @@ if (_ROOT / '.git').is_dir() and 'dev' in VERSION:
 class VersionMixin:
 
     def _fix_version(self, filename):
-        # Replace asyncpg.__version__ with the actual version
+        # Replace asynckb.__version__ with the actual version
         # of the distribution (possibly inferred from git).
 
         with open(str(filename)) as f:
@@ -96,7 +98,7 @@ class sdist(setuptools_sdist.sdist, VersionMixin):
 
     def make_release_tree(self, base_dir, files):
         super().make_release_tree(base_dir, files)
-        self._fix_version(pathlib.Path(base_dir) / 'asyncpg' / '_version.py')
+        self._fix_version(pathlib.Path(base_dir) / 'asynckb' / '_version.py')
 
 
 class build_py(setuptools_build_py.build_py, VersionMixin):
@@ -104,7 +106,7 @@ class build_py(setuptools_build_py.build_py, VersionMixin):
     def build_module(self, module, module_file, package):
         outfile, copied = super().build_module(module, module_file, package)
 
-        if module == '__init__' and package == 'asyncpg':
+        if module == '__init__' and package == 'asynckb':
             self._fix_version(outfile)
 
         return outfile, copied
@@ -136,7 +138,7 @@ class build_ext(setuptools_build_ext.build_ext):
             "CYTHON_USE_TYPE_SPECS",
         ]
 
-        if os.environ.get('ASYNCPG_DEBUG'):
+        if os.environ.get('ASYNCKB_DEBUG'):
             self.cython_always = True
             self.cython_annotate = True
             self.cython_directives = "linetrace=True"
@@ -159,15 +161,15 @@ class build_ext(setuptools_build_ext.build_ext):
 
         if not self.cython_always:
             self.cython_always = bool(os.environ.get(
-                "ASYNCPG_BUILD_CYTHON_ALWAYS"))
+                "ASYNCKB_BUILD_CYTHON_ALWAYS"))
 
         if self.cython_annotate is None:
             self.cython_annotate = os.environ.get(
-                "ASYNCPG_BUILD_CYTHON_ANNOTATE")
+                "ASYNCKB_BUILD_CYTHON_ANNOTATE")
 
         if self.cython_directives is None:
             self.cython_directives = os.environ.get(
-                "ASYNCPG_BUILD_CYTHON_DIRECTIVES")
+                "ASYNCKB_BUILD_CYTHON_DIRECTIVES")
 
         need_cythonize = self.cython_always
         cfiles = {}
@@ -196,13 +198,13 @@ class build_ext(setuptools_build_ext.build_ext):
                 import Cython
             except ImportError:
                 raise RuntimeError(
-                    'please install {} to compile asyncpg from source'.format(
+                    'please install {} to compile asynckb from source'.format(
                         CYTHON_DEPENDENCY))
 
             cython_specifier = Requirement(CYTHON_DEPENDENCY).specifier
             if Cython.__version__ not in cython_specifier:
                 raise RuntimeError(
-                    'asyncpg requires {}, got Cython=={}'.format(
+                    'asynckb requires {}, got Cython=={}'.format(
                         CYTHON_DEPENDENCY, Cython.__version__
                     ))
 
@@ -235,29 +237,32 @@ class build_ext(setuptools_build_ext.build_ext):
 setup_requires = []
 
 if (
-    not (_ROOT / 'asyncpg' / 'protocol' / 'protocol.c').exists()
-    or os.environ.get("ASYNCPG_BUILD_CYTHON_ALWAYS")
+    not (_ROOT / 'asynckb' / 'protocol' / 'protocol.c').exists()
+    or os.environ.get("ASYNCKB_BUILD_CYTHON_ALWAYS")
 ):
     # No Cython output, require Cython to build.
     setup_requires.append(CYTHON_DEPENDENCY)
 
 
 _ = setuptools.setup(
-    name='asyncpg-kes',
+    name='asynckb',
     version=VERSION,
     description='An asyncio driver for KingbaseES compatibility modes',
     long_description=readme,
     long_description_content_type='text/x-rst',
-    author='asyncpg authors and contributors',
-    url='https://github.com/198lma/asyncpg-kes',
+    author='asynckb contributors',
+    url='https://github.com/198lma/asynckb',
     project_urls={
-        'Issues': 'https://github.com/198lma/asyncpg-kes/issues',
+        'Issues': 'https://github.com/198lma/asynckb/issues',
         'Changelog': (
-            'https://github.com/198lma/asyncpg-kes/blob/main/CHANGELOG.md'
+            'https://github.com/198lma/asynckb/blob/main/CHANGELOG.md'
         ),
     },
-    license='Apache-2.0',
-    license_files=['LICENSE'],
+    license_expression='Apache-2.0 AND PSF-2.0 AND 0BSD',
+    license_files=[
+        'LICENSE', 'NOTICE', 'AUTHORS', 'UPSTREAM.md',
+        'LICENSES/PSF-2.0.txt', 'LICENSES/0BSD.txt',
+    ],
     python_requires='>=3.9.0',
     keywords=['database', 'kingbasees', 'kes', 'mysql', 'oracle',
               'sqlserver'],
@@ -289,38 +294,34 @@ _ = setuptools.setup(
         'sqlalchemy': ['SQLAlchemy>=2.0'],
         'alembic': ['SQLAlchemy>=2.0', 'alembic>=1.13'],
     },
-    packages=setuptools.find_packages(include=['asyncpg', 'asyncpg.*']),
+    packages=setuptools.find_packages(include=['asynckb', 'asynckb.*']),
     include_package_data=True,
     exclude_package_data={'': ['*.c', '*.h']},
     zip_safe=False,
     entry_points={
         'sqlalchemy.dialects': [
-            'kingbase_mysql.asyncpg = '
-            'asyncpg.sa_dialect:KESMySQLDialect_asyncpg',
-            'kingbase_oracle.asyncpg = '
-            'asyncpg.sa_dialect:KESOracleDialect_asyncpg',
-            'kingbase_sqlserver.asyncpg = '
-            'asyncpg.sa_dialect:KESSQLServerDialect_asyncpg',
+            'kingbase.asynckb = '
+            'asynckb.sa_dialect:KESDialect_asynckb',
         ],
     },
     ext_modules=[
         setuptools.extension.Extension(
-            "asyncpg.pgproto.pgproto",
-            ["asyncpg/pgproto/pgproto.pyx"],
+            "asynckb.pgproto.pgproto",
+            ["asynckb/pgproto/pgproto.pyx"],
             extra_compile_args=CFLAGS,
             extra_link_args=LDFLAGS),
 
         setuptools.extension.Extension(
-            "asyncpg.protocol.record",
-            ["asyncpg/protocol/record/recordobj.c"],
-            include_dirs=['asyncpg/protocol/record/'],
+            "asynckb.protocol.record",
+            ["asynckb/protocol/record/recordobj.c"],
+            include_dirs=['asynckb/protocol/record/'],
             extra_compile_args=CFLAGS,
             extra_link_args=LDFLAGS),
 
         setuptools.extension.Extension(
-            "asyncpg.protocol.protocol",
-            ["asyncpg/protocol/protocol.pyx"],
-            include_dirs=['asyncpg/pgproto/'],
+            "asynckb.protocol.protocol",
+            ["asynckb/protocol/protocol.pyx"],
+            include_dirs=['asynckb/pgproto/'],
             extra_compile_args=CFLAGS,
             extra_link_args=LDFLAGS),
     ],

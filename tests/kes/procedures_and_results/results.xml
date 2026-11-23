@@ -1,0 +1,189 @@
+<?xml version="1.0" encoding="utf-8"?><testsuites name="pytest tests"><testsuite name="pytest" errors="0" failures="9" skipped="0" tests="60" time="3.942" timestamp="2026-11-03T16:30:32.384671+08:00" hostname="rootdba"><testcase classname="tests.kes.procedures_and_results.test_multiple_results" name="test_zip_original_two_select_forms[execute-select 1; select 2;]" file="tests/kes/procedures_and_results/test_multiple_results.py" line="10" time="0.061"><properties><property name="actual" value="'SELECT 1'" /></properties></testcase><testcase classname="tests.kes.procedures_and_results.test_multiple_results" name="test_zip_original_two_select_forms[execute-select 1 select 2]" file="tests/kes/procedures_and_results/test_multiple_results.py" line="10" time="0.059"><properties><property name="actual" value="'SELECT 1'" /></properties></testcase><testcase classname="tests.kes.procedures_and_results.test_multiple_results" name="test_zip_original_two_select_forms[fetch-select 1; select 2;]" file="tests/kes/procedures_and_results/test_multiple_results.py" line="10" time="0.059"><properties><property name="actual" value="[(1,), (2,)]" /></properties></testcase><testcase classname="tests.kes.procedures_and_results.test_multiple_results" name="test_zip_original_two_select_forms[fetch-select 1 select 2]" file="tests/kes/procedures_and_results/test_multiple_results.py" line="10" time="0.059"><properties><property name="actual" value="[(1,), (2,)]" /></properties></testcase><testcase classname="tests.kes.procedures_and_results.test_multiple_results" name="test_zip_original_two_select_forms[prepare-select 1; select 2;]" file="tests/kes/procedures_and_results/test_multiple_results.py" line="10" time="0.063"><properties><property name="actual" value="[(1,), (2,)]" /></properties></testcase><testcase classname="tests.kes.procedures_and_results.test_multiple_results" name="test_zip_original_two_select_forms[prepare-select 1 select 2]" file="tests/kes/procedures_and_results/test_multiple_results.py" line="10" time="0.086"><properties><property name="actual" value="[(1,), (2,)]" /></properties></testcase><testcase classname="tests.kes.procedures_and_results.test_multiple_results" name="test_zip_original_nocount_syntax_server_rejection[on]" file="tests/kes/procedures_and_results/test_multiple_results.py" line="34" time="0.076"><properties><property name="server_error" value="语法错误 在 &quot;on&quot; 或附近的" /></properties></testcase><testcase classname="tests.kes.procedures_and_results.test_multiple_results" name="test_zip_original_nocount_syntax_server_rejection[off]" file="tests/kes/procedures_and_results/test_multiple_results.py" line="34" time="0.061"><properties><property name="server_error" value="语法错误 在 &quot;off&quot; 或附近的" /></properties></testcase><testcase classname="tests.kes.procedures_and_results.test_multiple_results" name="test_zip_dml_with_supported_nocount_setting[literal-execute-on-; ]" file="tests/kes/procedures_and_results/test_multiple_results.py" line="52" time="0.069"><properties><property name="command_result" value="'UPDATE 1'" /><property name="table_rows" value="[(1, 'updated'), (2, 'yy')]" /></properties></testcase><testcase classname="tests.kes.procedures_and_results.test_multiple_results" name="test_zip_dml_with_supported_nocount_setting[literal-execute-on- ]" file="tests/kes/procedures_and_results/test_multiple_results.py" line="52" time="0.068"><properties><property name="command_result" value="'UPDATE 1'" /><property name="table_rows" value="[(1, 'updated'), (2, 'yy')]" /></properties></testcase><testcase classname="tests.kes.procedures_and_results.test_multiple_results" name="test_zip_dml_with_supported_nocount_setting[literal-execute-off-; ]" file="tests/kes/procedures_and_results/test_multiple_results.py" line="52" time="0.067"><properties><property name="command_result" value="'UPDATE 1'" /><property name="table_rows" value="[(1, 'updated'), (2, 'yy')]" /></properties></testcase><testcase classname="tests.kes.procedures_and_results.test_multiple_results" name="test_zip_dml_with_supported_nocount_setting[literal-execute-off- ]" file="tests/kes/procedures_and_results/test_multiple_results.py" line="52" time="0.069"><properties><property name="command_result" value="'UPDATE 1'" /><property name="table_rows" value="[(1, 'updated'), (2, 'yy')]" /></properties></testcase><testcase classname="tests.kes.procedures_and_results.test_multiple_results" name="test_zip_dml_with_supported_nocount_setting[literal-fetch-on-; ]" file="tests/kes/procedures_and_results/test_multiple_results.py" line="52" time="0.074"><properties><property name="command_result" value="[]" /><property name="table_rows" value="[(1, 'updated'), (2, 'yy')]" /></properties></testcase><testcase classname="tests.kes.procedures_and_results.test_multiple_results" name="test_zip_dml_with_supported_nocount_setting[literal-fetch-on- ]" file="tests/kes/procedures_and_results/test_multiple_results.py" line="52" time="0.071"><properties><property name="command_result" value="[]" /><property name="table_rows" value="[(1, 'updated'), (2, 'yy')]" /></properties></testcase><testcase classname="tests.kes.procedures_and_results.test_multiple_results" name="test_zip_dml_with_supported_nocount_setting[literal-fetch-off-; ]" file="tests/kes/procedures_and_results/test_multiple_results.py" line="52" time="0.075"><properties><property name="command_result" value="[]" /><property name="table_rows" value="[(1, 'updated'), (2, 'yy')]" /></properties></testcase><testcase classname="tests.kes.procedures_and_results.test_multiple_results" name="test_zip_dml_with_supported_nocount_setting[literal-fetch-off- ]" file="tests/kes/procedures_and_results/test_multiple_results.py" line="52" time="0.071"><properties><property name="command_result" value="[]" /><property name="table_rows" value="[(1, 'updated'), (2, 'yy')]" /></properties></testcase><testcase classname="tests.kes.procedures_and_results.test_multiple_results" name="test_zip_dml_with_supported_nocount_setting[literal-prepare-on-; ]" file="tests/kes/procedures_and_results/test_multiple_results.py" line="52" time="0.072"><properties><property name="command_result" value="[]" /><property name="table_rows" value="[(1, 'updated'), (2, 'yy')]" /></properties></testcase><testcase classname="tests.kes.procedures_and_results.test_multiple_results" name="test_zip_dml_with_supported_nocount_setting[literal-prepare-on- ]" file="tests/kes/procedures_and_results/test_multiple_results.py" line="52" time="0.069"><properties><property name="command_result" value="[]" /><property name="table_rows" value="[(1, 'updated'), (2, 'yy')]" /></properties></testcase><testcase classname="tests.kes.procedures_and_results.test_multiple_results" name="test_zip_dml_with_supported_nocount_setting[literal-prepare-off-; ]" file="tests/kes/procedures_and_results/test_multiple_results.py" line="52" time="0.069"><properties><property name="command_result" value="[]" /><property name="table_rows" value="[(1, 'updated'), (2, 'yy')]" /></properties></testcase><testcase classname="tests.kes.procedures_and_results.test_multiple_results" name="test_zip_dml_with_supported_nocount_setting[literal-prepare-off- ]" file="tests/kes/procedures_and_results/test_multiple_results.py" line="52" time="0.068"><properties><property name="command_result" value="[]" /><property name="table_rows" value="[(1, 'updated'), (2, 'yy')]" /></properties></testcase><testcase classname="tests.kes.procedures_and_results.test_multiple_results" name="test_zip_dml_with_supported_nocount_setting[bound-execute-on-; ]" file="tests/kes/procedures_and_results/test_multiple_results.py" line="52" time="0.069"><properties><property name="command_result" value="'ANONYMOUS BLOCK'" /><property name="table_rows" value="[(1, 'updated'), (2, 'yy')]" /></properties></testcase><testcase classname="tests.kes.procedures_and_results.test_multiple_results" name="test_zip_dml_with_supported_nocount_setting[bound-execute-on- ]" file="tests/kes/procedures_and_results/test_multiple_results.py" line="52" time="0.069"><properties><property name="command_result" value="'ANONYMOUS BLOCK'" /><property name="table_rows" value="[(1, 'updated'), (2, 'yy')]" /></properties></testcase><testcase classname="tests.kes.procedures_and_results.test_multiple_results" name="test_zip_dml_with_supported_nocount_setting[bound-execute-off-; ]" file="tests/kes/procedures_and_results/test_multiple_results.py" line="52" time="0.069"><properties><property name="command_result" value="'ANONYMOUS BLOCK'" /><property name="table_rows" value="[(1, 'updated'), (2, 'yy')]" /></properties></testcase><testcase classname="tests.kes.procedures_and_results.test_multiple_results" name="test_zip_dml_with_supported_nocount_setting[bound-execute-off- ]" file="tests/kes/procedures_and_results/test_multiple_results.py" line="52" time="0.071"><properties><property name="command_result" value="'ANONYMOUS BLOCK'" /><property name="table_rows" value="[(1, 'updated'), (2, 'yy')]" /></properties></testcase><testcase classname="tests.kes.procedures_and_results.test_multiple_results" name="test_zip_dml_with_supported_nocount_setting[bound-fetch-on-; ]" file="tests/kes/procedures_and_results/test_multiple_results.py" line="52" time="0.069"><properties><property name="command_result" value="[]" /><property name="table_rows" value="[(1, 'updated'), (2, 'yy')]" /></properties></testcase><testcase classname="tests.kes.procedures_and_results.test_multiple_results" name="test_zip_dml_with_supported_nocount_setting[bound-fetch-on- ]" file="tests/kes/procedures_and_results/test_multiple_results.py" line="52" time="0.069"><properties><property name="command_result" value="[]" /><property name="table_rows" value="[(1, 'updated'), (2, 'yy')]" /></properties></testcase><testcase classname="tests.kes.procedures_and_results.test_multiple_results" name="test_zip_dml_with_supported_nocount_setting[bound-fetch-off-; ]" file="tests/kes/procedures_and_results/test_multiple_results.py" line="52" time="0.071"><properties><property name="command_result" value="[]" /><property name="table_rows" value="[(1, 'updated'), (2, 'yy')]" /></properties></testcase><testcase classname="tests.kes.procedures_and_results.test_multiple_results" name="test_zip_dml_with_supported_nocount_setting[bound-fetch-off- ]" file="tests/kes/procedures_and_results/test_multiple_results.py" line="52" time="0.068"><properties><property name="command_result" value="[]" /><property name="table_rows" value="[(1, 'updated'), (2, 'yy')]" /></properties></testcase><testcase classname="tests.kes.procedures_and_results.test_multiple_results" name="test_zip_dml_with_supported_nocount_setting[bound-prepare-on-; ]" file="tests/kes/procedures_and_results/test_multiple_results.py" line="52" time="0.068"><properties><property name="command_result" value="[]" /><property name="table_rows" value="[(1, 'updated'), (2, 'yy')]" /></properties></testcase><testcase classname="tests.kes.procedures_and_results.test_multiple_results" name="test_zip_dml_with_supported_nocount_setting[bound-prepare-on- ]" file="tests/kes/procedures_and_results/test_multiple_results.py" line="52" time="0.070"><properties><property name="command_result" value="[]" /><property name="table_rows" value="[(1, 'updated'), (2, 'yy')]" /></properties></testcase><testcase classname="tests.kes.procedures_and_results.test_multiple_results" name="test_zip_dml_with_supported_nocount_setting[bound-prepare-off-; ]" file="tests/kes/procedures_and_results/test_multiple_results.py" line="52" time="0.070"><properties><property name="command_result" value="[]" /><property name="table_rows" value="[(1, 'updated'), (2, 'yy')]" /></properties></testcase><testcase classname="tests.kes.procedures_and_results.test_multiple_results" name="test_zip_dml_with_supported_nocount_setting[bound-prepare-off- ]" file="tests/kes/procedures_and_results/test_multiple_results.py" line="52" time="0.070"><properties><property name="command_result" value="[]" /><property name="table_rows" value="[(1, 'updated'), (2, 'yy')]" /></properties></testcase><testcase classname="tests.kes.procedures_and_results.test_multiple_results" name="test_empty_result_boundary_is_not_exposed[0]" file="tests/kes/procedures_and_results/test_multiple_results.py" line="102" time="0.059" /><testcase classname="tests.kes.procedures_and_results.test_multiple_results" name="test_empty_result_boundary_is_not_exposed[100]" file="tests/kes/procedures_and_results/test_multiple_results.py" line="102" time="0.062" /><testcase classname="tests.kes.procedures_and_results.test_procedures" name="test_pure_out_parameters_without_query_result_sets[mysql-0]" file="tests/kes/procedures_and_results/test_procedures.py" line="10" time="0.042" /><testcase classname="tests.kes.procedures_and_results.test_procedures" name="test_pure_out_parameters_without_query_result_sets[mysql-100]" file="tests/kes/procedures_and_results/test_procedures.py" line="10" time="0.038" /><testcase classname="tests.kes.procedures_and_results.test_procedures" name="test_pure_out_parameters_without_query_result_sets[oracle-0]" file="tests/kes/procedures_and_results/test_procedures.py" line="10" time="0.039" /><testcase classname="tests.kes.procedures_and_results.test_procedures" name="test_pure_out_parameters_without_query_result_sets[oracle-100]" file="tests/kes/procedures_and_results/test_procedures.py" line="10" time="0.038" /><testcase classname="tests.kes.procedures_and_results.test_procedures" name="test_pure_out_parameters_without_query_result_sets[sqlserver-0]" file="tests/kes/procedures_and_results/test_procedures.py" line="10" time="0.063" /><testcase classname="tests.kes.procedures_and_results.test_procedures" name="test_pure_out_parameters_without_query_result_sets[sqlserver-100]" file="tests/kes/procedures_and_results/test_procedures.py" line="10" time="0.065" /><testcase classname="tests.kes.procedures_and_results.test_procedures" name="test_oracle_returning_into_output_and_table_state[insert]" file="tests/kes/procedures_and_results/test_procedures.py" line="54" time="0.043" /><testcase classname="tests.kes.procedures_and_results.test_procedures" name="test_oracle_returning_into_output_and_table_state[update]" file="tests/kes/procedures_and_results/test_procedures.py" line="54" time="0.044" /><testcase classname="tests.kes.procedures_and_results.test_procedures" name="test_oracle_returning_into_output_and_table_state[delete]" file="tests/kes/procedures_and_results/test_procedures.py" line="54" time="0.043" /><testcase classname="tests.kes.procedures_and_results.test_procedures" name="test_scalar_function_input_null_and_repeated_calls[mysql-SELECT]" file="tests/kes/procedures_and_results/test_procedures.py" line="90" time="0.039" /><testcase classname="tests.kes.procedures_and_results.test_procedures" name="test_scalar_function_input_null_and_repeated_calls[mysql-CALL]" file="tests/kes/procedures_and_results/test_procedures.py" line="90" time="0.038"><failure message="asyncpg.exceptions._base.UnknownPostgresError: INVALID MODE 变量绑定到 IN 位置">tests/kes/procedures_and_results/test_procedures.py:126: in test_scalar_function_input_null_and_repeated_calls
+    asyncio.run(scenario())
+/usr/lib/python3.10/asyncio/runners.py:44: in run
+    return loop.run_until_complete(main)
+/usr/lib/python3.10/asyncio/base_events.py:649: in run_until_complete
+    return future.result()
+tests/kes/procedures_and_results/test_procedures.py:116: in scenario
+    actual = await stmt.fetchval(value)
+asyncpg/prepared_stmt.py:194: in fetchval
+    data = await self.__bind_execute(args, 1, timeout)
+asyncpg/prepared_stmt.py:268: in __bind_execute
+    data, status, _ = await self.__do_execute(
+asyncpg/prepared_stmt.py:257: in __do_execute
+    return await executor(protocol)
+asyncpg/protocol/protocol.pyx:212: in bind_execute
+    return await waiter
+E   asyncpg.exceptions._base.UnknownPostgresError: INVALID MODE 变量绑定到 IN 位置</failure></testcase><testcase classname="tests.kes.procedures_and_results.test_procedures" name="test_scalar_function_input_null_and_repeated_calls[mysql-CALL-explicit-IN]" file="tests/kes/procedures_and_results/test_procedures.py" line="90" time="0.040" /><testcase classname="tests.kes.procedures_and_results.test_procedures" name="test_scalar_function_input_null_and_repeated_calls[oracle-SELECT]" file="tests/kes/procedures_and_results/test_procedures.py" line="90" time="0.040" /><testcase classname="tests.kes.procedures_and_results.test_procedures" name="test_scalar_function_input_null_and_repeated_calls[oracle-CALL]" file="tests/kes/procedures_and_results/test_procedures.py" line="90" time="0.038" /><testcase classname="tests.kes.procedures_and_results.test_procedures" name="test_scalar_function_input_null_and_repeated_calls[oracle-CALL-explicit-IN]" file="tests/kes/procedures_and_results/test_procedures.py" line="90" time="0.040" /><testcase classname="tests.kes.procedures_and_results.test_procedures" name="test_scalar_function_input_null_and_repeated_calls[sqlserver-SELECT]" file="tests/kes/procedures_and_results/test_procedures.py" line="90" time="0.065" /><testcase classname="tests.kes.procedures_and_results.test_procedures" name="test_scalar_function_input_null_and_repeated_calls[sqlserver-CALL]" file="tests/kes/procedures_and_results/test_procedures.py" line="90" time="0.063"><failure message="AssertionError">tests/kes/procedures_and_results/test_procedures.py:126: in test_scalar_function_input_null_and_repeated_calls
+    asyncio.run(scenario())
+/usr/lib/python3.10/asyncio/runners.py:44: in run
+    return loop.run_until_complete(main)
+/usr/lib/python3.10/asyncio/base_events.py:649: in run_until_complete
+    return future.result()
+tests/kes/procedures_and_results/test_procedures.py:117: in scenario
+    assert actual == expected
+E   AssertionError</failure></testcase><testcase classname="tests.kes.procedures_and_results.test_procedures" name="test_scalar_function_input_null_and_repeated_calls[sqlserver-CALL-explicit-IN]" file="tests/kes/procedures_and_results/test_procedures.py" line="90" time="0.062"><failure message="AssertionError">tests/kes/procedures_and_results/test_procedures.py:126: in test_scalar_function_input_null_and_repeated_calls
+    asyncio.run(scenario())
+/usr/lib/python3.10/asyncio/runners.py:44: in run
+    return loop.run_until_complete(main)
+/usr/lib/python3.10/asyncio/base_events.py:649: in run_until_complete
+    return future.result()
+tests/kes/procedures_and_results/test_procedures.py:117: in scenario
+    assert actual == expected
+E   AssertionError</failure></testcase><testcase classname="tests.kes.procedures_and_results.test_procedures" name="test_output_parameters_together_with_multiple_result_rows[mysql-0]" file="tests/kes/procedures_and_results/test_procedures.py" line="128" time="0.039"><failure message="asyncpg.exceptions._base.ProtocolError: the number of columns in the result row (2) is different from what was described (1)">tests/kes/procedures_and_results/test_procedures.py:191: in test_output_parameters_together_with_multiple_result_rows
+    asyncio.run(scenario())
+/usr/lib/python3.10/asyncio/runners.py:44: in run
+    return loop.run_until_complete(main)
+/usr/lib/python3.10/asyncio/base_events.py:649: in run_until_complete
+    return future.result()
+tests/kes/procedures_and_results/test_procedures.py:174: in scenario
+    rows = await stmt.fetch(*args)
+asyncpg/prepared_stmt.py:177: in fetch
+    data = await self.__bind_execute(args, 0, timeout)
+asyncpg/prepared_stmt.py:268: in __bind_execute
+    data, status, _ = await self.__do_execute(
+asyncpg/prepared_stmt.py:257: in __do_execute
+    return await executor(protocol)
+asyncpg/protocol/protocol.pyx:212: in bind_execute
+    return await waiter
+asyncpg/protocol/coreproto.pyx:84: in asyncpg.protocol.protocol.CoreProtocol._read_server_messages
+    self._process__bind_execute(mtype)
+asyncpg/protocol/coreproto.pyx:245: in asyncpg.protocol.protocol.CoreProtocol._process__bind_execute
+    self._parse_data_msgs()
+asyncpg/protocol/coreproto.pyx:543: in asyncpg.protocol.protocol.CoreProtocol._parse_data_msgs
+    row = decoder(self, cbuf, cbuf_len)
+asyncpg/protocol/protocol.pyx:868: in asyncpg.protocol.protocol.BaseProtocol._decode_row
+    return self.statement._decode_row(buf, buf_len)
+asyncpg/protocol/prepared_stmt.pyx:334: in asyncpg.protocol.protocol.PreparedStatementState._decode_row
+    raise exceptions.ProtocolError(
+E   asyncpg.exceptions._base.ProtocolError: the number of columns in the result row (2) is different from what was described (1)</failure></testcase><testcase classname="tests.kes.procedures_and_results.test_procedures" name="test_output_parameters_together_with_multiple_result_rows[mysql-100]" file="tests/kes/procedures_and_results/test_procedures.py" line="128" time="0.039"><failure message="asyncpg.exceptions._base.ProtocolError: the number of columns in the result row (2) is different from what was described (1)">tests/kes/procedures_and_results/test_procedures.py:191: in test_output_parameters_together_with_multiple_result_rows
+    asyncio.run(scenario())
+/usr/lib/python3.10/asyncio/runners.py:44: in run
+    return loop.run_until_complete(main)
+/usr/lib/python3.10/asyncio/base_events.py:649: in run_until_complete
+    return future.result()
+tests/kes/procedures_and_results/test_procedures.py:174: in scenario
+    rows = await stmt.fetch(*args)
+asyncpg/prepared_stmt.py:177: in fetch
+    data = await self.__bind_execute(args, 0, timeout)
+asyncpg/prepared_stmt.py:268: in __bind_execute
+    data, status, _ = await self.__do_execute(
+asyncpg/prepared_stmt.py:257: in __do_execute
+    return await executor(protocol)
+asyncpg/protocol/protocol.pyx:212: in bind_execute
+    return await waiter
+asyncpg/protocol/coreproto.pyx:84: in asyncpg.protocol.protocol.CoreProtocol._read_server_messages
+    self._process__bind_execute(mtype)
+asyncpg/protocol/coreproto.pyx:245: in asyncpg.protocol.protocol.CoreProtocol._process__bind_execute
+    self._parse_data_msgs()
+asyncpg/protocol/coreproto.pyx:543: in asyncpg.protocol.protocol.CoreProtocol._parse_data_msgs
+    row = decoder(self, cbuf, cbuf_len)
+asyncpg/protocol/protocol.pyx:868: in asyncpg.protocol.protocol.BaseProtocol._decode_row
+    return self.statement._decode_row(buf, buf_len)
+asyncpg/protocol/prepared_stmt.pyx:334: in asyncpg.protocol.protocol.PreparedStatementState._decode_row
+    raise exceptions.ProtocolError(
+E   asyncpg.exceptions._base.ProtocolError: the number of columns in the result row (2) is different from what was described (1)</failure></testcase><testcase classname="tests.kes.procedures_and_results.test_procedures" name="test_output_parameters_together_with_multiple_result_rows[oracle-0]" file="tests/kes/procedures_and_results/test_procedures.py" line="128" time="0.038"><failure message="asyncpg.exceptions._base.ProtocolError: the number of columns in the result row (2) is different from what was described (1)">tests/kes/procedures_and_results/test_procedures.py:191: in test_output_parameters_together_with_multiple_result_rows
+    asyncio.run(scenario())
+/usr/lib/python3.10/asyncio/runners.py:44: in run
+    return loop.run_until_complete(main)
+/usr/lib/python3.10/asyncio/base_events.py:649: in run_until_complete
+    return future.result()
+tests/kes/procedures_and_results/test_procedures.py:174: in scenario
+    rows = await stmt.fetch(*args)
+asyncpg/prepared_stmt.py:177: in fetch
+    data = await self.__bind_execute(args, 0, timeout)
+asyncpg/prepared_stmt.py:268: in __bind_execute
+    data, status, _ = await self.__do_execute(
+asyncpg/prepared_stmt.py:257: in __do_execute
+    return await executor(protocol)
+asyncpg/protocol/protocol.pyx:212: in bind_execute
+    return await waiter
+asyncpg/protocol/coreproto.pyx:84: in asyncpg.protocol.protocol.CoreProtocol._read_server_messages
+    self._process__bind_execute(mtype)
+asyncpg/protocol/coreproto.pyx:245: in asyncpg.protocol.protocol.CoreProtocol._process__bind_execute
+    self._parse_data_msgs()
+asyncpg/protocol/coreproto.pyx:543: in asyncpg.protocol.protocol.CoreProtocol._parse_data_msgs
+    row = decoder(self, cbuf, cbuf_len)
+asyncpg/protocol/protocol.pyx:868: in asyncpg.protocol.protocol.BaseProtocol._decode_row
+    return self.statement._decode_row(buf, buf_len)
+asyncpg/protocol/prepared_stmt.pyx:334: in asyncpg.protocol.protocol.PreparedStatementState._decode_row
+    raise exceptions.ProtocolError(
+E   asyncpg.exceptions._base.ProtocolError: the number of columns in the result row (2) is different from what was described (1)</failure></testcase><testcase classname="tests.kes.procedures_and_results.test_procedures" name="test_output_parameters_together_with_multiple_result_rows[oracle-100]" file="tests/kes/procedures_and_results/test_procedures.py" line="128" time="0.038"><failure message="asyncpg.exceptions._base.ProtocolError: the number of columns in the result row (2) is different from what was described (1)">tests/kes/procedures_and_results/test_procedures.py:191: in test_output_parameters_together_with_multiple_result_rows
+    asyncio.run(scenario())
+/usr/lib/python3.10/asyncio/runners.py:44: in run
+    return loop.run_until_complete(main)
+/usr/lib/python3.10/asyncio/base_events.py:649: in run_until_complete
+    return future.result()
+tests/kes/procedures_and_results/test_procedures.py:174: in scenario
+    rows = await stmt.fetch(*args)
+asyncpg/prepared_stmt.py:177: in fetch
+    data = await self.__bind_execute(args, 0, timeout)
+asyncpg/prepared_stmt.py:268: in __bind_execute
+    data, status, _ = await self.__do_execute(
+asyncpg/prepared_stmt.py:257: in __do_execute
+    return await executor(protocol)
+asyncpg/protocol/protocol.pyx:212: in bind_execute
+    return await waiter
+asyncpg/protocol/coreproto.pyx:84: in asyncpg.protocol.protocol.CoreProtocol._read_server_messages
+    self._process__bind_execute(mtype)
+asyncpg/protocol/coreproto.pyx:245: in asyncpg.protocol.protocol.CoreProtocol._process__bind_execute
+    self._parse_data_msgs()
+asyncpg/protocol/coreproto.pyx:543: in asyncpg.protocol.protocol.CoreProtocol._parse_data_msgs
+    row = decoder(self, cbuf, cbuf_len)
+asyncpg/protocol/protocol.pyx:868: in asyncpg.protocol.protocol.BaseProtocol._decode_row
+    return self.statement._decode_row(buf, buf_len)
+asyncpg/protocol/prepared_stmt.pyx:334: in asyncpg.protocol.protocol.PreparedStatementState._decode_row
+    raise exceptions.ProtocolError(
+E   asyncpg.exceptions._base.ProtocolError: the number of columns in the result row (2) is different from what was described (1)</failure></testcase><testcase classname="tests.kes.procedures_and_results.test_procedures" name="test_output_parameters_together_with_multiple_result_rows[sqlserver-0]" file="tests/kes/procedures_and_results/test_procedures.py" line="128" time="0.062"><failure message="asyncpg.exceptions._base.ProtocolError: the number of columns in the result row (3) is different from what was described (1)">tests/kes/procedures_and_results/test_procedures.py:191: in test_output_parameters_together_with_multiple_result_rows
+    asyncio.run(scenario())
+/usr/lib/python3.10/asyncio/runners.py:44: in run
+    return loop.run_until_complete(main)
+/usr/lib/python3.10/asyncio/base_events.py:649: in run_until_complete
+    return future.result()
+tests/kes/procedures_and_results/test_procedures.py:174: in scenario
+    rows = await stmt.fetch(*args)
+asyncpg/prepared_stmt.py:177: in fetch
+    data = await self.__bind_execute(args, 0, timeout)
+asyncpg/prepared_stmt.py:268: in __bind_execute
+    data, status, _ = await self.__do_execute(
+asyncpg/prepared_stmt.py:257: in __do_execute
+    return await executor(protocol)
+asyncpg/protocol/protocol.pyx:212: in bind_execute
+    return await waiter
+asyncpg/protocol/coreproto.pyx:84: in asyncpg.protocol.protocol.CoreProtocol._read_server_messages
+    self._process__bind_execute(mtype)
+asyncpg/protocol/coreproto.pyx:245: in asyncpg.protocol.protocol.CoreProtocol._process__bind_execute
+    self._parse_data_msgs()
+asyncpg/protocol/coreproto.pyx:543: in asyncpg.protocol.protocol.CoreProtocol._parse_data_msgs
+    row = decoder(self, cbuf, cbuf_len)
+asyncpg/protocol/protocol.pyx:868: in asyncpg.protocol.protocol.BaseProtocol._decode_row
+    return self.statement._decode_row(buf, buf_len)
+asyncpg/protocol/prepared_stmt.pyx:334: in asyncpg.protocol.protocol.PreparedStatementState._decode_row
+    raise exceptions.ProtocolError(
+E   asyncpg.exceptions._base.ProtocolError: the number of columns in the result row (3) is different from what was described (1)</failure></testcase><testcase classname="tests.kes.procedures_and_results.test_procedures" name="test_output_parameters_together_with_multiple_result_rows[sqlserver-100]" file="tests/kes/procedures_and_results/test_procedures.py" line="128" time="0.065"><failure message="asyncpg.exceptions._base.ProtocolError: the number of columns in the result row (3) is different from what was described (1)">tests/kes/procedures_and_results/test_procedures.py:191: in test_output_parameters_together_with_multiple_result_rows
+    asyncio.run(scenario())
+/usr/lib/python3.10/asyncio/runners.py:44: in run
+    return loop.run_until_complete(main)
+/usr/lib/python3.10/asyncio/base_events.py:649: in run_until_complete
+    return future.result()
+tests/kes/procedures_and_results/test_procedures.py:174: in scenario
+    rows = await stmt.fetch(*args)
+asyncpg/prepared_stmt.py:177: in fetch
+    data = await self.__bind_execute(args, 0, timeout)
+asyncpg/prepared_stmt.py:268: in __bind_execute
+    data, status, _ = await self.__do_execute(
+asyncpg/prepared_stmt.py:257: in __do_execute
+    return await executor(protocol)
+asyncpg/protocol/protocol.pyx:212: in bind_execute
+    return await waiter
+asyncpg/protocol/coreproto.pyx:84: in asyncpg.protocol.protocol.CoreProtocol._read_server_messages
+    self._process__bind_execute(mtype)
+asyncpg/protocol/coreproto.pyx:245: in asyncpg.protocol.protocol.CoreProtocol._process__bind_execute
+    self._parse_data_msgs()
+asyncpg/protocol/coreproto.pyx:543: in asyncpg.protocol.protocol.CoreProtocol._parse_data_msgs
+    row = decoder(self, cbuf, cbuf_len)
+asyncpg/protocol/protocol.pyx:868: in asyncpg.protocol.protocol.BaseProtocol._decode_row
+    return self.statement._decode_row(buf, buf_len)
+asyncpg/protocol/prepared_stmt.pyx:334: in asyncpg.protocol.protocol.PreparedStatementState._decode_row
+    raise exceptions.ProtocolError(
+E   asyncpg.exceptions._base.ProtocolError: the number of columns in the result row (3) is different from what was described (1)</failure></testcase><testcase classname="tests.kes.procedures_and_results.test_procedures" name="test_mysql_nested_procedure_multiple_results[0]" file="tests/kes/procedures_and_results/test_procedures.py" line="193" time="0.040" /><testcase classname="tests.kes.procedures_and_results.test_procedures" name="test_mysql_nested_procedure_multiple_results[100]" file="tests/kes/procedures_and_results/test_procedures.py" line="193" time="0.042" /></testsuite></testsuites>

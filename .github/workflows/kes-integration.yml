@@ -1,3 +1,4 @@
+# Modified for asynckb: independent distribution and KES compatibility.
 name: KES Integration
 
 on:
@@ -23,13 +24,13 @@ jobs:
     environment: kes-test
     timeout-minutes: 30
     env:
-      ASYNCPG_KES_HOST: ${{ secrets.ASYNCPG_KES_HOST }}
-      ASYNCPG_KES_USER: ${{ secrets.ASYNCPG_KES_USER }}
-      ASYNCPG_KES_PASSWORD: ${{ secrets.ASYNCPG_KES_PASSWORD }}
-      ASYNCPG_KES_DATABASE: ${{ secrets.ASYNCPG_KES_DATABASE }}
-      ASYNCPG_KES_MYSQL_PORT: ${{ secrets.ASYNCPG_KES_MYSQL_PORT }}
-      ASYNCPG_KES_ORACLE_PORT: ${{ secrets.ASYNCPG_KES_ORACLE_PORT }}
-      ASYNCPG_KES_SQLSERVER_PORT: ${{ secrets.ASYNCPG_KES_SQLSERVER_PORT }}
+      ASYNCKB_KES_HOST: ${{ secrets.ASYNCKB_KES_HOST }}
+      ASYNCKB_KES_USER: ${{ secrets.ASYNCKB_KES_USER }}
+      ASYNCKB_KES_PASSWORD: ${{ secrets.ASYNCKB_KES_PASSWORD }}
+      ASYNCKB_KES_DATABASE: ${{ secrets.ASYNCKB_KES_DATABASE }}
+      ASYNCKB_KES_MYSQL_PORT: ${{ secrets.ASYNCKB_KES_MYSQL_PORT }}
+      ASYNCKB_KES_ORACLE_PORT: ${{ secrets.ASYNCKB_KES_ORACLE_PORT }}
+      ASYNCKB_KES_SQLSERVER_PORT: ${{ secrets.ASYNCKB_KES_SQLSERVER_PORT }}
     steps:
       - uses: actions/checkout@v5
         with:
@@ -43,13 +44,13 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          test -n "${ASYNCPG_KES_HOST}"
-          test -n "${ASYNCPG_KES_USER}"
-          test -n "${ASYNCPG_KES_PASSWORD}"
-          test -n "${ASYNCPG_KES_DATABASE}"
-          test -n "${ASYNCPG_KES_MYSQL_PORT}"
-          test -n "${ASYNCPG_KES_ORACLE_PORT}"
-          test -n "${ASYNCPG_KES_SQLSERVER_PORT}"
+          test -n "${ASYNCKB_KES_HOST}"
+          test -n "${ASYNCKB_KES_USER}"
+          test -n "${ASYNCKB_KES_PASSWORD}"
+          test -n "${ASYNCKB_KES_DATABASE}"
+          test -n "${ASYNCKB_KES_MYSQL_PORT}"
+          test -n "${ASYNCKB_KES_ORACLE_PORT}"
+          test -n "${ASYNCKB_KES_SQLSERVER_PORT}"
 
       - name: Install project and test dependencies
         run: |

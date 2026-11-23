@@ -1,1 +1,1 @@
-"""KingbaseES compatibility-mode tests for asyncpg."""
+"""KingbaseES compatibility-mode tests for asynckb."""

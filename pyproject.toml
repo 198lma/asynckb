@@ -1,3 +1,5 @@
+# Modified for asynckb:
+# independent distribution and KingbaseES compatibility.
 [dependency-groups]
 test = [
     'flake8~=6.1',
@@ -34,6 +36,7 @@ filterwarnings = "default"
 asyncio_mode = "strict"
 asyncio_default_fixture_loop_scope = "function"
 markers = [
+    "case_id(id): stable test-plan ID, shared by code, XMind and JUnit",
     "unit: does not require a running KingbaseES instance",
     "integration: requires running KingbaseES instances",
     "framework: exercises SQLAlchemy or Alembic integration",
@@ -43,7 +46,7 @@ markers = [
 branch = true
 plugins = ["Cython.Coverage"]
 parallel = true
-source = ["asyncpg/", "tests/"]
+source = ["asynckb/", "tests/"]
 omit = ["*.pxd"]
 
 [tool.coverage.report]
@@ -72,18 +75,18 @@ implicit_reexport = true
 
 [[tool.mypy.overrides]]
 module = [
-    "asyncpg._testbase",
-    "asyncpg._testbase.*",
-    "asyncpg.cluster",
-    "asyncpg.connect_utils",
-    "asyncpg.connection",
-    "asyncpg.connresource",
-    "asyncpg.cursor",
-    "asyncpg.exceptions",
-    "asyncpg.exceptions.*",
-    "asyncpg.pool",
-    "asyncpg.prepared_stmt",
-    "asyncpg.transaction",
-    "asyncpg.utils",
+    "asynckb._testbase",
+    "asynckb._testbase.*",
+    "asynckb.cluster",
+    "asynckb.connect_utils",
+    "asynckb.connection",
+    "asynckb.connresource",
+    "asynckb.cursor",
+    "asynckb.exceptions",
+    "asynckb.exceptions.*",
+    "asynckb.pool",
+    "asynckb.prepared_stmt",
+    "asynckb.transaction",
+    "asynckb.utils",
 ]
 ignore_errors = true

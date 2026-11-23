@@ -1,5 +1,31 @@
 Copyright (C) 2016-present the asyncpg authors and contributors.
 
+asynckb distribution and attribution note
+=======================================
+
+asynckb is an independently named derivative of asyncpg 0.31.0. Its Python
+distribution and import name are asynckb, and its SQLAlchemy URL uses
+kingbase+asynckb://. Renaming does not remove the original authors' rights.
+The upstream copyright notice and Apache License 2.0 text below are retained.
+Project-specific additions are distributed under Apache License 2.0, except
+where a file explicitly identifies another applicable license.
+
+Some included upstream components retain their own licenses:
+  - CPython-derived asyncio compatibility and Record implementation code:
+    Python Software Foundation License Version 2 (LICENSES/PSF-2.0.txt).
+  - pythoncapi_compat.h: BSD Zero Clause License (LICENSES/0BSD.txt).
+See NOTICE, AUTHORS, and UPSTREAM.md for attribution and component details.
+These licenses apply to their respective components, not as alternatives.
+
+Redistribution must retain applicable copyright and attribution notices,
+include the relevant license texts, and prominently identify modified
+files as required by Apache License 2.0 Section 4. Keeping the name asyncpg
+in legal notices and source attribution does not make it the package name.
+This note is informational and does not amend any license below or grant
+trademark rights. Release preparation requirements are in docs/DELIVERY.md.
+
+Original upstream license follows, unchanged:
+
                                  Apache License
                            Version 2.0, January 2004
                         http://www.apache.org/licenses/

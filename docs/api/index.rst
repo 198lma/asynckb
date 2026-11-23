@@ -1,13 +1,16 @@
+.. Modified for asynckb:
+   independent distribution and KingbaseES compatibility.
+
 .. _asyncpg-api-reference:
 
 =============
 API Reference
 =============
 
-.. module:: asyncpg
+.. module:: asynckb
     :synopsis: An asyncio driver for KingbaseES compatibility modes
 
-.. currentmodule:: asyncpg
+.. currentmodule:: asynckb
 
 
 .. _asyncpg-api-connection:
@@ -15,10 +18,10 @@ API Reference
 Connection
 ==========
 
-.. autofunction:: asyncpg.connection.connect
+.. autofunction:: asynckb.connection.connect
 
 
-.. autoclass:: asyncpg.connection.Connection
+.. autoclass:: asynckb.connection.Connection
    :members:
 
 
@@ -35,9 +38,9 @@ a need to run the same query again.
 
 .. code-block:: pycon
 
-   >>> import asyncpg, asyncio
+   >>> import asynckb, asyncio
    >>> async def run():
-   ...     conn = await asyncpg.connect()
+   ...     conn = await asynckb.connect()
    ...     stmt = await conn.prepare('''SELECT 2 ^ $1''')
    ...     print(await stmt.fetchval(10))
    ...     print(await stmt.fetchval(20))
@@ -48,7 +51,7 @@ a need to run the same query again.
 
 .. note::
 
-   asyncpg automatically maintains a small LRU cache for queries executed
+   asynckb automatically maintains a small LRU cache for queries executed
    during calls to the :meth:`~Connection.fetch`, :meth:`~Connection.fetchrow`,
    or :meth:`~Connection.fetchval` methods.
 
@@ -56,10 +59,10 @@ a need to run the same query again.
 
    If you are using pgbouncer with ``pool_mode`` set to ``transaction`` or
    ``statement``, prepared statements will not work correctly.  See
-   :ref:`asyncpg-prepared-stmt-errors` for more information.
+   :ref:`asynckb-prepared-stmt-errors` for more information.
 
 
-.. autoclass:: asyncpg.prepared_stmt.PreparedStatement()
+.. autoclass:: asynckb.prepared_stmt.PreparedStatement()
    :members:
 
 
@@ -76,7 +79,7 @@ The most common way to use transactions is through an ``async with`` statement:
        await connection.execute("INSERT INTO mytable VALUES(1, 2, 3)")
 
 
-asyncpg supports nested transactions (a nested transaction context will create
+asynckb supports nested transactions (a nested transaction context will create
 a `savepoint`_.):
 
 .. code-block:: python
@@ -114,13 +117,13 @@ Alternatively, transactions can be used without an ``async with`` block:
 
 
 See also the
-:meth:`Connection.transaction() <asyncpg.connection.Connection.transaction>`
+:meth:`Connection.transaction() <asynckb.connection.Connection.transaction>`
 function.
 
 .. _savepoint: https://www.postgresql.org/docs/current/static/sql-savepoint.html
 
 
-.. autoclass:: asyncpg.transaction.Transaction()
+.. autoclass:: asynckb.transaction.Transaction()
    :members:
 
    .. describe:: async with c:
@@ -137,12 +140,12 @@ Cursors
 
 Cursors are useful when there is a need to iterate over the results of
 a large query without fetching all rows at once.  The cursor interface
-provided by asyncpg supports *asynchronous iteration* via the ``async for``
+provided by asynckb supports *asynchronous iteration* via the ``async for``
 statement, and also a way to read row chunks and skip forward over the
 result set.
 
 To iterate over a cursor using a connection object use
-:meth:`Connection.cursor() <asyncpg.connection.Connection.cursor>`.
+:meth:`Connection.cursor() <asynckb.connection.Connection.cursor>`.
 To make the iteration efficient, the cursor will prefetch records to
 reduce the number of queries sent to the server:
 
@@ -200,24 +203,24 @@ It's also possible to create cursors from prepared statements:
 .. note::
 
    Cursors created by a call to
-   :meth:`Connection.cursor() <asyncpg.connection.Connection.cursor>` or
-   :meth:`PreparedStatement.cursor() <asyncpg.prepared_stmt.PreparedStatement.cursor>`
+   :meth:`Connection.cursor() <asynckb.connection.Connection.cursor>` or
+   :meth:`PreparedStatement.cursor() <asynckb.prepared_stmt.PreparedStatement.cursor>`
    are *non-scrollable*: they can only be read forwards.  To create a scrollable
    cursor, use the ``DECLARE ... SCROLL CURSOR`` SQL statement directly.
 
 .. warning::
 
    Cursors created by a call to
-   :meth:`Connection.cursor() <asyncpg.connection.Connection.cursor>` or
-   :meth:`PreparedStatement.cursor() <asyncpg.prepared_stmt.PreparedStatement.cursor>`
+   :meth:`Connection.cursor() <asynckb.connection.Connection.cursor>` or
+   :meth:`PreparedStatement.cursor() <asynckb.prepared_stmt.PreparedStatement.cursor>`
    cannot be used outside of a transaction.  Any such attempt will result in
-   :exc:`~asyncpg.exceptions.InterfaceError`.
+   :exc:`~asynckb.exceptions.InterfaceError`.
 
    To create a cursor usable outside of a transaction, use the
    ``DECLARE ... CURSOR WITH HOLD`` SQL statement directly.
 
 
-.. autoclass:: asyncpg.cursor.CursorFactory()
+.. autoclass:: asynckb.cursor.CursorFactory()
    :members:
 
    .. describe:: async for row in c
@@ -227,11 +230,11 @@ It's also possible to create cursors from prepared statements:
    .. describe:: await c
 
       Execute the statement and return an instance of
-      :class:`~asyncpg.cursor.Cursor` which can be used to navigate over and
+      :class:`~asynckb.cursor.Cursor` which can be used to navigate over and
       fetch subsets of the query results.
 
 
-.. autoclass:: asyncpg.cursor.Cursor()
+.. autoclass:: asynckb.cursor.Cursor()
    :members:
 
 
@@ -240,10 +243,10 @@ It's also possible to create cursors from prepared statements:
 Connection Pools
 ================
 
-.. autofunction:: asyncpg.pool.create_pool
+.. autofunction:: asynckb.pool.create_pool
 
 
-.. autoclass:: asyncpg.pool.Pool()
+.. autoclass:: asynckb.pool.Pool()
    :members:
 
 
@@ -253,16 +256,16 @@ Record Objects
 ==============
 
 Each row (or composite type value) returned by calls to ``fetch*`` methods
-is represented by an instance of the :class:`~asyncpg.Record` object.
+is represented by an instance of the :class:`~asynckb.Record` object.
 ``Record`` objects are a tuple-/dict-like hybrid, and allow addressing of
 items either by a numeric index or by a field name:
 
 .. code-block:: pycon
 
-    >>> import asyncpg
+    >>> import asynckb
     >>> import asyncio
     >>> loop = asyncio.get_event_loop()
-    >>> conn = loop.run_until_complete(asyncpg.connect())
+    >>> conn = loop.run_until_complete(asynckb.connect())
     >>> r = loop.run_until_complete(conn.fetchrow('''
     ...     SELECT oid, rolname, rolsuper FROM pg_roles WHERE rolname = user'''))
     >>> r
@@ -340,5 +343,5 @@ items either by a numeric index or by a field name:
 Data Types
 ==========
 
-.. automodule:: asyncpg.types
+.. automodule:: asynckb.types
    :members:
