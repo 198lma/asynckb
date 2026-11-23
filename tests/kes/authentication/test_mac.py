@@ -1,4 +1,5 @@
-"""Client MAC upload is an auxiliary server request, not a password algorithm."""
+("""Client MAC upload is an auxiliary server request, """
+ """not a password algorithm.""")
 
 import asyncio
 
@@ -34,7 +35,9 @@ def test_server_validates_uploaded_loopback_mac(isolated_kes, matches):
                 if matches:
                     con = await asynckb.connect(**options)
                     try:
-                        assert await con.fetchval(instance.config.select_one) == 1
+                        assert await con.fetchval(
+                            instance.config.select_one
+                        ) == 1
                         assert proxy.exchanges == [[19, 10, 11, 12, 0]]
                     finally:
                         await con.close()

@@ -14,11 +14,14 @@ from tests.kes.support.config import KESConfig, drop_table, unique_object_name
 from asynckb import kes
 from asynckb.utils import _quote_ident
 
+
 async def drop_type(connection: asynckb.Connection, type_name: str) -> None:
     try:
         await connection.execute(f"DROP TYPE {type_name}")
     except asynckb.UndefinedObjectError:
         pass
+
+
 async def drop_domain(
     connection: asynckb.Connection,
     domain_name: str,
@@ -27,6 +30,8 @@ async def drop_domain(
         await connection.execute(f"DROP DOMAIN {domain_name}")
     except asynckb.UndefinedObjectError:
         pass
+
+
 @pytest.mark.case_id("KB-TYPE-001")
 @pytest.mark.integration
 def test_enum_custom_codec_applies_to_scalar_and_array(
@@ -62,6 +67,8 @@ def test_enum_custom_codec_applies_to_scalar_and_array(
             await connection.close()
 
     asyncio.run(scenario())
+
+
 @pytest.mark.case_id("KB-TYPE-002")
 @pytest.mark.integration
 def test_nested_domain_uses_base_codec_and_rejects_custom_domain_codec(
@@ -104,6 +111,8 @@ def test_nested_domain_uses_base_codec_and_rejects_custom_domain_codec(
             await connection.close()
 
     asyncio.run(scenario())
+
+
 @pytest.mark.case_id("KB-TYPE-003")
 @pytest.mark.integration
 def test_composite_mapping_round_trip_after_schema_cache_reload(
@@ -136,6 +145,8 @@ def test_composite_mapping_round_trip_after_schema_cache_reload(
             await connection.close()
 
     asyncio.run(scenario())
+
+
 @pytest.mark.case_id("KB-TYPE-004")
 @pytest.mark.integration
 def test_range_codec_round_trip_and_invalid_input(
@@ -163,6 +174,8 @@ def test_range_codec_round_trip_and_invalid_input(
             await connection.close()
 
     asyncio.run(scenario())
+
+
 @pytest.mark.case_id("KB-TYPE-005")
 @pytest.mark.integration
 def test_sqlserver_sql_variant_uses_text_representation(
@@ -186,6 +199,8 @@ def test_sqlserver_sql_variant_uses_text_representation(
             await connection.close()
 
     asyncio.run(scenario())
+
+
 @pytest.mark.case_id("KB-TYPE-006")
 @pytest.mark.integration
 def test_standard_asynckb_scalar_array_and_network_codecs(
@@ -229,6 +244,8 @@ def test_standard_asynckb_scalar_array_and_network_codecs(
             await connection.close()
 
     asyncio.run(scenario())
+
+
 @pytest.mark.case_id("KB-TYPE-007")
 @pytest.mark.integration
 def test_oracle_nested_transaction_uses_session_default_isolation(
@@ -258,6 +275,8 @@ def test_oracle_nested_transaction_uses_session_default_isolation(
             await connection.close()
 
     asyncio.run(scenario())
+
+
 @pytest.mark.case_id("KB-TYPE-008")
 @pytest.mark.integration
 def test_mysql_custom_codec_reset_restores_kes_default(
@@ -299,6 +318,8 @@ def test_mysql_custom_codec_reset_restores_kes_default(
             await connection.close()
 
     asyncio.run(scenario())
+
+
 @pytest.mark.case_id("KB-TYPE-009")
 @pytest.mark.integration
 def test_oracle_custom_codec_reset_restores_kes_default(
@@ -326,6 +347,8 @@ def test_oracle_custom_codec_reset_restores_kes_default(
             await connection.close()
 
     asyncio.run(scenario())
+
+
 @pytest.mark.case_id("KB-TYPE-010")
 @pytest.mark.integration
 def test_kes_builtin_codec_rejects_incompatible_binary_wire_format(
@@ -424,6 +447,8 @@ def test_kes_builtin_codec_rejects_incompatible_binary_wire_format(
             await connection.close()
 
     asyncio.run(scenario())
+
+
 @pytest.mark.case_id("KB-TYPE-011")
 @pytest.mark.integration
 def test_oracle_standard_date_tuple_codec_maps_to_timestamp_oid(
@@ -456,6 +481,8 @@ def test_oracle_standard_date_tuple_codec_maps_to_timestamp_oid(
             await connection.close()
 
     asyncio.run(scenario())
+
+
 @pytest.mark.case_id("KB-TYPE-012")
 @pytest.mark.integration
 def test_mysql_standard_json_codec_name_maps_to_kes_json(
@@ -516,6 +543,8 @@ def test_mysql_standard_json_codec_name_maps_to_kes_json(
             await connection.close()
 
     asyncio.run(scenario())
+
+
 @pytest.mark.case_id("KB-TYPE-013")
 @pytest.mark.integration
 def test_mysql_builtin_json_codec_updates_domain_and_base_type(
@@ -556,6 +585,8 @@ def test_mysql_builtin_json_codec_updates_domain_and_base_type(
             await connection.close()
 
     asyncio.run(scenario())
+
+
 @pytest.mark.case_id("KB-TYPE-014")
 @pytest.mark.parametrize(
     ("typename", "query"),
@@ -599,6 +630,8 @@ def test_mysql_standard_codec_name_maps_to_kes_type(
             await connection.close()
 
     asyncio.run(scenario())
+
+
 @pytest.mark.case_id("KB-TYPE-015")
 @pytest.mark.parametrize(
     ("typename", "value", "expected_text"),
@@ -648,6 +681,8 @@ def test_mysql_standard_temporal_tuple_codec_maps_to_kes_text_protocol(
             await connection.close()
 
     asyncio.run(scenario())
+
+
 @pytest.mark.case_id("KB-TYPE-016")
 @pytest.mark.integration
 def test_mysql_timestamp_accepts_date_and_rejects_invalid_input(
@@ -685,6 +720,8 @@ def test_mysql_timestamp_accepts_date_and_rejects_invalid_input(
             await connection.close()
 
     asyncio.run(scenario())
+
+
 @pytest.mark.case_id("KB-TYPE-017")
 @pytest.mark.integration
 def test_mysql_common_type_matrix_round_trips_values(
@@ -732,6 +769,8 @@ def test_mysql_common_type_matrix_round_trips_values(
             await connection.close()
 
     asyncio.run(scenario())
+
+
 @pytest.mark.case_id("KB-TYPE-018")
 @pytest.mark.integration
 def test_oracle_common_type_matrix_round_trips_values(
@@ -806,6 +845,8 @@ def test_oracle_common_type_matrix_round_trips_values(
             await connection.close()
 
     asyncio.run(scenario())
+
+
 @pytest.mark.case_id("KB-TYPE-019")
 @pytest.mark.integration
 def test_sqlserver_common_type_matrix_round_trips_values(
@@ -860,7 +901,8 @@ def test_sqlserver_common_type_matrix_round_trips_values(
 
 @pytest.mark.case_id("KB-TYPE-020")
 @pytest.mark.integration
-def test_sqlserver_rowversion_database_support(sqlserver_config: KESConfig) -> None:
+def test_sqlserver_rowversion_database_support(
+        sqlserver_config: KESConfig) -> None:
     """测试点：临时业务数据库中的 ROWVERSION 返回 8 字节并随更新变化。"""
     async def scenario() -> None:
         admin = await asynckb.connect(
@@ -902,6 +944,8 @@ def test_sqlserver_rowversion_database_support(sqlserver_config: KESConfig) -> N
                 await admin.close()
 
     asyncio.run(scenario())
+
+
 @pytest.mark.case_id("KB-TYPE-022")
 @pytest.mark.integration
 def test_mysql_unsigned_enum_set_and_binary_types_round_trip(
@@ -985,6 +1029,8 @@ def test_mysql_unsigned_enum_set_and_binary_types_round_trip(
             await connection.close()
 
     asyncio.run(scenario())
+
+
 @pytest.mark.case_id("KB-TYPE-023")
 @pytest.mark.integration
 def test_oracle_rowid_bfile_and_local_timestamp_types_round_trip(
@@ -1073,6 +1119,8 @@ def test_oracle_rowid_bfile_and_local_timestamp_types_round_trip(
             await connection.close()
 
     asyncio.run(scenario())
+
+
 @pytest.mark.case_id("KB-TYPE-025")
 @pytest.mark.integration
 def test_oracle_types_and_supported_transaction_isolation(
@@ -1109,6 +1157,8 @@ def test_oracle_types_and_supported_transaction_isolation(
             await connection.close()
 
     asyncio.run(scenario())
+
+
 @pytest.mark.case_id("KB-TYPE-026")
 @pytest.mark.integration
 def test_supported_readonly_transactions_reject_writes_and_recover(
@@ -1145,6 +1195,8 @@ def test_supported_readonly_transactions_reject_writes_and_recover(
             await connection.close()
 
     asyncio.run(scenario())
+
+
 @pytest.mark.case_id("KB-TYPE-027")
 @pytest.mark.integration
 def test_server_errors_map_to_driver_subclasses_and_preserve_connection(
@@ -1225,6 +1277,8 @@ def test_server_errors_map_to_driver_subclasses_and_preserve_connection(
             await connection.close()
 
     asyncio.run(scenario())
+
+
 @pytest.mark.case_id("KB-TYPE-030")
 @pytest.mark.integration
 def test_schema_reload_and_statement_expiry_preserve_kes_codecs(
@@ -1265,6 +1319,8 @@ def test_schema_reload_and_statement_expiry_preserve_kes_codecs(
             await connection.close()
 
     asyncio.run(scenario())
+
+
 @pytest.mark.case_id("KB-TYPE-031")
 @pytest.mark.unit
 def test_mysql_fractional_datetime_codecs_preserve_precision_and_duration(
@@ -1285,6 +1341,8 @@ def test_mysql_fractional_datetime_codecs_preserve_precision_and_duration(
     assert kes._encode_time(datetime.timedelta(hours=25, microseconds=1)) == (
         "25:00:00.000001"
     )
+
+
 @pytest.mark.case_id("KB-TYPE-032")
 @pytest.mark.unit
 def test_sqlserver_datetime2_default_precision_decodes_to_microseconds(
@@ -1293,6 +1351,8 @@ def test_sqlserver_datetime2_default_precision_decodes_to_microseconds(
     assert kes._decode_datetime(
         "2026-01-02 03:04:05.1234567"
     ) == datetime.datetime(2026, 1, 2, 3, 4, 5, 123456)
+
+
 @pytest.mark.case_id("KB-TYPE-033")
 @pytest.mark.unit
 def test_kes_scalar_encoders_reject_silent_python_coercions() -> None:
@@ -1324,6 +1384,8 @@ def test_kes_scalar_encoders_reject_silent_python_coercions() -> None:
                 2025, 1, 2, tzinfo=datetime.timezone.utc
             )
         )
+
+
 @pytest.mark.case_id("KB-TYPE-035")
 @pytest.mark.unit
 def test_kes_temporal_codecs_cover_infinity_range_and_shape_boundaries(
@@ -1383,6 +1445,8 @@ def test_kes_temporal_codecs_cover_infinity_range_and_shape_boundaries(
     assert timestamp_encoder((-(2**63),)) == "-infinity"
     assert timestamp_decoder("infinity") == (2**63 - 1,)
     assert timestamp_decoder("-infinity") == (-(2**63),)
+
+
 @pytest.mark.case_id("KB-TYPE-036")
 @pytest.mark.unit
 def test_kes_scalar_codecs_cover_false_hex_numeric_and_uuid_boundaries(
@@ -1412,6 +1476,7 @@ def test_kes_scalar_codecs_cover_false_hex_numeric_and_uuid_boundaries(
         kes._encode_uuid(str(value))
     with pytest.raises(ValueError, match="cannot be negative"):
         kes._encode_mysql_bit(-1)
+
 
 @pytest.mark.case_id("KB-TYPE-038")
 @pytest.mark.unit
@@ -1507,8 +1572,6 @@ def test_codec_registration_uses_discovered_oids_and_rejects_missing_markers(
         kes.register_codecs(FailingSettings(), [], "oracle")
 
 
-
-
 @pytest.mark.case_id("KB-TYPE-041")
 @pytest.mark.integration
 @pytest.mark.parametrize(("sql_type", "value"), [
@@ -1544,7 +1607,9 @@ def test_sqlserver_execution_row_descriptions_preserve_python_types(
                 f"SELECT CAST($1 AS {sql_type}) AS value")
             for argument in (value, None, value):
                 rows = await statement.fetch(argument)
-                assert [tuple(row) for row in rows] == [(argument,), (argument,)]
+                assert [
+                    tuple(row) for row in rows] == [
+                    (argument,), (argument,)]
                 if argument is not None:
                     assert all(type(row[0]) is type(value) for row in rows)
         finally:
@@ -1573,7 +1638,9 @@ def test_sqlserver_native_scalar_types_round_trip_and_reset(
 ) -> None:
     """New KES system types retain Python values and restore default codecs."""
     async def scenario() -> None:
-        connection = await asynckb.connect(**sqlserver_config.connection_kwargs())
+        connection = await asynckb.connect(
+            **sqlserver_config.connection_kwargs()
+        )
         query = f"SELECT CAST($1 AS {sql_type})"
         try:
             statement = await connection.prepare(query)

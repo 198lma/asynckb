@@ -1,4 +1,5 @@
-"""ZIP scenarios through existing asynckb APIs, including explicit limitations."""
+("""ZIP scenarios through existing asynckb APIs, including """
+ """explicit limitations.""")
 
 import asyncio
 
@@ -12,7 +13,8 @@ from tests.kes.support.config import drop_table, unique_object_name
 @pytest.mark.parametrize("query", ["select 1; select 2;", "select 1 select 2"])
 @pytest.mark.parametrize("api", ["execute", "fetch", "prepare"])
 @pytest.mark.integration
-def test_zip_original_two_select_forms(sqlserver_config, query, api, record_property):
+def test_zip_original_two_select_forms(
+        sqlserver_config, query, api, record_property):
     """测试点：ZIP 原始分号和空格两种多 SELECT 写法，经简单协议和 PBE 执行。"""
     async def scenario():
         con = await asynckb.connect(**sqlserver_config.connection_kwargs())
@@ -36,7 +38,10 @@ def test_zip_original_two_select_forms(sqlserver_config, query, api, record_prop
 @pytest.mark.case_id("KB-EXEC-050")
 @pytest.mark.parametrize("setting", ["on", "off"])
 @pytest.mark.integration
-def test_zip_original_nocount_syntax(sqlserver_config, setting, record_property):
+def test_zip_original_nocount_syntax(
+        sqlserver_config,
+        setting,
+        record_property):
     """测试点：原始 SET NOCOUNT ON/OFF 是否被当前 KES 语法接受。"""
     async def scenario():
         con = await asynckb.connect(**sqlserver_config.connection_kwargs())
@@ -65,7 +70,9 @@ def test_zip_dml_with_supported_nocount_setting(
         con = await asynckb.connect(**sqlserver_config.connection_kwargs())
         table = unique_object_name("zip_dml", "sqlserver")
         try:
-            await con.execute(f"CREATE TABLE {table}(id INT PRIMARY KEY, label VARCHAR(30))")
+            await con.execute(
+                f"CREATE TABLE {table}(id INT PRIMARY KEY, label VARCHAR(30))"
+            )
             await con.execute(f"SET nocount = {nocount}")
             assert (await con.fetchval("SHOW nocount")).lower() == nocount
             if bound:
@@ -109,7 +116,8 @@ def test_empty_result_boundary_is_not_exposed(sqlserver_config, cache_size):
     """测试点：fetch 合并返回行，不表示能保留空结果集或通过 nextset 遍历。"""
     async def scenario():
         con = await asynckb.connect(
-            **sqlserver_config.connection_kwargs(), statement_cache_size=cache_size,
+            **sqlserver_config.connection_kwargs(),
+            statement_cache_size=cache_size,
         )
         try:
             rows = await con.fetch(

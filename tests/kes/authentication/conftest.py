@@ -30,6 +30,7 @@ POLICIES = {
 async def _reload(admin):
     before = await admin.fetchval("SELECT pg_catalog.pg_conf_load_time()")
     assert await admin.fetchval("SELECT pg_catalog.pg_reload_conf()")
+
     async def wait_for_reload():
         while await admin.fetchval(
             "SELECT pg_catalog.pg_conf_load_time()"
@@ -59,7 +60,8 @@ class AuthenticationLab:
 
     async def setup(self):
         if not ipaddress.ip_address(self.config.host).is_loopback:
-            raise RuntimeError("HBA configuration requires a local KES instance")
+            raise RuntimeError(
+                "HBA configuration requires a local KES instance")
         admin = await asynckb.connect(**self.config.connection_kwargs())
         try:
             hba_path = Path(await admin.fetchval("SHOW hba_file"))

@@ -6,7 +6,8 @@ import struct
 
 
 class AuthenticationProxy:
-    """Relay real, non-TLS KES traffic and retain only authentication metadata."""
+    ("""Relay real, non-TLS KES traffic and """
+     """retain only authentication metadata.""")
 
     def __init__(self, host: str, port: int, *, tamper: str | None = None):
         self.host = host

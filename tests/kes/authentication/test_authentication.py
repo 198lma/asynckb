@@ -25,8 +25,6 @@ def assert_exchange(proxy, expected, *, count=1):
         assert proxy.mechanisms == []
 
 
-
-
 @pytest.mark.case_id("KB-AUTH-002")
 @pytest.mark.integration
 @pytest.mark.parametrize("policy", SUCCESS_POLICIES)
@@ -59,6 +57,7 @@ def test_password_methods_reject_invalid_credentials(
 ):
     """测试点：错误、缺失和空密码不能绕过真实密码校验。"""
     monkeypatch.delenv("PGPASSWORD", raising=False)
+
     async def scenario():
         async with AuthenticationProxy(
             auth_lab.config.host, auth_lab.config.port
@@ -86,7 +85,9 @@ def test_reject_rule_refuses_valid_password(auth_lab):
             auth_lab.config.host, auth_lab.config.port
         ) as proxy:
             with pytest.raises(asynckb.InvalidAuthorizationSpecificationError):
-                con = await asynckb.connect(**auth_lab.options("reject", proxy))
+                con = await asynckb.connect(
+                    **auth_lab.options("reject", proxy)
+                )
                 await con.close()
             assert_exchange(proxy, [])
     asyncio.run(scenario())
@@ -119,9 +120,11 @@ def test_password_callback(auth_lab, policy, asynchronous):
     """测试点：同步/异步密码回调参与真实认证且每条连接调用一次。"""
     async def scenario():
         calls = []
+
         def sync_password():
             calls.append(1)
             return auth_lab.password
+
         async def async_password():
             calls.append(1)
             return auth_lab.password
@@ -147,12 +150,14 @@ def test_password_callback(auth_lab, policy, asynchronous):
 def test_password_file(auth_lab, policy, tmp_path, monkeypatch):
     """测试点：密码文件转义后的特殊字符/Unicode 密码仍能通过认证。"""
     monkeypatch.delenv("PGPASSWORD", raising=False)
+
     async def scenario():
         async with AuthenticationProxy(
             auth_lab.config.host, auth_lab.config.port
         ) as proxy:
             passfile = tmp_path / "pgpass"
-            escaped = auth_lab.password.replace("\\", "\\\\").replace(":", "\\:")
+            escaped = auth_lab.password.replace(
+                "\\", "\\\\").replace(":", "\\:")
             passfile.write_text(
                 f"127.0.0.1:{proxy.local_port}:{auth_lab.config.database}:"
                 f"{auth_lab.roles[policy]}:{escaped}\n", encoding="utf-8",
@@ -184,7 +189,9 @@ def test_pool_reauthenticates_new_connections(auth_lab, policy):
                 async with pool.acquire() as first, pool.acquire() as second:
                     assert first.get_server_pid() != second.get_server_pid()
                     for con in (first, second):
-                        assert await con.fetchval(auth_lab.config.select_one) == 1
+                        assert await con.fetchval(
+                            auth_lab.config.select_one
+                        ) == 1
                 await pool.expire_connections()
                 async with pool.acquire() as con:
                     assert await con.fetchval(auth_lab.config.select_one) == 1
@@ -194,11 +201,17 @@ def test_pool_reauthenticates_new_connections(auth_lab, policy):
 
 @pytest.mark.case_id("KB-AUTH-009")
 @pytest.mark.integration
-@pytest.mark.parametrize("tamper, error, message", (
-    ("signature", asynckb.InterfaceError, "could not verify server signature"),
-    ("nonce", asynckb.InternalClientError, "nonce"),
-    ("mechanism", asynckb.InterfaceError, "unsupported SASL Authentication methods"),
-))
+@pytest.mark.parametrize("tamper, error, message",
+                         (("signature",
+                           asynckb.InterfaceError,
+                           "could not verify server signature"),
+                          ("nonce",
+                           asynckb.InternalClientError,
+                           "nonce"),
+                             ("mechanism",
+                              asynckb.InterfaceError,
+                              "unsupported SASL Authentication methods"),
+                          ))
 def test_scram_refuses_invalid_server_authentication(
     kes_config, tamper, error, message,
 ):

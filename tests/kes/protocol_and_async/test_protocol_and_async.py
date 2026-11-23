@@ -28,6 +28,8 @@ def test_connected_server_rejects_the_wrong_compatibility_mode(
             )
 
     asyncio.run(scenario())
+
+
 @pytest.mark.case_id("KB-PROTO-017")
 @pytest.mark.integration
 def test_wrong_mode_initialization_closes_server_session(
@@ -59,6 +61,8 @@ def test_wrong_mode_initialization_closes_server_session(
             await observer.close()
 
     asyncio.run(scenario())
+
+
 @pytest.mark.case_id("KB-PROTO-020")
 @pytest.mark.integration
 def test_copy_round_trip_supports_records_csv_text_and_binary(
@@ -140,6 +144,8 @@ def test_copy_round_trip_supports_records_csv_text_and_binary(
             await connection.close()
 
     asyncio.run(scenario())
+
+
 @pytest.mark.case_id("KB-PROTO-021")
 @pytest.mark.integration
 def test_copy_source_accepts_inline_bytes_and_bytes_file_path(
@@ -188,6 +194,8 @@ def test_copy_source_accepts_inline_bytes_and_bytes_file_path(
             await connection.close()
 
     asyncio.run(scenario())
+
+
 @pytest.mark.case_id("KB-PROTO-022")
 @pytest.mark.integration
 def test_copy_inline_bytes_survives_path_probe_errors(
@@ -232,6 +240,8 @@ def test_copy_inline_bytes_survives_path_probe_errors(
             await connection.close()
 
     asyncio.run(scenario())
+
+
 @pytest.mark.case_id("KB-PROTO-024")
 @pytest.mark.integration
 def test_copy_async_records_parameterized_sink_and_source(
@@ -301,6 +311,8 @@ def test_copy_async_records_parameterized_sink_and_source(
             await connection.close()
 
     asyncio.run(scenario())
+
+
 @pytest.mark.case_id("KB-PROTO-025")
 @pytest.mark.integration
 def test_copy_completed_output_sink_failure_preserves_connection(
@@ -342,6 +354,8 @@ def test_copy_completed_output_sink_failure_preserves_connection(
             await connection.close()
 
     asyncio.run(scenario())
+
+
 @pytest.mark.case_id("KB-PROTO-026")
 @pytest.mark.integration
 def test_copy_active_output_sink_failure_preserves_connection(
@@ -400,6 +414,8 @@ def test_copy_active_output_sink_failure_preserves_connection(
             await connection.close()
 
     asyncio.run(scenario())
+
+
 @pytest.mark.case_id("KB-PROTO-027")
 @pytest.mark.integration
 def test_copy_async_source_failures_are_atomic_and_connection_reusable(
@@ -463,6 +479,8 @@ def test_copy_async_source_failures_are_atomic_and_connection_reusable(
             await connection.close()
 
     asyncio.run(scenario())
+
+
 @pytest.mark.case_id("KB-PROTO-028")
 @pytest.mark.integration
 def test_copy_async_source_timeout_is_atomic_and_connection_reusable(
@@ -514,6 +532,8 @@ def test_copy_async_source_timeout_is_atomic_and_connection_reusable(
             await connection.close()
 
     asyncio.run(scenario())
+
+
 @pytest.mark.case_id("KB-PROTO-029")
 @pytest.mark.integration
 def test_copy_server_error_before_source_error_preserves_connection(
@@ -558,6 +578,8 @@ def test_copy_server_error_before_source_error_preserves_connection(
             await connection.close()
 
     asyncio.run(scenario())
+
+
 @pytest.mark.case_id("KB-PROTO-030")
 @pytest.mark.integration
 def test_copy_server_error_racing_source_timeout_preserves_connection(
@@ -606,6 +628,8 @@ def test_copy_server_error_racing_source_timeout_preserves_connection(
             await connection.close()
 
     asyncio.run(scenario())
+
+
 @pytest.mark.case_id("KB-PROTO-031")
 @pytest.mark.integration
 def test_copy_completed_output_sink_timeout_preserves_connection(
@@ -648,6 +672,8 @@ def test_copy_completed_output_sink_timeout_preserves_connection(
             await connection.close()
 
     asyncio.run(scenario())
+
+
 @pytest.mark.case_id("KB-PROTO-032")
 @pytest.mark.integration
 def test_copy_server_error_before_source_cancellation_preserves_connection(
@@ -693,6 +719,8 @@ def test_copy_server_error_before_source_cancellation_preserves_connection(
             await connection.close()
 
     asyncio.run(scenario())
+
+
 @pytest.mark.case_id("KB-PROTO-033")
 @pytest.mark.integration
 def test_listen_notify_delivers_payload_in_both_modes(
@@ -728,6 +756,8 @@ def test_listen_notify_delivers_payload_in_both_modes(
             await sender.close()
 
     asyncio.run(scenario())
+
+
 @pytest.mark.case_id("KB-PROTO-035")
 @pytest.mark.integration
 def test_repeated_query_timeout_race_preserves_connection(
@@ -749,9 +779,3 @@ def test_repeated_query_timeout_race_preserves_connection(
             await connection.close()
 
     asyncio.run(scenario())
-
-
-
-
-
-

@@ -19,8 +19,14 @@ from tests.kes.support.config import KESConfig
 
 DEFAULT_BINARIES = {
     "mysql": "/home/rootdba/kingbase-mysql/KESRealPro/V009R003C018/Server/bin",
-    "oracle": "/home/rootdba/kingbase-sqlserver/KESRealPro/V009R002C016/Server/bin",
-    "sqlserver": "/home/rootdba/kingbase-oracle/KESRealPro/V009R004C019/Server/bin",
+    "oracle": (
+        "/home/rootdba/kingbase-sqlserver/KESRealPro/"
+        "V009R002C016/Server/bin"
+    ),
+    "sqlserver": (
+        "/home/rootdba/kingbase-oracle/KESRealPro/"
+        "V009R004C019/Server/bin"
+    ),
 }
 
 
@@ -31,25 +37,34 @@ def issue_certificates(directory):
     from cryptography.x509.oid import NameOID, ExtendedKeyUsageOID
     now = datetime.datetime.now(datetime.timezone.utc)
     ca_key = rsa.generate_private_key(public_exponent=65537, key_size=2048)
-    ca_name = x509.Name([x509.NameAttribute(NameOID.COMMON_NAME, "KES test CA")])
+    ca_name = x509.Name(
+        [x509.NameAttribute(NameOID.COMMON_NAME, "KES test CA")])
     ca = (
         x509.CertificateBuilder().subject_name(ca_name).issuer_name(ca_name)
-        .public_key(ca_key.public_key()).serial_number(x509.random_serial_number())
+        .public_key(ca_key.public_key())
+        .serial_number(x509.random_serial_number())
         .not_valid_before(now - datetime.timedelta(minutes=5))
         .not_valid_after(now + datetime.timedelta(days=1))
         .add_extension(x509.BasicConstraints(ca=True, path_length=None), True)
         .sign(ca_key, hashes.SHA256())
     )
-    (directory / "ca.crt").write_bytes(ca.public_bytes(serialization.Encoding.PEM))
+    (directory / "ca.crt").write_bytes(
+        ca.public_bytes(serialization.Encoding.PEM)
+    )
     for name in ("server", "apg_external", "wrong_identity"):
         key = rsa.generate_private_key(public_exponent=65537, key_size=2048)
         subject = x509.Name([x509.NameAttribute(NameOID.COMMON_NAME, name)])
         builder = (
-            x509.CertificateBuilder().subject_name(subject).issuer_name(ca_name)
-            .public_key(key.public_key()).serial_number(x509.random_serial_number())
+            x509.CertificateBuilder().subject_name(subject).issuer_name(
+                ca_name
+            ).public_key(key.public_key()).serial_number(
+                x509.random_serial_number()
+            )
             .not_valid_before(now - datetime.timedelta(minutes=5))
             .not_valid_after(now + datetime.timedelta(days=1))
-            .add_extension(x509.BasicConstraints(ca=False, path_length=None), True)
+            .add_extension(
+                x509.BasicConstraints(ca=False, path_length=None), True
+            )
         )
         if name == "server":
             import ipaddress
@@ -60,15 +75,18 @@ def issue_certificates(directory):
             usage = ExtendedKeyUsageOID.SERVER_AUTH
         else:
             usage = ExtendedKeyUsageOID.CLIENT_AUTH
-        cert = builder.add_extension(x509.ExtendedKeyUsage([usage]), False).sign(
-            ca_key, hashes.SHA256()
-        )
+        cert = builder.add_extension(
+            x509.ExtendedKeyUsage(
+                [usage]), False).sign(
+            ca_key, hashes.SHA256())
         key_path = directory / f"{name}.key"
         key_path.touch(mode=0o600)
-        key_path.write_bytes(key.private_bytes(
-            serialization.Encoding.PEM, serialization.PrivateFormat.TraditionalOpenSSL,
-            serialization.NoEncryption(),
-        ))
+        key_path.write_bytes(
+            key.private_bytes(
+                serialization.Encoding.PEM,
+                serialization.PrivateFormat.TraditionalOpenSSL,
+                serialization.NoEncryption(),
+            ))
         (directory / f"{name}.crt").write_bytes(
             cert.public_bytes(serialization.Encoding.PEM)
         )
@@ -102,12 +120,14 @@ class IsolatedKES:
         )
         if result.returncode:
             raise RuntimeError(
-                f"{Path(args[0]).name} failed: {result.stdout}\n{result.stderr}"
+                f"{Path(args[0]).name} failed: "
+                f"{result.stdout}\n{result.stderr}"
             )
         return result
 
     def start(self):
-        preload = ','.join((('plsql',) if self.mode == 'oracle' else ()) + self.preload)
+        preload = ','.join(
+            (('plsql',) if self.mode == 'oracle' else ()) + self.preload)
         password_file = self.directory / "init-password"
         password_file.touch(mode=0o600)
         password_file.write_text(self.password, encoding="ascii")
@@ -142,7 +162,9 @@ class IsolatedKES:
         self.started = True
 
     async def initialize(self):
-        con = await asynckb.connect(**self.config.connection_kwargs(database="template1"))
+        con = await asynckb.connect(
+            **self.config.connection_kwargs(database="template1")
+        )
         try:
             if not await con.fetchval(
                 "SELECT 1 FROM pg_catalog.pg_database WHERE datname='test'"
@@ -176,7 +198,8 @@ class IsolatedKES:
         try:
             self.hba.write_bytes(("\n".join(lines) + "\n").encode() + original)
             errors = await admin.fetch(
-                "SELECT error FROM pg_catalog.pg_hba_file_rules WHERE error IS NOT NULL"
+                "SELECT error FROM pg_catalog.pg_hba_file_rules "
+                "WHERE error IS NOT NULL"
             )
             assert not errors, errors
             await _reload(admin)

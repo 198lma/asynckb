@@ -21,7 +21,8 @@ MODES = frozenset({'mysql', 'oracle', 'sqlserver'})
 
 
 def client_mac_address(local_address):
-    """Resolve the interface of the connected socket, never a guessed node ID."""
+    ("""Resolve the interface of the connected socket, """
+     """never a guessed node ID.""")
     if sys.platform != 'linux':
         raise exceptions.InterfaceError(
             'KES client MAC upload currently requires Linux')
@@ -38,8 +39,8 @@ def client_mac_address(local_address):
             with open('/proc/net/if_inet6', encoding='ascii') as interfaces:
                 for line in interfaces:
                     fields = line.split()
-                    ipv6_interfaces[ipaddress.IPv6Address(int(fields[0], 16))] = (
-                        fields[-1])
+                    ipv6_interfaces[ipaddress.IPv6Address(
+                        int(fields[0], 16))] = (fields[-1])
         except OSError as exc:
             raise exceptions.InterfaceError(
                 'could not resolve the KES client IPv6 interface') from exc
@@ -61,6 +62,7 @@ def client_mac_address(local_address):
                 continue
     raise exceptions.InterfaceError(
         'could not resolve the KES client MAC address for the local socket')
+
 
 _DETECTED_MODE_ALIASES = {
     'mysql': 'mysql',
@@ -228,14 +230,16 @@ def is_oracle_call(mode, query):
 
 
 def sqlserver_parameter_count(query, *, standard_conforming_strings=True):
-    """Count bind slots without interpreting literals, identifiers or comments."""
+    ("""Count bind slots without interpreting literals, identifiers """
+     """or comments.""")
     count = 0
     pos = 0
     while pos < len(query):
         token = _SQLSERVER_TOKEN_RE.match(query, pos)
         pos = token.end()
         if token.lastgroup == 'string':
-            escapes = len(token.group()) == 2 or not standard_conforming_strings
+            escapes = len(
+                token.group()) == 2 or not standard_conforming_strings
             while pos < len(query):
                 if query[pos] == "'":
                     pos += 1
@@ -267,7 +271,8 @@ def sqlserver_parameter_count(query, *, standard_conforming_strings=True):
 
 
 def bind_parameter_oids(query, modes, *, standard_conforming_strings=True):
-    """Declare KES bind directions while leaving type inference to the server."""
+    ("""Declare KES bind directions while leaving type inference to """
+     """the server.""")
     flags = {'in': 0x20000000, 'out': 0x40000000, 'inout': 0x60000000}
     if not isinstance(modes, (list, tuple)):
         raise exceptions.InterfaceError(
@@ -455,7 +460,8 @@ def _sqlserver_local_positions(tokens):
         if value.casefold() in locals_:
             preserved.add(index)
         else:
-            following = [tokens[i][1] for i in significant[offset + 1:offset + 3]]
+            following = [tokens[i][1]
+                         for i in significant[offset + 1:offset + 3]]
             assignment = following[:1] == ['='] or (
                 len(following) == 2
                 and following[0] in {'+', '-', '*', '/', '%', '&', '|', '^'}
@@ -483,8 +489,13 @@ def rewrite_query(query, mode, *, standard_conforming_strings=True):
     marker = {'mysql': '?', 'oracle': ':', 'sqlserver': '@'}[mode]
     if marker not in query:
         return query
-    tokens = list(_placeholder_tokens(query, mode, standard_conforming_strings))
-    preserved = _sqlserver_local_positions(tokens) if mode == 'sqlserver' else set()
+    tokens = list(
+        _placeholder_tokens(
+            query,
+            mode,
+            standard_conforming_strings))
+    preserved = _sqlserver_local_positions(
+        tokens) if mode == 'sqlserver' else set()
     used = set()
     for kind, value in tokens:
         if kind == 'parameter' or (
@@ -495,7 +506,8 @@ def rewrite_query(query, mode, *, standard_conforming_strings=True):
                     'query argument positions must be between 1 and 32767')
             used.add(slot)
     if mode == 'mysql' and used and ('question', '?') in tokens:
-        raise exceptions.InterfaceError('cannot mix MySQL ? and $n bind placeholders')
+        raise exceptions.InterfaceError(
+            'cannot mix MySQL ? and $n bind placeholders')
     names = {}
     next_slot = 1
     result = []
@@ -1055,8 +1067,8 @@ def register_codec(settings, oid, name, schema, mode):
     settings.add_python_codec(
         oid, name, schema, None, 'scalar',
         encoder, decoder, data_format)
-    if (mode == 'sqlserver' and schema == 'sys'
-            and name.lower() in {'binary', 'varbinary', 'image', 'rowversion'}):
+    if (mode == 'sqlserver' and schema == 'sys' and name.lower()
+            in {'binary', 'varbinary', 'image', 'rowversion'}):
         settings.add_python_codec(
             oid, name, schema, None, 'scalar',
             _encode_sqlserver_binary_text, _decode_sqlserver_binary_text,

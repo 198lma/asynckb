@@ -651,7 +651,8 @@ def _parse_connect_dsn_and_args(*, dsn, host, port, user,
     for h, p in zip(host, port):
         if h.startswith('/'):
             # UNIX socket name
-            if not os.path.basename(h).startswith(('.s.PGSQL.', '.s.KINGBASE.')):
+            if not os.path.basename(h).startswith(
+                    ('.s.PGSQL.', '.s.KINGBASE.')):
                 h = os.path.join(h, '.s.PGSQL.{}'.format(p))
             addrs.append(h)
         else:

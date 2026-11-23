@@ -10,17 +10,24 @@ import gc
 from decimal import Decimal
 import datetime
 
+
 def _table_types(mode: str) -> tuple[str, str]:
     if mode == "oracle":
         return "NUMBER(10)", "VARCHAR2(400)"
     return "INT", "VARCHAR(400)"
+
+
 def _sleep_query(mode: str, seconds: int = 10) -> str:
     suffix = " FROM dual" if mode == "oracle" else ""
     return f"SELECT pg_sleep({seconds}){suffix}"
+
+
 def _pool_options(config: KESConfig) -> dict[str, object]:
     options = config.connection_kwargs()
     options.pop("timeout")
     return options
+
+
 def _user_columns(mode: str) -> str:
     if mode == "oracle":
         return (
@@ -33,6 +40,8 @@ def _user_columns(mode: str) -> str:
         "username VARCHAR(50) NOT NULL UNIQUE, "
         "age INT"
     )
+
+
 async def _create_users_table(
     connection: asynckb.Connection,
     table: str,
@@ -41,6 +50,7 @@ async def _create_users_table(
     await connection.execute(
         f"CREATE TABLE {table} ({_user_columns(mode)})"
     )
+
 
 @pytest.mark.case_id("KB-EXEC-004")
 @pytest.mark.integration
@@ -106,6 +116,8 @@ def test_prepared_single_result_and_cursor_iteration_contracts(
             await connection.close()
 
     asyncio.run(scenario())
+
+
 @pytest.mark.case_id("KB-EXEC-005")
 @pytest.mark.integration
 def test_active_query_close_and_terminate_report_distinct_failures(
@@ -135,6 +147,8 @@ def test_active_query_close_and_terminate_report_distinct_failures(
             assert connection.is_closed()
 
     asyncio.run(scenario())
+
+
 @pytest.mark.case_id("KB-EXEC-006")
 @pytest.mark.integration
 def test_concurrent_connection_operation_is_rejected_then_connection_recovers(
@@ -165,6 +179,8 @@ def test_concurrent_connection_operation_is_rejected_then_connection_recovers(
             await connection.close()
 
     asyncio.run(scenario())
+
+
 @pytest.mark.case_id("KB-EXEC-007")
 @pytest.mark.integration
 def test_executemany_server_error_is_atomic_and_connection_is_reusable(
@@ -201,6 +217,8 @@ def test_executemany_server_error_is_atomic_and_connection_is_reusable(
             await connection.close()
 
     asyncio.run(scenario())
+
+
 @pytest.mark.case_id("KB-EXEC-008")
 @pytest.mark.integration
 def test_executemany_client_iterator_failure_is_atomic(
@@ -236,6 +254,8 @@ def test_executemany_client_iterator_failure_is_atomic(
             await connection.close()
 
     asyncio.run(scenario())
+
+
 @pytest.mark.case_id("KB-EXEC-010")
 @pytest.mark.integration
 def test_statement_cache_disable_and_query_size_limit(
@@ -279,6 +299,8 @@ def test_statement_cache_disable_and_query_size_limit(
             await disabled.close()
 
     asyncio.run(scenario())
+
+
 @pytest.mark.case_id("KB-EXEC-013")
 @pytest.mark.integration
 def test_mysql_manual_deallocate_allows_reprepare(
@@ -309,6 +331,8 @@ def test_mysql_manual_deallocate_allows_reprepare(
             await connection.close()
 
     asyncio.run(scenario())
+
+
 @pytest.mark.case_id("KB-EXEC-014")
 @pytest.mark.integration
 def test_mysql_old_statement_gc_does_not_close_replacement(
@@ -334,6 +358,8 @@ def test_mysql_old_statement_gc_does_not_close_replacement(
             await connection.close()
 
     asyncio.run(scenario())
+
+
 @pytest.mark.case_id("KB-EXEC-015")
 @pytest.mark.integration
 def test_duplicate_named_statement_is_rejected_without_replacing_original(
@@ -354,6 +380,8 @@ def test_duplicate_named_statement_is_rejected_without_replacing_original(
             await connection.close()
 
     asyncio.run(scenario())
+
+
 @pytest.mark.case_id("KB-EXEC-016")
 @pytest.mark.parametrize(
     "deallocate_variant",
@@ -409,6 +437,8 @@ def test_named_statement_recovers_when_deallocate_is_not_a_standalone_command(
             await connection.close()
 
     asyncio.run(scenario())
+
+
 @pytest.mark.case_id("KB-EXEC-017")
 @pytest.mark.integration
 def test_execute_script_error_preserves_mode_specific_ddl_atomicity(
@@ -437,6 +467,8 @@ def test_execute_script_error_preserves_mode_specific_ddl_atomicity(
             await connection.close()
 
     asyncio.run(scenario())
+
+
 @pytest.mark.case_id("KB-EXEC-018")
 @pytest.mark.integration
 def test_parameterized_execute_rejects_multiple_commands_before_execution(
@@ -470,6 +502,8 @@ def test_parameterized_execute_rejects_multiple_commands_before_execution(
             await connection.close()
 
     asyncio.run(scenario())
+
+
 @pytest.mark.case_id("KB-EXEC-020")
 @pytest.mark.parametrize("cache_size", [0, 100])
 @pytest.mark.integration
@@ -542,8 +576,6 @@ def test_kes_explicit_parameter_directions(
     asyncio.run(scenario())
 
 
-
-
 @pytest.mark.case_id("KB-EXEC-022")
 @pytest.mark.parametrize("modes", [
     "out", ("in",), ("in", "out", "out"), ("in", "invalid"),
@@ -558,13 +590,17 @@ def test_kes_invalid_parameter_directions_do_not_execute(
         connection = await asynckb.connect(**kes_config.connection_kwargs())
         table = unique_object_name("invalid_direction", kes_config.mode)
         try:
-            await connection.execute(f"CREATE TABLE {table}(id INT, value INT)")
+            await connection.execute(
+                f"CREATE TABLE {table}(id INT, value INT)"
+            )
             with pytest.raises(asynckb.InterfaceError):
                 await connection.prepare(
                     f"INSERT INTO {table} VALUES ($1, $2)",
                     parameter_modes=modes,
                 )
-            assert await connection.fetchval(f"SELECT count(*) FROM {table}") == 0
+            assert await connection.fetchval(
+                f"SELECT count(*) FROM {table}"
+            ) == 0
             assert await connection.fetchval("SELECT 987") == 987
         finally:
             await drop_table(connection, table)
@@ -579,10 +615,13 @@ def test_kes_invalid_parameter_directions_do_not_execute(
 def test_oracle_returning_into_temporal_numeric_and_zero_rows(
     oracle_config: KESConfig, cache_size: int,
 ) -> None:
-    """Output bindings use normal codecs, including temporal and numeric NULLs."""
+    ("""Output bindings use normal codecs, including temporal and """
+     """numeric NULLs.""")
+
     async def scenario() -> None:
         connection = await asynckb.connect(
-            **oracle_config.connection_kwargs(), statement_cache_size=cache_size,
+            **oracle_config.connection_kwargs(),
+            statement_cache_size=cache_size,
         )
         table = unique_object_name("output_codecs", "oracle")
         try:
@@ -619,7 +658,9 @@ def test_oracle_returning_into_temporal_numeric_and_zero_rows(
             with pytest.raises(asynckb.TooManyRowsError):
                 await multirow.fetchrow(2, Decimal("9.99"), None)
             await transaction.rollback()
-            assert await connection.fetchval(f"SELECT count(*) FROM {table}") == 2
+            assert await connection.fetchval(
+                f"SELECT count(*) FROM {table}"
+            ) == 2
             assert await connection.fetchval(
                 f"SELECT amount FROM {table} WHERE id = 1"
             ) == Decimal("123.45")
@@ -635,7 +676,9 @@ def test_oracle_returning_into_temporal_numeric_and_zero_rows(
 def test_oracle_standalone_returning_into_is_server_restriction(
     oracle_config: KESConfig,
 ) -> None:
-    """Standalone INTO is rejected by KES, not silently rewritten by the driver."""
+    ("""Standalone INTO is rejected by KES, not silently """
+     """rewritten by the driver.""")
+
     async def scenario() -> None:
         connection = await asynckb.connect(**oracle_config.connection_kwargs())
         table = unique_object_name("standalone_into", "oracle")
@@ -647,7 +690,9 @@ def test_oracle_standalone_returning_into_is_server_restriction(
                     parameter_modes=("in", "out"),
                 )
             assert error.value.sqlstate == "42601"
-            assert await connection.fetchval(f"SELECT count(*) FROM {table}") == 0
+            assert await connection.fetchval(
+                f"SELECT count(*) FROM {table}"
+            ) == 0
             assert await connection.fetchval(
                 f"INSERT INTO {table} VALUES ($1) RETURNING id", 42,
             ) == 42
@@ -712,6 +757,8 @@ def test_oracle_call_returns_out_and_inout_parameters(
                 await connection.close()
 
     asyncio.run(scenario())
+
+
 @pytest.mark.case_id("KB-EXEC-027")
 @pytest.mark.integration
 def test_oracle_call_pure_out_parameters_and_transaction_recovery(
@@ -764,6 +811,8 @@ def test_oracle_call_pure_out_parameters_and_transaction_recovery(
                 await connection.close()
 
     asyncio.run(scenario())
+
+
 @pytest.mark.case_id("KB-EXEC-028")
 @pytest.mark.parametrize("cache_size", [0, 100])
 @pytest.mark.integration
@@ -814,6 +863,8 @@ def test_oracle_call_returns_multiple_result_sets(
                 await connection.close()
 
     asyncio.run(scenario())
+
+
 @pytest.mark.case_id("KB-EXEC-029")
 @pytest.mark.integration
 def test_oracle_refcursor_anonymous_portal_can_be_fetched(
@@ -849,6 +900,8 @@ def test_oracle_refcursor_anonymous_portal_can_be_fetched(
                 await connection.close()
 
     asyncio.run(scenario())
+
+
 @pytest.mark.case_id("KB-EXEC-030")
 @pytest.mark.parametrize("cache_size", [0, 100])
 @pytest.mark.parametrize("command", ["CALL {name}($1)", "EXEC {name} $1"])
@@ -856,7 +909,9 @@ def test_oracle_refcursor_anonymous_portal_can_be_fetched(
 def test_sqlserver_bound_nested_procedure_result_sets(
     sqlserver_config: KESConfig, cache_size: int, command: str,
 ) -> None:
-    """Bound CALL/EXEC must retain every nested result set and argument value."""
+    ("""Bound CALL/EXEC must retain every nested result set and """
+     """argument value.""")
+
     async def scenario() -> None:
         inner = unique_object_name("bound_inner", "sqlserver")
         outer = unique_object_name("bound_outer", "sqlserver")
@@ -910,7 +965,9 @@ def test_sqlserver_bound_nested_procedure_result_sets(
 def test_sqlserver_bound_multistatement_select(
     sqlserver_config: KESConfig, cache_size: int, separator: str,
 ) -> None:
-    """The server, not Python value guessing, determines batch parameter types."""
+    ("""The server, not Python value guessing, determines batch """
+     """parameter types.""")
+
     async def scenario() -> None:
         connection = await asynckb.connect(
             **sqlserver_config.connection_kwargs(),
@@ -927,7 +984,9 @@ def test_sqlserver_bound_multistatement_select(
                     {"id": value}, {"label": label},
                 ]
             statement = await connection.prepare(query)
-            assert [tuple(row) for row in await statement.fetch(8, "eight")] == [
+            assert [
+                tuple(row) for row in await statement.fetch(8, "eight")
+            ] == [
                 (8,), ("eight",),
             ]
             assert [tuple(row) for row in await connection.fetch(
@@ -951,10 +1010,14 @@ def test_sqlserver_bound_multistatement_select(
 def test_sqlserver_bound_multistatement_dml_and_rollback(
     sqlserver_config: KESConfig, api: str,
 ) -> None:
-    """Bound batches preserve server-side typing, command status and atomicity."""
+    ("""Bound batches preserve server-side typing, command status """
+     """and atomicity.""")
+
     async def scenario() -> None:
         table = unique_object_name("bound_batch", "sqlserver")
-        connection = await asynckb.connect(**sqlserver_config.connection_kwargs())
+        connection = await asynckb.connect(
+            **sqlserver_config.connection_kwargs()
+        )
         query = (f"INSERT INTO {table} VALUES ($1, $2); "
                  f"UPDATE {table} SET label=$3 WHERE id=$1")
         try:
@@ -1001,7 +1064,10 @@ def test_sqlserver_bound_batch_ignores_placeholder_text_in_strings(
             server_settings={"standard_conforming_strings": standard_strings},
         )
         try:
-            literal = "E'quote\\\'$9'" if standard_strings == "on" else "'quote\\\'$9'"
+            literal = (
+                "E'quote\\\'$9'" if standard_strings == "on"
+                else "'quote\\\'$9'"
+            )
             query = (f"SELECT {literal} AS [$8]; /* $7 /* $6 */ */ "
                      "SELECT CAST($1 AS INT) AS id -- $5\n")
             assert [dict(row) for row in
@@ -1025,7 +1091,9 @@ def test_sqlserver_batch_error_caught_inside_transaction_is_atomic(
         con = await asynckb.connect(**sqlserver_config.connection_kwargs())
         table = unique_object_name("batch_outer_transaction", "sqlserver")
         try:
-            await con.execute(f"CREATE TABLE {table}(id INT PRIMARY KEY, label VARCHAR(30))")
+            await con.execute(
+                f"CREATE TABLE {table}(id INT PRIMARY KEY, label VARCHAR(30))"
+            )
             await con.execute(f"INSERT INTO {table} VALUES(1, 'original')")
             query = (f"INSERT INTO {table} VALUES($1, $2); "
                      f"UPDATE {table} SET label=$3 WHERE id=$1")
@@ -1083,6 +1151,8 @@ def test_mysql_prepared_statement_row_limit_does_not_corrupt_status(
             await connection.close()
 
     asyncio.run(scenario())
+
+
 @pytest.mark.case_id("KB-EXEC-036")
 @pytest.mark.integration
 def test_oracle_prepared_statement_cursor_and_returning_support(
@@ -1153,6 +1223,8 @@ def test_oracle_prepared_statement_cursor_and_returning_support(
     import datetime
 
     asyncio.run(scenario())
+
+
 @pytest.mark.case_id("KB-EXEC-039")
 @pytest.mark.integration
 @pytest.mark.asyncio
@@ -1219,6 +1291,8 @@ async def test_async_connection_crud_round_trip(
         await connection.close()
 
     assert connection.is_closed()
+
+
 @pytest.mark.case_id("KB-EXEC-042")
 @pytest.mark.integration
 @pytest.mark.asyncio
@@ -1259,6 +1333,8 @@ async def test_async_transaction_exception_rolls_back_and_recovers(
     finally:
         await drop_table(connection, table)
         await connection.close()
+
+
 @pytest.mark.case_id("KB-EXEC-043")
 @pytest.mark.integration
 @pytest.mark.asyncio
@@ -1371,7 +1447,9 @@ def test_nested_transactions_reuse_pg_savepoint_commands(
                                 )
                             raise RuntimeError("undo inner")
                     async with connection.transaction():
-                        await connection.execute(f"INSERT INTO {table} VALUES (4)")
+                        await connection.execute(
+                            f"INSERT INTO {table} VALUES (4)"
+                        )
                     assert [tuple(row) for row in await connection.fetch(
                         f"SELECT id FROM {table} ORDER BY id"
                     )] == [(1,), (4,)]
@@ -1387,15 +1465,19 @@ def test_nested_transactions_reuse_pg_savepoint_commands(
                 else "BEGIN;"
             )
             assert queries[0] == start
-            assert sum(query.startswith("SAVEPOINT ") for query in queries) == 3
+            assert sum(query.startswith("SAVEPOINT ")
+                       for query in queries) == 3
             assert sum(
                 query.startswith("RELEASE SAVEPOINT ") for query in queries
             ) == 2
-            assert sum(query.startswith("ROLLBACK TO ") for query in queries) == 1
+            assert sum(query.startswith("ROLLBACK TO ")
+                       for query in queries) == 1
             with pytest.raises(RuntimeError, match="undo outer"):
                 async with connection.transaction():
                     async with connection.transaction():
-                        await connection.execute(f"INSERT INTO {table} VALUES (5)")
+                        await connection.execute(
+                            f"INSERT INTO {table} VALUES (5)"
+                        )
                     raise RuntimeError("undo outer")
             assert [tuple(row) for row in await observer.fetch(
                 f"SELECT id FROM {table} ORDER BY id"

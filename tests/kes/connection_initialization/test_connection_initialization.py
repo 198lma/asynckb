@@ -28,6 +28,8 @@ def test_connection_detects_kes_mode_without_explicit_option(
             await connection.close()
 
     asyncio.run(scenario())
+
+
 @pytest.mark.case_id("KB-CONN-002")
 @pytest.mark.integration
 def test_service_file_passfile_and_primary_target_connect(
@@ -85,6 +87,8 @@ def test_service_file_passfile_and_primary_target_connect(
             await environment_connection.close()
 
     asyncio.run(scenario())
+
+
 @pytest.mark.case_id("KB-CONN-005")
 @pytest.mark.unit
 def test_mode_normalization_accepts_supported_names_and_rejects_unknown_names(
@@ -96,6 +100,8 @@ def test_mode_normalization_accepts_supported_names_and_rejects_unknown_names(
     assert kes.normalize_mode("SQLSERVER") == "sqlserver"
     with pytest.raises(asynckb.ClientConfigurationError):
         kes.normalize_mode("postgres")
+
+
 @pytest.mark.case_id("KB-CONN-006")
 @pytest.mark.unit
 def test_dsn_parser_extracts_encoded_kes_mode_and_preserves_other_settings(
@@ -141,6 +147,8 @@ def test_dsn_parser_extracts_encoded_kes_mode_and_preserves_other_settings(
     )
     assert config.kes_mode == "oracle"
     assert "kes_mode" not in parameters.server_settings
+
+
 @pytest.mark.case_id("KB-CONN-007")
 @pytest.mark.unit
 def test_connect_timeout_aborts_stalled_protocol_handshake() -> None:

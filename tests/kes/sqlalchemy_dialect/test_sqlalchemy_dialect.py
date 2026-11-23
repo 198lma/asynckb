@@ -20,7 +20,9 @@ sqlalchemy = pytest.importorskip("sqlalchemy")
 def test_sqlserver_native_column_types_reflect_from_catalog(
     sqlserver_config: KESConfig,
 ) -> None:
-    """Column reflection must not depend on removed information_schema fields."""
+    ("""Column reflection must not depend on removed """
+     """information_schema fields.""")
+
     async def scenario() -> None:
         from sqlalchemy.ext.asyncio import create_async_engine
 
@@ -31,7 +33,9 @@ def test_sqlserver_native_column_types_reflect_from_catalog(
             async with engine.begin() as connection:
                 await connection.exec_driver_sql(
                     f"CREATE TABLE {table}(id INT, amount NUMERIC(20,4), "
-                    "label NVARCHAR(30), event_date DATE, event_time DATETIME2(3))")
+                    "label NVARCHAR(30), event_date DATE, "
+                    "event_time DATETIME2(3))"
+                )
                 columns = await connection.run_sync(
                     lambda sync: sqlalchemy.inspect(sync).get_columns(table))
                 assert [column["name"] for column in columns] == [
@@ -47,7 +51,9 @@ def test_sqlserver_native_column_types_reflect_from_catalog(
                 assert columns[4]["type"].precision == 3
         finally:
             async with engine.begin() as connection:
-                await connection.exec_driver_sql(f"DROP TABLE IF EXISTS {table}")
+                await connection.exec_driver_sql(
+                    f"DROP TABLE IF EXISTS {table}"
+                )
             await engine.dispose()
 
     asyncio.run(scenario())
@@ -61,8 +67,11 @@ def _sqlalchemy_url(config: KESConfig, query: str) -> str:
         f"kingbase+asynckb://{user}:{password}@"
         f"{config.host}:{config.port}/{database}?{query}"
     )
+
+
 pytest.importorskip("alembic")
 pytest.importorskip("sqlalchemy")
+
 
 @pytest.mark.case_id("KB-SA-002")
 @pytest.mark.integration
@@ -110,6 +119,8 @@ def test_sqlalchemy_unified_url_detects_and_loads_mode_dialect(
             await engine.dispose()
 
     asyncio.run(scenario())
+
+
 @pytest.mark.case_id("KB-SA-004")
 @pytest.mark.integration
 @pytest.mark.framework
@@ -144,6 +155,8 @@ def test_sqlalchemy_url_options_connect_in_all_kes_modes(
                 await engine.dispose()
 
     asyncio.run(scenario())
+
+
 @pytest.mark.case_id("KB-SA-006")
 @pytest.mark.integration
 @pytest.mark.framework
@@ -172,6 +185,8 @@ def test_sqlalchemy_autocommit_detection_in_all_kes_modes(
                 await engine.dispose()
 
     asyncio.run(scenario())
+
+
 @pytest.mark.case_id("KB-SA-008")
 @pytest.mark.integration
 @pytest.mark.framework
@@ -202,6 +217,8 @@ def test_sqlalchemy_reports_server_session_isolation_level(
                 await engine.dispose()
 
     asyncio.run(scenario())
+
+
 @pytest.mark.case_id("KB-SA-009")
 @pytest.mark.integration
 @pytest.mark.framework
@@ -247,6 +264,8 @@ def test_sqlalchemy_pool_pre_ping_replaces_terminated_connections(
                 await engine.dispose()
 
     asyncio.run(scenario())
+
+
 @pytest.mark.case_id("KB-SA-010")
 @pytest.mark.integration
 @pytest.mark.framework
@@ -290,6 +309,8 @@ def test_sqlalchemy_deallocate_all_invalidates_both_statement_caches(
                 await engine.dispose()
 
     asyncio.run(scenario())
+
+
 @pytest.mark.case_id("KB-SA-011")
 @pytest.mark.integration
 @pytest.mark.framework
@@ -367,6 +388,8 @@ def test_sqlalchemy_views_and_multi_reflection_in_all_kes_modes(
                 await engine.dispose()
 
     asyncio.run(scenario())
+
+
 @pytest.mark.case_id("KB-SA-012")
 @pytest.mark.integration
 @pytest.mark.framework
@@ -535,6 +558,8 @@ def test_sqlalchemy_quoted_identifiers_and_nested_transactions(
             await engine.dispose()
 
     asyncio.run(scenario())
+
+
 @pytest.mark.case_id("KB-SA-013")
 @pytest.mark.integration
 @pytest.mark.framework
@@ -721,6 +746,8 @@ def test_sqlalchemy_mysql_crud_and_catalog_reflection(
             await engine.dispose()
 
     asyncio.run(scenario())
+
+
 @pytest.mark.case_id("KB-SA-014")
 @pytest.mark.integration
 @pytest.mark.framework
@@ -873,6 +900,8 @@ def test_sqlalchemy_sqlserver_crud_and_catalog_reflection(
             await engine.dispose()
 
     asyncio.run(scenario())
+
+
 @pytest.mark.case_id("KB-SA-015")
 @pytest.mark.integration
 @pytest.mark.framework
@@ -1057,6 +1086,8 @@ def test_sqlalchemy_oracle_crud_stream_and_catalog_reflection(
             await engine.dispose()
 
     asyncio.run(scenario())
+
+
 @pytest.mark.case_id("KB-SA-016")
 @pytest.mark.integration
 @pytest.mark.framework
@@ -1101,6 +1132,8 @@ def test_sqlalchemy_oracle_character_lengths_use_kes_data_length(
             await engine.dispose()
 
     asyncio.run(scenario())
+
+
 @pytest.mark.case_id("KB-SA-017")
 @pytest.mark.integration
 @pytest.mark.framework
@@ -1198,6 +1231,8 @@ def test_sqlalchemy_oracle_can_reflect_and_query_another_owner(
             await admin.close()
 
     asyncio.run(scenario())
+
+
 @pytest.mark.case_id("KB-SA-018")
 @pytest.mark.integration
 @pytest.mark.framework
@@ -1306,6 +1341,8 @@ def test_sqlalchemy_oracle_quoted_user_reflects_its_default_owner(
             await admin.close()
 
     asyncio.run(scenario())
+
+
 @pytest.mark.case_id("KB-SA-020")
 @pytest.mark.integration
 @pytest.mark.framework
@@ -1352,6 +1389,8 @@ def test_sqlalchemy_executemany_failure_rolls_back_and_recovers(
             await engine.dispose()
 
     asyncio.run(scenario())
+
+
 @pytest.mark.case_id("KB-SA-021")
 @pytest.mark.integration
 @pytest.mark.framework
@@ -1408,6 +1447,8 @@ def test_sqlalchemy_catalog_boundaries_in_all_kes_modes(
             await engine.dispose()
 
     asyncio.run(scenario())
+
+
 @pytest.mark.case_id("KB-SA-024")
 @pytest.mark.unit
 def test_sqlalchemy_connection_url_options_are_normalized(
@@ -1452,6 +1493,8 @@ def test_sqlalchemy_connection_url_options_are_normalized(
     assert dialect.get_pool_class(
         fallback_url
     ) is pool.FallbackAsyncAdaptedQueuePool
+
+
 @pytest.mark.case_id("KB-SA-029")
 @pytest.mark.unit
 def test_sqlalchemy_connection_url_rejects_incomplete_or_conflicting_options(
@@ -1495,6 +1538,8 @@ def test_sqlalchemy_connection_url_rejects_incomplete_or_conflicting_options(
         )
         with pytest.raises(exc.ArgumentError, match=message):
             dialect.create_connect_args(url)
+
+
 @pytest.mark.case_id("KB-SA-030")
 @pytest.mark.unit
 def test_sqlalchemy_adapter_named_deallocate_updates_both_caches() -> None:

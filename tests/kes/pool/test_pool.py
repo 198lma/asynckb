@@ -8,13 +8,18 @@ import asynckb
 import pytest
 from tests.kes.support.config import KESConfig, drop_table, unique_object_name
 
+
 def _pool_options(config: KESConfig) -> dict[str, object]:
     options = config.connection_kwargs()
     options.pop("timeout")
     return options
+
+
 def _sleep_query(mode: str) -> str:
     suffix = " FROM dual" if mode == "oracle" else ""
     return f"SELECT pg_sleep(1){suffix}"
+
+
 async def _wait_until(predicate, *, timeout: float = 2) -> None:
     loop = asyncio.get_running_loop()
     deadline = loop.time() + timeout
@@ -22,6 +27,7 @@ async def _wait_until(predicate, *, timeout: float = 2) -> None:
         if loop.time() >= deadline:
             raise asyncio.TimeoutError("condition did not become true")
         await asyncio.sleep(0.01)
+
 
 @pytest.mark.case_id("KB-POOL-005")
 @pytest.mark.integration
@@ -84,6 +90,8 @@ def test_pool_release_rolls_back_transaction_and_reloads_kes_codecs(
             await pool.close()
 
     asyncio.run(scenario())
+
+
 @pytest.mark.case_id("KB-POOL-006")
 @pytest.mark.integration
 def test_pool_callbacks_run_in_order_and_preserve_kes_mode(
@@ -131,6 +139,8 @@ def test_pool_callbacks_run_in_order_and_preserve_kes_mode(
             await pool.close()
 
     asyncio.run(scenario())
+
+
 @pytest.mark.case_id("KB-POOL-007")
 @pytest.mark.integration
 def test_pool_partial_initialization_failure_closes_kes_connections(
@@ -170,6 +180,8 @@ def test_pool_partial_initialization_failure_closes_kes_connections(
         )
 
     asyncio.run(scenario())
+
+
 @pytest.mark.case_id("KB-POOL-009")
 @pytest.mark.integration
 def test_pool_setup_callback_failure_discards_connection_and_recovers(
@@ -214,6 +226,8 @@ def test_pool_setup_callback_failure_discards_connection_and_recovers(
             await pool.close()
 
     asyncio.run(scenario())
+
+
 @pytest.mark.case_id("KB-POOL-010")
 @pytest.mark.integration
 def test_pool_reset_callback_failure_discards_connection_and_recovers(
@@ -262,6 +276,8 @@ def test_pool_reset_callback_failure_discards_connection_and_recovers(
             await pool.close()
 
     asyncio.run(scenario())
+
+
 @pytest.mark.case_id("KB-POOL-013")
 @pytest.mark.integration
 def test_pool_query_and_idle_recycling_reload_kes_codecs(
@@ -329,6 +345,8 @@ def test_pool_query_and_idle_recycling_reload_kes_codecs(
             await idle_pool.close()
 
     asyncio.run(scenario())
+
+
 @pytest.mark.case_id("KB-POOL-016")
 @pytest.mark.integration
 def test_pool_batch_capacity_timeout_and_shutdown_contracts(
@@ -416,6 +434,8 @@ def test_pool_batch_capacity_timeout_and_shutdown_contracts(
             await cleanup.close()
 
     asyncio.run(scenario())
+
+
 @pytest.mark.case_id("KB-POOL-017")
 @pytest.mark.integration
 def test_cancelled_pool_waiter_does_not_consume_capacity(
@@ -449,6 +469,8 @@ def test_cancelled_pool_waiter_does_not_consume_capacity(
             await pool.close()
 
     asyncio.run(scenario())
+
+
 @pytest.mark.case_id("KB-POOL-019")
 @pytest.mark.integration
 def test_cancelled_pool_release_still_returns_connection(
@@ -489,6 +511,8 @@ def test_cancelled_pool_release_still_returns_connection(
             await pool.close()
 
     asyncio.run(scenario())
+
+
 @pytest.mark.case_id("KB-POOL-020")
 @pytest.mark.integration
 def test_pool_release_waits_for_query_cancellation_and_connection_recovers(
@@ -523,6 +547,8 @@ def test_pool_release_waits_for_query_cancellation_and_connection_recovers(
             await pool.close()
 
     asyncio.run(scenario())
+
+
 @pytest.mark.case_id("KB-POOL-021")
 @pytest.mark.integration
 def test_pool_close_waits_for_checked_out_connection(
@@ -556,6 +582,8 @@ def test_pool_close_waits_for_checked_out_connection(
                 await asyncio.wait_for(close_task, timeout=2)
 
     asyncio.run(scenario())
+
+
 @pytest.mark.case_id("KB-POOL-023")
 @pytest.mark.integration
 def test_idle_pool_connection_terminated_by_server_is_replaced(
@@ -585,6 +613,8 @@ def test_idle_pool_connection_terminated_by_server_is_replaced(
             await pool.close()
 
     asyncio.run(scenario())
+
+
 @pytest.mark.case_id("KB-POOL-025")
 @pytest.mark.parametrize(
     ("options", "error_type", "message"),

@@ -7,7 +7,8 @@ import sys
 
 def main():
     if not sys.platform.startswith('linux') or os.getuid() == 0:
-        raise SystemExit('Run as a non-root Linux user with unshare and iproute2')
+        raise SystemExit(
+            'Run as a non-root Linux user with unshare and iproute2')
     uid, gid = os.getuid(), os.getgid()
     command = (
         'set -eu\n'

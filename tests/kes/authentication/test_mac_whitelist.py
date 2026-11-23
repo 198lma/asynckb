@@ -21,7 +21,10 @@ def test_limited_info_mac_whitelist(isolated_whitelist_kes, case):
         sso = None
         original = instance.hba.read_bytes()
         added = False
-        mac = '02:00:00:00:00:01' if case == 'wrong-mac' else '00:00:00:00:00:00'
+        mac = (
+            '02:00:00:00:00:01' if case == 'wrong-mac'
+            else '00:00:00:00:00:00'
+        )
         limited_info = f'mac={mac}'
         try:
             # The API appends rules. No earlier TCP allow rule may mask it.
@@ -42,27 +45,36 @@ def test_limited_info_mac_whitelist(isolated_whitelist_kes, case):
             )
             added = True
             await _reload(admin)
-            async with AuthenticationProxy('127.0.0.1', instance.port) as proxy:
+            async with AuthenticationProxy(
+                '127.0.0.1', instance.port
+            ) as proxy:
                 options = instance.options(
                     port=proxy.local_port,
-                    password='wrong-password' if case == 'wrong-password' else instance.password,
+                    password=(
+                        'wrong-password' if case == 'wrong-password'
+                        else instance.password
+                    ),
                 )
                 if case == 'allow':
                     con = await asynckb.connect(**options)
                     try:
-                        assert await con.fetchval(instance.config.select_one) == 1
+                        assert await con.fetchval(
+                            instance.config.select_one
+                        ) == 1
                         assert proxy.exchanges == [[19, 10, 11, 12, 0]]
                     finally:
                         await con.close()
                 else:
                     error = (
-                        asynckb.InvalidPasswordError if case == 'wrong-password'
+                        asynckb.InvalidPasswordError
+                        if case == 'wrong-password'
                         else asynckb.InvalidAuthorizationSpecificationError
                     )
                     with pytest.raises(error):
                         con = await asynckb.connect(**options)
                         await con.close()
-                    expected = [19, 10, 11] if case == 'wrong-password' else [19]
+                    expected = [
+                        19, 10, 11] if case == 'wrong-password' else [19]
                     assert proxy.exchanges == [expected]
                 assert proxy.client_macs == [b'00:00:00:00:00:00']
         finally:
@@ -71,7 +83,8 @@ def test_limited_info_mac_whitelist(isolated_whitelist_kes, case):
                     try:
                         if added:
                             assert await sso.fetchval(
-                                "SELECT src_restrict.remove_rules(0, $1, '127.0.0.1', $2)",
+                                "SELECT src_restrict.remove_rules(0, $1, "
+                                "'127.0.0.1', $2)",
                                 instance.role, limited_info,
                             )
                     finally:
